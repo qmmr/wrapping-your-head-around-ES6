@@ -143,7 +143,7 @@ function wrapper ( arr ) {
     }
     return result
 }
-var wrapped = wrapper(['Luke', 'Obi-Wan', 'Leia', 'Yoda', 'Han', 'Chewbacca'])
+var wrapped = wrapper(['Luke', 'Obi-Wan', 'Yoda'])
 var f = wrapped[1]
 f() // undefined
                         </code></pre>
@@ -161,7 +161,7 @@ function wrapper ( arr ) {
     }
     return result
 }
-var wrapped = wrapper(['Luke', 'Obi-Wan', 'Leia', 'Yoda', 'Han', 'Chewbacca'])
+var wrapped = wrapper(['Luke', 'Obi-Wan', 'Yoda'])
 var f = wrapped[3]
 f() // 'Yoda'
                         </code></pre>
@@ -177,7 +177,7 @@ function wrapper ( arr ) {
     }
     return result
 }
-var wrapped = wrapper(['Luke', 'Obi-Wan', 'Leia', 'Yoda', 'Han', 'Chewbacca'])
+var wrapped = wrapper(['Luke', 'Obi-Wan', 'Yoda'])
 var f = wrapped[1]
 f() // 'Obi-Wan'
                         </code></pre>
