@@ -179,6 +179,25 @@ var wrapped = wrapper( ['Luke', 'Obi-Wan', 'Yoda'] )
 wrapped[1]() // 'Obi-Wan'
                         </code></pre>
                     </section>
+
+                    <section>
+                        <h2>Everything inside {}</h2>
+                        <ul>
+                            <li>loops</li>
+                            <li>if/else/else if</li>
+                            <li>switch</li>
+                            <li>try/catch*</li>
+                        </ul>
+                        <pre><code data-trim contenteditable>
+function square ( x ) {
+    if ( !x ) {
+        let x = 2
+        return x * x
+    }
+    throw new Error('x was undefined')
+}
+                        </code></pre>
+                    </section>
                 </section> <!-- end of vertical section -->
 
             </div>
