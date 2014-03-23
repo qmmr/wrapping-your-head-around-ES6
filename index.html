@@ -446,6 +446,37 @@ bar(person) // 30 John Doe
                     <section>
                         <h1>for..of</h1>
                     </section>
+
+                    <section>
+                        <pre><code data-trim contenteditable>
+let numbers = [ 1, 2, 3, 4, 5 ]
+// traditional
+numbers.forEach(function ( number ) {
+    console.log( number )
+})
+// new syntax
+for ( let number of numbers ) {
+    console.log( number )
+}
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>array-like objects</h2>
+                        <pre><code data-trim contenteditable>
+// html
+<ul>
+    <li>one</li>
+    <li>two</li>
+    <li>three</li>
+</ul>
+// js
+var items = [].slice.call(document.getElementsByTagName('li'))
+items.forEach(function ( el ) {
+    console.log( el.textContent )
+})
+                        </code></pre>
+                    </section>
                 </section>
 
                 <!-- iterators -->
