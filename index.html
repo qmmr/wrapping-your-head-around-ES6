@@ -201,6 +201,7 @@ function square ( x ) {
                     </section>
                 </section> <!-- end of let keyword vertical section -->
 
+                <!-- const keyword -->
                 <section>
                     <section>
                         <h1>const</h1>
@@ -251,6 +252,7 @@ console.log( bar.baz ) // hello, world!
                     </section>
                 </section>
 
+                <!-- default parameters -->
                 <section>
                     <section>
                         <h1>default parameters</h1>
@@ -286,6 +288,7 @@ function createCustomElement ( tagName, id = generateID(), parent = document.bod
                     </section>
                 </section>
 
+                <!-- rest & spread -->
                 <section>
                     <section>
                         <h1>rest & spread operators</h1>
@@ -325,9 +328,8 @@ sum( 1, 2, 3, 4, 5 ) // 15
                         <h2>spread - getting the highest value</h2>
                         <pre><code data-trim contenteditable>
 let numbers = [ 0, 20, 21, 42 ]
-let 
-let highest = Math.max.apply(null, numbers) // 42
-let highestNew = Math.max(...numbers) // 42
+// var highest = Math.max.apply(null, numbers) // 42
+let highest = Math.max(...numbers) // 42
                         </code></pre>
                     </section>
 
@@ -349,7 +351,14 @@ let fibonacci = [0, 1, 1, ...primes, 8, 13, 21]
 console.log(fibonacci) // [0, 1, 1, 2, 3, 5, 8, 13, 21]
                         </code></pre>
                     </section>
+                </section>
 
+                <!-- destructuring -->
+                <section>
+                    <section>
+                        <h1>destructuring</h1>
+                        <h2>extract data from objects and arrays</h2>
+                    </section>
                 </section>
 
                 <section>
