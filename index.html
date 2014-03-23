@@ -62,13 +62,13 @@
                         <li><a href="#/7">let</a></li>
                         <li><a href="#/8">const</a></li>
                         <li><a href="#/9">default parameters</a></li>
-                        <li>rest</li>
-                        <li>spread</li>
-                        <li>destructuring</li>
-                        <li>for..of loop</li>
-                        <li>iterators</li>
-                        <li>generators</li>
-                        <li>comprehensions</li>
+                        <li><a href="#/10">rest</a></li>
+                        <li><a href="#/11">spread</a></li>
+                        <li><a href="#/12">destructuring</a></li>
+                        <li><a href="#/13">for..of loop</a></li>
+                        <li><a href="#/14">iterators</a></li>
+                        <li><a href="#/15">generators</a></li>
+                        <li><a href="#/16">comprehensions</a></li>
                     </ul>
                 </section>
 
@@ -288,12 +288,11 @@ function createCustomElement ( tagName, id = generateID(), parent = document.bod
                     </section>
                 </section>
 
-                <!-- rest & spread -->
+                <!-- rest -->
                 <section>
                     <section>
-                        <h1>rest & spread operators</h1>
-                        <h2>rest - contains array of params that were not declared</h2>
-                        <h2>spread - expands array of args into individual variables</h2>
+                        <h1>rest operator</h1>
+                        <h2>rest - is an array of params that were not declared</h2>
                     </section>
 
                     <section>
@@ -323,9 +322,17 @@ function sum ( a, b, ...more ) {
 sum( 1, 2, 3, 4, 5 ) // 15
                         </code></pre>
                     </section>
+                </section>
+
+                <!-- spread  -->
+                <section>
+                    <section>
+                        <h1>spread operator</h1>
+                        <h2>spread expands array of args into individual variables</h2>
+                    </section>
 
                     <section>
-                        <h2>spread - getting the highest value</h2>
+                        <h2>getting the highest value</h2>
                         <pre><code data-trim contenteditable>
 let numbers = [ 0, 20, 21, 42 ]
 // var highest = Math.max.apply(null, numbers) // 42
