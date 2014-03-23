@@ -60,8 +60,8 @@
                     <h2>New syntax:</h2>
                     <ul class="fragment">
                         <li><a href="#/7">let</a></li>
-                        <li>const</li>
-                        <li>default params</li>
+                        <li><a href="#/8">const</a></li>
+                        <li><a href="#/9">default parameters</a></li>
                         <li>rest</li>
                         <li>spread</li>
                         <li>destructuring</li>
@@ -215,8 +215,9 @@ foo = 'oops!' // error
                     </section>
 
                     <section>
-                        <h2>During declaration we must assign it's value otherwise we have undefined value. (IE will give throw an error, others will ignore it (Firefox)).</h2>
-                        <h3>Some environments give an error when you try to redeclare, others will simply ignore it.</h3>
+                        <h2>declaration must be followed by assignment</h2>
+                        <p>otherwise we have undefined value, that we cannot change (sic!)</p>
+                        <p>IE will give an error, others will ignore it (Firefox)</p>
                         <pre><code data-trim contenteditable>
 const foo;
 console.log( foo ) // undefined
@@ -248,6 +249,82 @@ bar.baz = 'hello, world!'
 console.log( bar.baz ) // hello, world!
                         </code></pre>
                     </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h1>default parameters</h1>
+                    </section>
+                    <section>
+                        <h2>old way, checking if optional params were supplied</h2>
+                        <pre><code data-trim contenteditable>
+function createCustomElement ( tagName, id, parent ) {
+    if ( !id ) {
+        id = generateID()
+    }
+    if ( ! parent ) {
+        parent = document.body
+    }
+    let element = document.createElement( tagName )
+    element.id = id
+    parent.appendChild( element )
+    return element
+}
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>new way, assignment inside parenthesis</h2>
+                        <pre><code data-trim contenteditable>
+function createCustomElement ( tagName, id = generateID(), parent = document.body ) {
+    let element = document.createElement( tagName )
+    element.id = id
+    parent.appendChild( element )
+    return element
+}
+                        </code></pre>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h1>rest & spread operators</h1>
+                        <h2>rest - contains array of params that were not declared</h2>
+                    </section>
+
+                    <section>
+                        <h2>old way</h2>
+                        <h3>sum function with 2 required params ( a, b )</h3>
+                        <h3>any additional params are optional</h3>
+                        <pre><code data-trim contenteditable>
+function sum ( a, b ) {
+    var rest = [].slice.call(arguments, 2)
+
+    return a + b + rest.reduce(function ( prev, current ) {
+        return prev + current
+    })
+}
+sum( 1, 2, 3, 4, 5 ) // 15
+                        </code></pre>
+                    </section>
+function sum ( a, b ) {
+    var rest = [].slice.call(arguments, 2)
+
+    return a + b + rest.reduce(function ( prev, current ) {
+        return prev + current
+    })
+}
+sum( 1, 2, 3, 4, 5 ) // 15
+                    <section>
+                        <h2>new way</h2>
+                        <pre><code data-trim contenteditable>
+
+                        </code></pre>
+                    </section>
+                </section>
+
+                <section>
+                    <section></section>
                 </section>
 
             </div>
