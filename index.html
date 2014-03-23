@@ -410,6 +410,23 @@ let { firstName, lastName } = person
 console.log(firstName, lastName) // John Doe
                         </code></pre>
                     </section>
+
+                    <section>
+                        <h2>destructuring inside function parameters</h2>
+                        <pre><code data-trim contenteditable>
+let person = {
+    age: 30,
+    name: {
+        first: 'John',
+        last: 'Doe'
+    }
+}
+function bar ( { age, name: { first, last } } ) {
+    console.log(age, first, last)
+}
+bar(person) // 30 John Doe
+                        </code></pre>
+                    </section>
                 </section>
 
                 <section>
