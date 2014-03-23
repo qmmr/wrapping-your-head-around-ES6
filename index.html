@@ -471,10 +471,15 @@ for ( let number of numbers ) {
     <li>three</li>
 </ul>
 // js
+// old way
 var items = [].slice.call(document.getElementsByTagName('li'))
 items.forEach(function ( el ) {
     console.log( el.textContent )
 })
+// new way
+for ( let item of items ) {
+    console.log( item.textContent )
+}
                         </code></pre>
                     </section>
                 </section>
