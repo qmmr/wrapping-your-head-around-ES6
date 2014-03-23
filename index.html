@@ -114,6 +114,7 @@
                     </ul>
                 </section>
 
+                <!-- let keyword -->
                 <section>
                     <section>
                         <h1>let</h1>
@@ -198,7 +199,56 @@ function square ( x ) {
 }
                         </code></pre>
                     </section>
-                </section> <!-- end of vertical section -->
+                </section> <!-- end of let keyword vertical section -->
+
+                <section>
+                    <section>
+                        <h1>const</h1>
+                    </section>
+
+                    <section>
+                        <h2>once declared, cannot be redeclared</h2>
+                        <pre><code data-trim contenteditable>
+const foo = 'hello world'
+foo = 'oops!' // error
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>During declaration we must assign it's value otherwise we have undefined value. (IE will give throw an error, others will ignore it (Firefox)).</h2>
+                        <h3>Some environments give an error when you try to redeclare, others will simply ignore it.</h3>
+                        <pre><code data-trim contenteditable>
+const foo;
+console.log( foo ) // undefined
+foo = 'hello world!' // error: cannot reasign const
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>const (like let) are block scoped</h2>
+                        <pre><code data-trim contenteditable>
+if ( 1 ) {
+    const foo = 'hello world!'
+}
+console.log( foo ) // undefined
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>const can hold any type of variables (array, object etc.)</h2>
+                        <pre><code data-trim contenteditable>
+const foo = []
+foo.push( 'hello' )
+foo.push( 'world!' )
+console.log( foo.join(', ') ) // hello, world!
+                        </code></pre>
+                        <pre><code data-trim contenteditable>
+const bar = {}
+bar.baz = 'hello, world!'
+console.log( bar.baz ) // hello, world!
+                        </code></pre>
+                    </section>
+                </section>
 
             </div>
 
