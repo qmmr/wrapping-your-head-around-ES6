@@ -290,7 +290,7 @@ function createCustomElement ( tagName, id = generateID(), parent = document.bod
                     <section>
                         <h1>rest & spread operators</h1>
                         <h2>rest - contains array of params that were not declared</h2>
-                        <h2>spread - expands array of args into separate variables</h2>
+                        <h2>spread - expands array of args into individual variables</h2>
                     </section>
 
                     <section>
@@ -322,11 +322,34 @@ sum( 1, 2, 3, 4, 5 ) // 15
                     </section>
 
                     <section>
-                        <h2>old </h2>
+                        <h2>spread - getting the highest value</h2>
                         <pre><code data-trim contenteditable>
-                            
+let numbers = [ 0, 20, 21, 42 ]
+let 
+let highest = Math.max.apply(null, numbers) // 42
+let highestNew = Math.max(...numbers) // 42
                         </code></pre>
                     </section>
+
+                    <section>
+                        <h2>spread array into individual arguments</h2>
+                        <pre><code data-trim contenteditable>
+function coords ( x, y, z ) {
+    return { x, y, z }
+}
+let point = coords( ...[ 100, 50, 42 ] )
+console.log(point.x, point.y, point.z) // 100 50 42
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <pre><code data-trim contenteditable>
+let primes = [2, 3, 5]
+let fibonacci = [0, 1, 1, ...primes, 8, 13, 21]
+console.log(fibonacci) // [0, 1, 1, 2, 3, 5, 8, 13, 21]
+                        </code></pre>
+                    </section>
+
                 </section>
 
                 <section>
