@@ -386,6 +386,7 @@ console.log(y) // Reference error: y is not defined
                     </section>
 
                     <section>
+                        <h2>long way / control naming</h2>
                         <pre><code data-trim contenteditable>
 let person = {
     name: {
@@ -394,6 +395,18 @@ let person = {
     }
 }
 let { first: firstName, last: lastName } = person.name
+console.log(firstName, lastName) // John Doe
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>short way / same variables names</h2>
+                        <pre><code data-trim contenteditable>
+let person = {
+    firstName: 'John',
+    lastName: 'Doe'
+}
+let { firstName, lastName } = person
 console.log(firstName, lastName) // John Doe
                         </code></pre>
                     </section>
