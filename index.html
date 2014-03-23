@@ -421,8 +421,8 @@ let person = {
         last: 'Doe'
     }
 }
-function bar ( { age, name: { first, last } } ) {
-    console.log(age, first, last)
+function bar ( { age, name: { first: firstName, last: lastName } } ) {
+    console.log(age, firstName, lastName)
 }
 bar(person) // 30 John Doe
                         </code></pre>
