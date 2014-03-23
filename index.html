@@ -358,6 +358,31 @@ console.log(fibonacci) // [0, 1, 1, 2, 3, 5, 8, 13, 21]
                     <section>
                         <h1>destructuring</h1>
                         <h2>extract data from objects and arrays</h2>
+                        <pre><code data-trim contenteditable>
+// old way
+let a = 1
+let b = 2
+let tmp = a
+a = b
+b = tmp
+// new way
+[a, b] = [b, a]
+console.log(a, b) // 2 1
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <pre><code data-trim contenteditable>
+function foo () {
+    return [ 5, 10, 15 ]
+}
+let [ a, b, c ] = foo()
+console.log(a, b, c) // 5 10 15
+// omitting
+let [ x, , z ] = foo() 
+console.log(x, z) // 5 15
+console.log(y) // Reference error: y is not defined
+                        </code></pre>
                     </section>
                 </section>
 
