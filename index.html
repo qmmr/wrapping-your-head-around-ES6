@@ -384,6 +384,19 @@ console.log(x, z) // 5 15
 console.log(y) // Reference error: y is not defined
                         </code></pre>
                     </section>
+
+                    <section>
+                        <pre><code data-trim contenteditable>
+let person = {
+    name: {
+        first: 'John',
+        last: 'Doe'
+    }
+}
+let { first: firstName, last: lastName } = person.name
+console.log(firstName, lastName) // John Doe
+                        </code></pre>
+                    </section>
                 </section>
 
                 <section>
