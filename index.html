@@ -296,14 +296,14 @@ function createCustomElement ( tagName, id = generateID(), parent = document.bod
                 <!-- rest -->
                 <section>
                     <section>
-                        <h1>rest operator</h1>
-                        <h2>rest - is an array of params that were not declared</h2>
+                        <h2>...rest</h2>
+                        <p>is an array of params that were not declared</p>
                     </section>
 
                     <section>
                         <h2>rest params - old way</h2>
-                        <h3>sum function with 2 required params ( a, b )</h3>
-                        <h3>any additional params are optional</h3>
+                        <p>sum function with 2 required params ( a, b )</p>
+                        <p>any additional params are optional</p>
                         <pre><code data-trim contenteditable>
 function sum ( a, b ) {
     var rest = [].slice.call(arguments, 2)
@@ -332,8 +332,8 @@ sum( 1, 2, 3, 4, 5 ) // 15
                 <!-- spread  -->
                 <section>
                     <section>
-                        <h1>spread operator</h1>
-                        <h2>spread expands array of args into individual variables</h2>
+                        <h2>...spread</h2>
+                        <p>expands array of args into individual variables</p>
                     </section>
 
                     <section>
