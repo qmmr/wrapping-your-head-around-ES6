@@ -351,6 +351,12 @@ let highest = Math.max(...numbers) // 42
 function coords ( x, y, z ) {
     return { x, y, z }
 }
+let points = [ 100, 50, 42 ]
+// old way
+var point = coords( points[0], points[1], points[2] )
+// new way
+let point = coords( ...points )
+// or even shorter
 let point = coords( ...[ 100, 50, 42 ] )
 console.log(point.x, point.y, point.z) // 100 50 42
                         </code></pre>
