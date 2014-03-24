@@ -363,10 +363,31 @@ console.log(point.x, point.y, point.z) // 100 50 42
                     </section>
 
                     <section>
+                        <h2>joining arrays - novice</h2>
                         <pre><code data-trim contenteditable>
-let primes = [2, 3, 5]
-let fibonacci = [0, 1, 1, ...primes, 8, 13, 21]
-console.log(fibonacci) // [0, 1, 1, 2, 3, 5, 8, 13, 21]
+// old way
+var primes = [ 2, 3, 5 ]
+var fibonacci = [ 0, 1, 1 ]
+fibonacci = fibonacci.concat( primes ) // [0, 1, 1, 2, 3, 5]
+// new way
+fibonacci = [ 0, 1, 1, ...primes ]
+console.log( fibonacci ) // [0, 1, 1, 2, 3, 5]
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>joining arrays - advanced</h2>
+                        <pre><code data-trim contenteditable>
+// old way
+var primes = [ 2, 3, 5 ]
+var fibonacci = [ 0, 1, 1, 8, 13, 21 ]
+[ 2, 3, 5 ].forEach(function ( num ) {
+    var index = fibonacci.indexOf( 8 )
+    fibonacci.splice( index, 0, num )
+})
+// new way
+let fibonacci = [ 0, 1, 1, ...primes, 8, 13, 21 ]
+console.log( fibonacci ) // [0, 1, 1, 2, 3, 5, 8, 13, 21]
                         </code></pre>
                     </section>
                 </section>
