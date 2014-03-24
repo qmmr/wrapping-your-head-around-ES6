@@ -395,8 +395,8 @@ console.log( fibonacci ) // [0, 1, 1, 2, 3, 5, 8, 13, 21]
                 <!-- destructuring -->
                 <section>
                     <section>
-                        <h1>destructuring</h1>
-                        <h2>extract data from objects and arrays</h2>
+                        <h2>destructuring</h2>
+                        <p>extract data from objects and arrays</p>
                         <pre><code data-trim contenteditable>
 // old way
 let a = 1
@@ -411,6 +411,7 @@ console.log(a, b) // 2 1
                     </section>
 
                     <section>
+                        <h2>extract array into individual variables</h2>
                         <pre><code data-trim contenteditable>
 function foo () {
     return [ 5, 10, 15 ]
@@ -425,7 +426,8 @@ console.log(y) // Reference error: y is not defined
                     </section>
 
                     <section>
-                        <h2>long way / control naming</h2>
+                        <h2>destructuring objects</h2>
+                        <p>long way / control naming</p>
                         <pre><code data-trim contenteditable>
 let person = {
     name: {
@@ -439,7 +441,8 @@ console.log(firstName, lastName) // John Doe
                     </section>
 
                     <section>
-                        <h2>short way / same variables names</h2>
+                        <h2>destructuring objects</h2>
+                        <p>short way / same variables names</p>
                         <pre><code data-trim contenteditable>
 let person = {
     firstName: 'John',
