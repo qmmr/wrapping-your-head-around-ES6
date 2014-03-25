@@ -517,7 +517,22 @@ for ( let item of items ) {
                 <!-- iterators -->
                 <section>
                     <section>
-                        <h1>iterators</h1>
+                        <h2>iterators</h2>
+                        <p>iterable objects have [Symbol.iterator] function that returns iterable object</p>
+                        <p>currently no environment implements Symbol</p>
+                        <p>some envs (Nightly Firefox) have ["@@iterator"] property</p>
+                        <p>iterator object has one method: next() which iterates over values of the object</p>
+                    </section>
+
+                    <section>
+                        <h2>iterating over array</h2>
+                        <pre><code data-trim contenteditable>
+let numbers = [ 1, 2 ]
+let iter = numbers["@iterator"]() // iterator object that has method next()
+iter.next() // { value: 1, done: false }
+iter.next() // { value: 2, done: false }
+iter.next() // { value: undefined, done: true }
+                        </code></pre>
                     </section>
                 </section>
 
