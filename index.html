@@ -534,6 +534,23 @@ iter.next() // { value: 2, done: false }
 iter.next() // { value: undefined, done: true }
                         </code></pre>
                     </section>
+
+                    <section>
+                        <h2>iterating over object values</h2>
+                        <pre><code data-trim contenteditable>
+function Person ( ...[firstName, lastName] ) {
+    this.firstName = firstName
+    this.lastName = lastName
+}
+Person.prototype.greet = function () {
+    return 'Hi, my name is ' + this.firstName
+}
+var john = new Person( ['John', 'Doe'] )
+for ( let val of john ) {
+    console.log( val )
+}
+                        </code></pre>
+                    </section>
                 </section>
 
                 <!-- generators -->
