@@ -583,16 +583,42 @@ function* objGen ( obj ) {
 }
 
 for ( let [key, val] of objGen( johnDoe ) ) {
-    console.log( key, val )
+    console.log( key + ': ' + val )
 }
-"firstName" "John"
-"lastName" "Doe"
+// "firstName: John"
+// "lastName: Doe"
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>implementing generator into obj</h2>
+                        <pre><code data-trim contenteditable>
+
                         </code></pre>
                     </section>
                 </section>
 
                 <section>
-                    <section></section>
+                    <section>
+                        <h2>comprehensions</h2>
+                        <p>syntactic construct for creating arrays based on other arrays</p>
+                    </section>
+                    <section>
+                        <h2>ES5 - map</h2>
+                        <pre><code data-trim contenteditable>
+var jedis = ['Luke Skywalker', 'Obi-wan Kenobi', 'Yoda']
+var jediMasters = jedis.map(function ( jedi ) {
+    return 'master ' + jedi
+})
+console.log( jediMasters ) // [ "master Luke Skywalker", "master Obi-wan Kenobi", "master Yoda" ]
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>ES6 - map using comprehensions</h2>
+                        <pre><code data-trim contenteditable>
+let jedis = ['Luke Skywalker', 'Obi-wan Kenobi', 'Yoda']
+let jediMasters = [ 'master ' + jedi for ( jedi of jedis ) ]
+                        </code></pre>
+                    </section>
                 </section>
 
             </div>
