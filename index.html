@@ -557,6 +557,38 @@ for ( let num of evenGen ( numbers ) ) {
 }
                         </code></pre>
                     </section>
+
+                    <section>
+                        <h2>iterating over obj using generator</h2>
+                        <pre><code data-trim contenteditable>
+function Person ( firstName, lastName ) {
+    this.firstName = firstName
+    this.lastName = lastName
+}
+Person.prototype.greet = function () {
+    return 'Hi, my name is ' + this.firstName
+}
+let johnDoe = new Person( ...['John', 'Doe'] )
+for ( let val of johnDoe ) {
+    console.log( val )
+}
+// TypeError: john['@@iterator'] is not a function
+
+function* objGen ( obj ) {
+    for ( let prop in obj ) {
+        if (obj.hasOwnProperty(prop) ) {
+            yield [prop, obj[prop]]
+        }
+    }
+}
+
+for ( let [key, val] of objGen( johnDoe ) ) {
+    console.log( key, val )
+}
+"firstName" "John"
+"lastName" "Doe"
+                        </code></pre>
+                    </section>
                 </section>
 
                 <section>
