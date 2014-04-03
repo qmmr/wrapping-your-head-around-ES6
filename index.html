@@ -37,9 +37,28 @@
     </head>
 
     <body>
+        <script src="https://traceur-compiler.googlecode.com/git/bin/traceur.js" type="text/javascript"></script>
+        <script src="https://traceur-compiler.googlecode.com/git/src/bootstrap.js" type="text/javascript"></script>
+        <script>
+        traceur.options.experimental = true;
+        </script>
+        <script type="module">
+            class Greeter {
+                constructor(message) {
+                    this.message = message;
+                }
 
+                greet() {
+                    // let element = document.querySelector('#message');
+                    // element.innerHTML = this.message;
+                    console.log(this.message)
+                }
+            };
+
+            let greeter = new Greeter('Yo dude, that is awesome!');
+            greeter.greet();
+        </script>
         <div class="reveal">
-
             <!-- Any section element inside of this container is displayed as a slide -->
             <div class="slides">
                 <section>
@@ -75,8 +94,8 @@
                 <section>
                     <h2>Syntax refinements:</h2>
                     <ul>
-                        <li>arrow</li>
-                        <li>object literals</li>
+                        <li><a href="#/18">arrow</a></li>
+                        <li><a href="#/19">object literals</a></li>
                     </ul>
                 </section>
 
@@ -597,6 +616,7 @@ for ( let [key, val] of objGen( johnDoe ) ) {
                     </section>
                 </section>
 
+                <!-- comprehensions -->
                 <section>
                     <section>
                         <h2>comprehensions</h2>
@@ -618,6 +638,21 @@ console.log( jediMasters ) // [ "master Luke Skywalker", "master Obi-wan Kenobi"
 let jedis = ['Luke Skywalker', 'Obi-wan Kenobi', 'Yoda']
 let jediMasters = [ 'master ' + jedi for ( jedi of jedis ) ]
                         </code></pre>
+                    </section>
+                </section>
+
+                <!-- => (arrow) -->
+                <section>
+                    <section>
+                        <h2>=> (arrow)</h2>
+                        <pre><code data-trim contenteditable></code></pre>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2></h2>
+                        <pre><code data-trim contenteditable></code></pre>
                     </section>
                 </section>
 
