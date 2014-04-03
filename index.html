@@ -650,7 +650,27 @@ let jediMasters = [ 'master ' + jedi for ( jedi of jedis ) ]
                 <section>
                     <section>
                         <h2>=> (arrow)</h2>
-                        <pre><code data-trim contenteditable></code></pre>
+                        <ul>
+                            <li>shorter syntax for common case use of anonymous functions</li>
+                            <li>retains lexical scope of <strong>this</strong></p></li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <p>old way</p>
+                        <pre><code data-trim contenteditable>
+var square = function ( n ) { return n * n }
+var numbers = [ 0, 1, 2, 3, 4, 5 ]
+var doubles = numbers.map( square )
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <p>new way</p>
+                        <pre><code data-trim contenteditable>
+let numbers = [ 0, 1, 2, 3, 4, 5 ]
+let doubles = numbers.map( n => n * n )
+                        </code></pre>
                     </section>
                 </section>
 
