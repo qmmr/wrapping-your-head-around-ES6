@@ -58,6 +58,20 @@
             let greeter = new Greeter('Yo dude, that is awesome!');
             greeter.greet();
         </script>
+        <script type="module">
+        let person = {
+            name: 'Joe',
+            fiends: [ 'Jane', 'Johnny', 'Luke' ],
+            getName() {
+                setTimeout(() => this.name, 1000);
+            },
+            showFriends() {
+                this.friends.forEach( friend => this.name + ' is friend with ' + friend )
+            }
+        }
+        console.log(person.getName())
+        console.log(person.showFriends())
+        </script>
         <div class="reveal">
             <!-- Any section element inside of this container is displayed as a slide -->
             <div class="slides">
@@ -657,6 +671,7 @@ let jediMasters = [ 'master ' + jedi for ( jedi of jedis ) ]
                     </section>
 
                     <section>
+                        <h2>shorter syntax for common case use of anonymous functions</h2>
                         <p>old way</p>
                         <pre><code data-trim contenteditable>
 var square = function ( n ) { return n * n }
@@ -672,8 +687,48 @@ let numbers = [ 0, 1, 2, 3, 4, 5 ]
 let doubles = numbers.map( n => n * n )
                         </code></pre>
                     </section>
+
+                    <section>
+                        <h2>retains lexical scope of <strong>this</strong></p></h2> 
+                        <p>old way</p>
+                        <pre><code data-trim contenteditable>
+var person = {
+    name: 'Joe',
+    friends: [ 'Jane', 'Johnny', 'Luke' ],
+    getName: function () {
+        setTimeout(function () {
+            console.log( this.name )
+        }.bind( this ), 1000)
+    },
+    showFriends: function () {
+        var self = this
+        this.friends.forEach(function ( friend ) {
+            console.log( self.name + ' is friend with ' + friend )
+        })
+    }
+}
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>new way</h2>
+                        <pre><code data-trim contenteditable>
+let person = {
+    name: 'Joe',
+    fiends: [ 'Jane', 'Johnny', 'Luke' ],
+    getName() {
+        setTimeout( () => this.name, 1000)
+    },
+    showFriends: function () {
+        var self = this
+        this.friends.forEach( friend => self.name + ' is friend with ' + friend )
+    }
+}
+                        </code></pre>
+                    </section>
                 </section>
 
+                <!-- refined object literals -->
                 <section>
                     <section>
                         <h2>object literals</h2>
