@@ -640,6 +640,11 @@ let jediMasters = [ 'master ' + jedi for ( jedi of jedis ) ]
                         </code></pre>
                     </section>
                 </section>
+                
+                <!-- SYNTAX REFINEMENTS -->
+                <section>
+                    <h1>Syntax refinements</h1>
+                </section>
 
                 <!-- => (arrow) -->
                 <section>
@@ -651,8 +656,34 @@ let jediMasters = [ 'master ' + jedi for ( jedi of jedis ) ]
 
                 <section>
                     <section>
-                        <h2></h2>
-                        <pre><code data-trim contenteditable></code></pre>
+                        <h2>object literals</h2>
+                        <p>old way</p>
+                        <pre><code data-trim contenteditable>
+var teacher = 'Michael'
+var student = {
+    name: 'Joe',
+    teacher: teacher,
+    greet: function () {
+        return 'Hi, ' + this.name + '!'
+    }
+}
+student[ '_id' + +new Date() ] = Math.floor( Math.random() * 10000000 )
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>object literals</h2>
+                        <p>new way</p>
+                        <pre><code data-trim contenteditable>
+let teacher = 'Michael'
+let student = {
+    name: 'Joe',
+    teacher,
+    greet() {
+        return 'Hi, ' + this.name + '!'
+    },
+    [ '_id' + +new Date() ]: Math.floor( Math.random() * 10000000 )
+}
+                        </code></pre>
                     </section>
                 </section>
 
