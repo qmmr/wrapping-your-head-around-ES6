@@ -101,7 +101,7 @@ module.exports = function(grunt) {
 				liverreload: true
 			},
 			main: {
-				files: [ 'Gruntfile.js', 'js/reveal.js', 'css/reveal.css', 'index.html' ],
+				files: [ 'Gruntfile.js', 'js/reveal.js', 'css/reveal.css' ],
 				tasks: 'default'
 			},
 			theme: {
