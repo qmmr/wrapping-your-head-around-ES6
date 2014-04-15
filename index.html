@@ -560,6 +560,7 @@ iter.next() // { value: undefined, done: true }
                     <section>
                         <h1>generators</h1>
                     </section>
+
                     <section>
                         <h2>iterating over array</h2>
                         <pre><code data-trim contenteditable>
@@ -573,6 +574,21 @@ function* evenGen ( arr ) {
 let numbers = [ 1, 2, 3, 4, 5, 6 ]
 for ( let num of evenGen ( numbers ) ) {
     console.log( num )
+}
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Fibonacci sequence - old way</h2>
+                        <pre><code data-trim contenteditable>
+function fibonacci ( max ) {
+    var a = 0, b = 1, c = 0;
+    for ( var i = 0; i < max; ++i ) {
+        console.log( a );
+        c = a;
+        a = b;
+        b = c + b;
+    }
 }
                         </code></pre>
                     </section>
@@ -649,11 +665,40 @@ var jediMasters = jedis.map(function ( jedi ) {
 console.log( jediMasters ) // [ "master Luke Skywalker", "master Obi-wan Kenobi", "master Yoda" ]
                         </code></pre>
                     </section>
+
                     <section>
                         <h2>ES6 - map using comprehensions</h2>
                         <pre><code data-trim contenteditable>
 let jedis = ['Luke Skywalker', 'Obi-wan Kenobi', 'Yoda']
 let jediMasters = [ 'master ' + jedi for ( jedi of jedis ) ]
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>ES5 - filter</h2>
+                        <pre><code data-trim contenteditable>
+var jedis = [ 'Luke Skywalker', 'Yoda', 'Darth Vader', 'Darth Maul' ]
+var jediKnights = jedis.filter(function ( jedi ) {
+    return jedi.indexOf( 'Darth' ) == -1
+})
+console.log( jediKnights ) // [ 'Luke Skywalker', 'Yoda' ]
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>ES6 - filter using comprehensions</h2>
+                        <pre><code data-trim contenteditable>
+let jedis = [ 'Luke Skywalker', 'Yoda', 'Darth Vader', 'Darth Maul' ]
+let jediKnights = [ knight for ( knight of jedis ) if ( knight.indexOf( 'Darth' ) == -1) ]
+console.log( jediKnights )
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Generator comprehension</h2>
+                        <pre><code data-trim contenteditable>
+let jedis = [ 'Luke Skywalker', 'Yoda', 'Darth Vader', 'Darth Maul' ]
+let jediKnights = ( knight for ( knight of jedis ) if ( knight.indexOf( 'Darth' ) == -1) )
+console.log( jediKnights.next() ) // 'Luke Skywalker'
                         </code></pre>
                     </section>
                 </section>
