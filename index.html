@@ -58,20 +58,6 @@
             let greeter = new Greeter('Yo dude, that is awesome!');
             greeter.greet();
         </script>
-        <script type="module">
-        let person = {
-            name: 'Joe',
-            fiends: [ 'Jane', 'Johnny', 'Luke' ],
-            getName() {
-                setTimeout(() => this.name, 1000);
-            },
-            showFriends() {
-                this.friends.forEach( friend => this.name + ' is friend with ' + friend )
-            }
-        }
-        console.log(person.getName())
-        console.log(person.showFriends())
-        </script>
         <div class="reveal">
             <!-- Any section element inside of this container is displayed as a slide -->
             <div class="slides">
@@ -606,7 +592,12 @@ for ( let val of johnDoe ) {
     console.log( val )
 }
 // TypeError: john['@@iterator'] is not a function
+                        </code></pre>
+                    </section>
 
+                    <section>
+                        <h2>iterating over obj using generator part 2</h2>
+                        <pre><code data-trim contenteditable>
 function* objGen ( obj ) {
     for ( let prop in obj ) {
         if (obj.hasOwnProperty(prop) ) {
@@ -622,10 +613,22 @@ for ( let [key, val] of objGen( johnDoe ) ) {
 // "lastName: Doe"
                         </code></pre>
                     </section>
+
                     <section>
                         <h2>implementing generator into obj</h2>
                         <pre><code data-trim contenteditable>
-
+Person.prototype['@@iterator'] = function* () {
+    for ( let prop in this ) {
+        if (this.hasOwnProperty( prop )) {
+            yield [ prop, this[prop] ]
+        }
+    }
+}
+for ( let [ key, val ] of johnDoe ) {
+    console.log( key + ': ' + val )
+}
+// "firstName: John"
+// "lastName: Doe"
                         </code></pre>
                     </section>
                 </section>
@@ -715,15 +718,16 @@ var person = {
                         <pre><code data-trim contenteditable>
 let person = {
     name: 'Joe',
-    fiends: [ 'Jane', 'Johnny', 'Luke' ],
+    friends: [ 'Jane', 'Jake' ],
     getName() {
-        setTimeout( () => this.name, 1000)
+        setTimeout(() => console.log( 'Hi, my name is ' + this.name ), 1000);
     },
-    showFriends: function () {
-        var self = this
-        this.friends.forEach( friend => self.name + ' is friend with ' + friend )
+    showFriends() {
+        this.friends.forEach( friend => console.log( this.name + ' is friend with ' + friend ) );
     }
 }
+person.getName();
+person.showFriends();
                         </code></pre>
                     </section>
                 </section>
