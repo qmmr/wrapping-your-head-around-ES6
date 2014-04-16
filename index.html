@@ -414,19 +414,27 @@ console.log( fibonacci ) // [0, 1, 1, 2, 3, 5, 8, 13, 21]
                 <!-- destructuring -->
                 <section>
                     <section>
-                        <h2>destructuring</h2>
-                        <p>extract data from objects and arrays</p>
+                        <h1>destructuring</h1>
+                        <h2>extract data from objects and arrays</h2>
+                    </section>
+
+                    <section>
+                        <h2>swaping values of variables - old way</h2>
                         <pre><code data-trim contenteditable>
-// old way
-let a = 1
-let b = 2
-let tmp = a
+var a = 1
+var b = 2
+var tmp = a
 a = b
 b = tmp
-// new way
-[a, b] = [b, a]
-console.log(a, b) // 2 1
                         </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>swaping values of variables - new way</h2>
+                        <pre><code data-trim contenteditable>
+let [a, b] = [b, a]
+console.log('a = %s, b = %s', a, b) // a = 5, b = 6
+                        </pre></code>
                     </section>
 
                     <section>
@@ -436,11 +444,11 @@ function foo () {
     return [ 5, 10, 15 ]
 }
 let [ a, b, c ] = foo()
-console.log(a, b, c) // 5 10 15
+console.log( 'a = %s, b = %s, c = %s', a, b, c ) // "a = 5, b = 10, c = 15"
 // omitting
-let [ x, , z ] = foo() 
-console.log(x, z) // 5 15
-console.log(y) // Reference error: y is not defined
+let [ x, , z ] = foo()
+console.log( 'x = %s, z = %s', x, z ) // "x = 5, z = 15"
+console.log( y ) // Reference error: y is not defined
                         </code></pre>
                     </section>
 
@@ -702,7 +710,7 @@ console.log( jediKnights.next() ) // 'Luke Skywalker'
                         </code></pre>
                     </section>
                 </section>
-                
+
                 <!-- SYNTAX REFINEMENTS -->
                 <section>
                     <h1>Syntax refinements</h1>
@@ -737,7 +745,7 @@ let doubles = numbers.map( n => n * n )
                     </section>
 
                     <section>
-                        <h2>retains lexical scope of <strong>this</strong></p></h2> 
+                        <h2>retains lexical scope of <strong>this</strong></p></h2>
                         <p>old way</p>
                         <pre><code data-trim contenteditable>
 var person = {
