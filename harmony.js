@@ -7,12 +7,13 @@ var log = console.log
 // var httpReq = new XMLHttpRequest()
 // httpReq.onreadystatechange = function () {
 // 	if ( httpReq.readyState == 4 && httpReq.status == 200 ) {
-// 		console.log('package arrived!', foo)
 // 		data = JSON.parse(httpReq.responseText)
-// 		// console.log(data['MRData'].StandingsTable.StandingsLists[0].DriverStandings)
-// 		let standings = data['MRData'].StandingsTable.StandingsLists[0].DriverStandings
-// 		for (let driver of standings) {
-// 			console.log(driver.Driver.familyName)
+// 		console.log(data['MRData'].StandingsTable.StandingsLists[0].DriverStandings[0])
+// 		let drivers = data['MRData'].StandingsTable.StandingsLists[0].DriverStandings
+// 		for (let driver of drivers) {
+// 			// console.log(driver.Driver.familyName)
+//           let { givenName: firstName, familyName: lastName, nationality } = driver.Driver
+//           console.log(firstName + ' ' + lastName + ' is ' + nationality)
 // 		}
 // 	}
 // }
