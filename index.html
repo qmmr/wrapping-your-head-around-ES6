@@ -47,8 +47,9 @@
                 <section>
                     <h2>About me:</h2>
                     <ul>
-                        <li>Marcin</li>
+                        <li>Marcin Kumorek</li>
                         <li>Front-end developer @platformui</li>
+                        <li>H4ck3R</li>
                         <li><a href="http://twitter.com/qmmr" target="_blank">@qmmr</a></li>
                         <li><a href="http://plus.google.com/+MarcinKumorekProfile" target="_blank">Google+</a></li>
                     </ul>
@@ -57,24 +58,24 @@
                 <section>
                     <h2>Syntax refinements:</h2>
                     <ul>
-                        <li><a href="#/18">arrow</a></li>
-                        <li><a href="#/19">object literals</a></li>
+                        <li><a href="#/10">arrow</a></li>
+                        <li><a href="#/11">object literals</a></li>
                     </ul>
                 </section>
 
                 <section>
                     <h2>New syntax:</h2>
                     <ul>
-                        <li><a href="#/8">let</a></li>
-                        <li><a href="#/9">const</a></li>
-                        <li><a href="#/10">default parameters</a></li>
-                        <li><a href="#/11">rest</a></li>
-                        <li><a href="#/12">spread</a></li>
-                        <li><a href="#/13">destructuring</a></li>
-                        <li><a href="#/14">for..of loop</a></li>
-                        <li><a href="#/15">iterators</a></li>
-                        <li><a href="#/16">generators</a></li>
-                        <li><a href="#/17">comprehensions</a></li>
+                        <li><a href="#/13">let</a></li>
+                        <li><a href="#/14">const</a></li>
+                        <li><a href="#/15">default parameters</a></li>
+                        <li><a href="#/16">rest</a></li>
+                        <li><a href="#/17">spread</a></li>
+                        <li><a href="#/18">destructuring</a></li>
+                        <li><a href="#/19">for..of loop</a></li>
+                        <li><a href="#/20">iterators</a></li>
+                        <li><a href="#/21">generators</a></li>
+                        <li><a href="#/22">comprehensions</a></li>
                     </ul>
                 </section>
 
@@ -113,7 +114,7 @@
                 </section>
 
                 <section>
-                    <h1>ES6 => `pure awesomness`</h1>
+                    <h1>ES6 =><br> `pure awesomness`</h1>
                     <h2 class="fragment">Let's start using it!</h2>
                 </section>
 
@@ -132,7 +133,7 @@
                 <!-- => (arrow) -->
                 <section>
                     <section>
-                        <h2>=> (arrow)</h2>
+                        <h1>=> (arrow)</h1>
                         <ul>
                             <li>shorter syntax for common case use of anonymous functions</li>
                             <li>retains lexical scope of <strong>this</strong></p></li>
@@ -184,7 +185,7 @@ var person = {
                         <pre><code data-trim contenteditable>
 let person = {
     name: 'Joe',
-    friends: [ 'Jane', 'Jake' ],
+    friends: [ 'Jane', 'Johnny', 'Luke' ],
     getName() {
         setTimeout(() => console.log( 'Hi, my name is ' + this.name ), 1000);
     },
@@ -192,14 +193,18 @@ let person = {
         this.friends.forEach( friend => console.log( this.name + ' is friend with ' + friend ) );
     }
 }
-person.getName();
-person.showFriends();
+person.getName()
+person.showFriends()
                         </code></pre>
                     </section>
                 </section>
 
                 <!-- refined object literals -->
                 <section>
+                    <section>
+                        <h1>Refined object literals</h1>
+                    </section>
+
                     <section>
                         <h2>object literals</h2>
                         <p>old way</p>
@@ -414,21 +419,28 @@ function createCustomElement ( tagName, id = generateID(), parent = document.bod
                 <!-- rest -->
                 <section>
                     <section>
-                        <h2>...rest</h2>
-                        <p>is an array of params that were not declared</p>
+                        <h1>...rest</h1>
+                        <p class="fragment">is an array of params that were not declared</p>
                     </section>
 
                     <section>
                         <h2>rest params - old way</h2>
-                        <p>sum function with 2 required params ( a, b )</p>
-                        <p>any additional params are optional</p>
+                        <aside class="notes">
+                            sum function with 2 required params ( a, b )
+                            any additional params are optional
+                        </aside>
                         <pre><code data-trim contenteditable>
 function sum ( a, b ) {
     var rest = [].slice.call(arguments, 2)
+    var optional = 0
 
-    return a + b + rest.reduce(function ( prev, current ) {
-        return prev + current
-    })
+    if ( rest.length ) {
+        optional = rest.reduce(function ( prev, current ) {
+            return prev + current
+        })
+    }
+
+    return a + b + optional
 }
 sum( 1, 2, 3, 4, 5 ) // 15
                         </code></pre>
