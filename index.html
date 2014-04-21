@@ -48,9 +48,17 @@
                     <h2>About me:</h2>
                     <ul>
                         <li>Marcin</li>
-                        <li>Front-end developer in Gamesys</li>
+                        <li>Front-end developer @platformui</li>
                         <li><a href="http://twitter.com/qmmr" target="_blank">@qmmr</a></li>
                         <li><a href="http://plus.google.com/+MarcinKumorekProfile" target="_blank">Google+</a></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Syntax refinements:</h2>
+                    <ul>
+                        <li><a href="#/18">arrow</a></li>
+                        <li><a href="#/19">object literals</a></li>
                     </ul>
                 </section>
 
@@ -67,14 +75,6 @@
                         <li><a href="#/15">iterators</a></li>
                         <li><a href="#/16">generators</a></li>
                         <li><a href="#/17">comprehensions</a></li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Syntax refinements:</h2>
-                    <ul>
-                        <li><a href="#/18">arrow</a></li>
-                        <li><a href="#/19">object literals</a></li>
                     </ul>
                 </section>
 
@@ -110,6 +110,126 @@
                         <li>reflect api</li>
                         <li>tail calls</li>
                     </ul>
+                </section>
+
+                <section>
+                    <h1>ES6 => `pure awesomness`</h1>
+                    <h2 class="fragment">Let's start using it!</h2>
+                </section>
+
+                <section>
+                    <figure>
+                        <img src="img/almost-there.jpg" alt="">
+                        <figcaption>Almost there...</figcaption>
+                    </figure>
+                </section>
+
+                <!-- SYNTAX REFINEMENTS -->
+                <section>
+                    <h1>Syntax refinements</h1>
+                </section>
+
+                <!-- => (arrow) -->
+                <section>
+                    <section>
+                        <h2>=> (arrow)</h2>
+                        <ul>
+                            <li>shorter syntax for common case use of anonymous functions</li>
+                            <li>retains lexical scope of <strong>this</strong></p></li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>shorter syntax for common case use of anonymous functions</h2>
+                        <p>old way</p>
+                        <pre><code data-trim contenteditable>
+var square = function ( n ) { return n * n }
+var numbers = [ 0, 1, 2, 3, 4, 5 ]
+var doubles = numbers.map( square )
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <p>new way</p>
+                        <pre><code data-trim contenteditable>
+let numbers = [ 0, 1, 2, 3, 4, 5 ]
+let doubles = numbers.map( n => n * n )
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>retains lexical scope of <strong>this</strong></p></h2>
+                        <p>old way</p>
+                        <pre><code data-trim contenteditable>
+var person = {
+    name: 'Joe',
+    friends: [ 'Jane', 'Johnny', 'Luke' ],
+    getName: function () {
+        setTimeout(function () {
+            console.log( this.name )
+        }.bind( this ), 1000)
+    },
+    showFriends: function () {
+        var self = this
+        this.friends.forEach(function ( friend ) {
+            console.log( self.name + ' is friend with ' + friend )
+        })
+    }
+}
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>new way</h2>
+                        <pre><code data-trim contenteditable>
+let person = {
+    name: 'Joe',
+    friends: [ 'Jane', 'Jake' ],
+    getName() {
+        setTimeout(() => console.log( 'Hi, my name is ' + this.name ), 1000);
+    },
+    showFriends() {
+        this.friends.forEach( friend => console.log( this.name + ' is friend with ' + friend ) );
+    }
+}
+person.getName();
+person.showFriends();
+                        </code></pre>
+                    </section>
+                </section>
+
+                <!-- refined object literals -->
+                <section>
+                    <section>
+                        <h2>object literals</h2>
+                        <p>old way</p>
+                        <pre><code data-trim contenteditable>
+var teacher = 'Michael'
+var student = {
+    name: 'Joe',
+    teacher: teacher,
+    greet: function () {
+        return 'Hi, ' + this.name + '!'
+    }
+}
+student[ '_id' + +new Date() ] = Math.floor( Math.random() * 10000000 )
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>object literals</h2>
+                        <p>new way</p>
+                        <pre><code data-trim contenteditable>
+let teacher = 'Michael'
+let student = {
+    name: 'Joe',
+    teacher,
+    greet() {
+        return 'Hi, ' + this.name + '!'
+    },
+    [ '_id' + +new Date() ]: Math.floor( Math.random() * 10000000 )
+}
+                        </code></pre>
+                    </section>
                 </section>
 
                 <!-- new syntax -->
@@ -148,7 +268,7 @@ function wrapper ( arr ) {
     return result
 }
 var wrapped = wrapper( ['Luke', 'Obi-Wan', 'Yoda'] )
-wrapped[1] // undefined
+wrapped[1]() // undefined
                         </code></pre>
                     </section>
 
@@ -165,7 +285,7 @@ function wrapper ( arr ) {
     return result
 }
 var wrapped = wrapper( ['Luke', 'Obi-Wan', 'Yoda'] )
-wrapped[2] // 'Yoda'
+wrapped[2]() // 'Yoda'
                         </code></pre>
                     </section>
 
@@ -198,7 +318,7 @@ function square ( x ) {
         let x = 2
         return x * x
     }
-    throw new Error('x was undefined')
+    return x * x
 }
                         </code></pre>
                     </section>
@@ -686,114 +806,6 @@ console.log( jediKnights )
 let jedis = [ 'Luke Skywalker', 'Yoda', 'Darth Vader', 'Darth Maul' ]
 let jediKnights = ( knight for ( knight of jedis ) if ( knight.indexOf( 'Darth' ) == -1) )
 console.log( jediKnights.next() ) // 'Luke Skywalker'
-                        </code></pre>
-                    </section>
-                </section>
-
-                <!-- SYNTAX REFINEMENTS -->
-                <section>
-                    <h1>Syntax refinements</h1>
-                </section>
-
-                <!-- => (arrow) -->
-                <section>
-                    <section>
-                        <h2>=> (arrow)</h2>
-                        <ul>
-                            <li>shorter syntax for common case use of anonymous functions</li>
-                            <li>retains lexical scope of <strong>this</strong></p></li>
-                        </ul>
-                    </section>
-
-                    <section>
-                        <h2>shorter syntax for common case use of anonymous functions</h2>
-                        <p>old way</p>
-                        <pre><code data-trim contenteditable>
-var square = function ( n ) { return n * n }
-var numbers = [ 0, 1, 2, 3, 4, 5 ]
-var doubles = numbers.map( square )
-                        </code></pre>
-                    </section>
-
-                    <section>
-                        <p>new way</p>
-                        <pre><code data-trim contenteditable>
-let numbers = [ 0, 1, 2, 3, 4, 5 ]
-let doubles = numbers.map( n => n * n )
-                        </code></pre>
-                    </section>
-
-                    <section>
-                        <h2>retains lexical scope of <strong>this</strong></p></h2>
-                        <p>old way</p>
-                        <pre><code data-trim contenteditable>
-var person = {
-    name: 'Joe',
-    friends: [ 'Jane', 'Johnny', 'Luke' ],
-    getName: function () {
-        setTimeout(function () {
-            console.log( this.name )
-        }.bind( this ), 1000)
-    },
-    showFriends: function () {
-        var self = this
-        this.friends.forEach(function ( friend ) {
-            console.log( self.name + ' is friend with ' + friend )
-        })
-    }
-}
-                        </code></pre>
-                    </section>
-
-                    <section>
-                        <h2>new way</h2>
-                        <pre><code data-trim contenteditable>
-let person = {
-    name: 'Joe',
-    friends: [ 'Jane', 'Jake' ],
-    getName() {
-        setTimeout(() => console.log( 'Hi, my name is ' + this.name ), 1000);
-    },
-    showFriends() {
-        this.friends.forEach( friend => console.log( this.name + ' is friend with ' + friend ) );
-    }
-}
-person.getName();
-person.showFriends();
-                        </code></pre>
-                    </section>
-                </section>
-
-                <!-- refined object literals -->
-                <section>
-                    <section>
-                        <h2>object literals</h2>
-                        <p>old way</p>
-                        <pre><code data-trim contenteditable>
-var teacher = 'Michael'
-var student = {
-    name: 'Joe',
-    teacher: teacher,
-    greet: function () {
-        return 'Hi, ' + this.name + '!'
-    }
-}
-student[ '_id' + +new Date() ] = Math.floor( Math.random() * 10000000 )
-                        </code></pre>
-                    </section>
-                    <section>
-                        <h2>object literals</h2>
-                        <p>new way</p>
-                        <pre><code data-trim contenteditable>
-let teacher = 'Michael'
-let student = {
-    name: 'Joe',
-    teacher,
-    greet() {
-        return 'Hi, ' + this.name + '!'
-    },
-    [ '_id' + +new Date() ]: Math.floor( Math.random() * 10000000 )
-}
                         </code></pre>
                     </section>
                 </section>
