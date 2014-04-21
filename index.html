@@ -123,6 +123,8 @@
                         <img src="img/almost-there.jpg" alt="">
                         <figcaption>Almost there...</figcaption>
                     </figure>
+                    <a class="fragment" href="http://kangax.github.io/es5-compat-table/es6/">kangax.github.io/es5-compat-table/es6</a>
+                    <a href="http://www.es6fiddle.net/" class="fragment">www.es6fiddle.net</a>
                 </section>
 
                 <!-- SYNTAX REFINEMENTS -->
@@ -601,7 +603,7 @@ let person = {
         last: 'Doe'
     }
 }
-function bar ( { age, name: { first: firstName, last: lastName } } ) {
+function bar ({ age, name: { first: firstName, last: lastName }}) {
     console.log(age, firstName, lastName)
 }
 bar(person) // 30 John Doe
@@ -812,6 +814,7 @@ let jediKnights = [ knight for ( knight of jedis ) if ( knight.indexOf( 'Darth' 
 console.log( jediKnights )
                         </code></pre>
                     </section>
+
                     <section>
                         <h2>Generator comprehension</h2>
                         <pre><code data-trim contenteditable>
