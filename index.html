@@ -78,7 +78,7 @@
                             <li>ECMAScript 6 (ES6 Harmony) - work in progress</li>
                         </ul>
                         <aside class="notes">
-                            - LiveScript was renamed to JavaScript (because of popularity of Java) despite the two having very little in common. This has been a source of confusion ever since.
+                            - LiveScript was renamed to JavaScript (because of popularity of Java) edespite the two having very little in common. This has been a source of confusion ever since.
                             - Netscape submitted the language to European Computer Manufacturers Association which resulted in the first edition of the ECMAScript standard in 1997.
                             - ECMAScript edition 3 in 1999 and has stayed pretty much stable ever since
                             - The fourth edition was abandoned, due to political differences concerning language complexity.
@@ -88,7 +88,29 @@
                 </section>
 
                 <section>
-                    <h1>Versions</h1>
+                    <section>
+                        <h1>ES6 finally</h1>
+                    </section>
+
+                    <section>
+                        <h2>Let's dive in!</h2>
+                    </section>
+
+                    <section>
+                        <img src="img/almost-there.jpg" alt="ES6 - almost there...">
+                        <p>Almost there...</p>
+                    </section>
+
+                    <section>
+                        <p>Available resources:</p>
+                        <ul>
+                            <li><a href="http://kangax.github.io/es5-compat-table/es6/">kangax.github.io/es5-compat-table/es6</a></li>
+                            <li><a href="http://www.es6fiddle.net/">www.es6fiddle.net</a></li>
+                            <li><a href="https://github.com/nzakas/understandinges6/blob/master/manuscript/01-The-Basics.md">understanding es6</a></li>
+                            <li><a href="https://github.com/lukehoban/es6features">github.com/lukehoban/es6features</a></li>
+                            <li><a href="https://twitter.com/esdiscuss">@esdiscuss</a></li>
+                        </ul>
+                    </section>
                 </section>
 
                 <section>
@@ -147,23 +169,6 @@
                         <li>reflect api</li>
                         <li>tail calls</li>
                     </ul>
-                </section>
-
-                <section>
-                    <h1>ES6 =><br> `pure awesomness`</h1>
-                    <h2 class="fragment">Let's start using it!</h2>
-                </section>
-
-                <section>
-                    <figure>
-                        <img src="img/almost-there.jpg" alt="">
-                        <figcaption>Almost there...</figcaption>
-                    </figure>
-                    <a class="fragment" href="http://kangax.github.io/es5-compat-table/es6/">kangax.github.io/es5-compat-table/es6</a>
-                    <a href="http://www.es6fiddle.net/" class="fragment">www.es6fiddle.net</a>
-                    <a href="https://github.com/nzakas/understandinges6/blob/master/manuscript/01-The-Basics.md">understanding es6</a>
-                    <a href="https://github.com/lukehoban/es6features">github.com/lukehoban/es6features</a>
-                    <a href="http://tagtree.tv/ecmascript-6-episode-2">http://tagtree.tv/ecmascript-6-episode-2</a>
                 </section>
 
                 <!-- SYNTAX REFINEMENTS -->
@@ -505,11 +510,11 @@ sum( 1, 2, 3, 4, 5 ) // 15
                     </section>
                 </section>
 
-                <!-- spread  -->
+                <!-- ### spread ### -->
                 <section>
                     <section>
-                        <h2>...spread</h2>
-                        <p>expands array of args into individual variables</p>
+                        <h1>...spread</h1>
+                        <p class="fragment">expands array of args into individual variables</p>
                     </section>
 
                     <section>
@@ -568,11 +573,11 @@ console.log( fibonacci ) // [0, 1, 1, 2, 3, 5, 8, 13, 21]
                     </section>
                 </section>
 
-                <!-- destructuring -->
+                <!-- ### destructuring ### -->
                 <section>
                     <section>
                         <h1>destructuring</h1>
-                        <h2>extract data from objects and arrays</h2>
+                        <p class="fragment">extract data from objects and arrays</p>
                     </section>
 
                     <section>
@@ -648,14 +653,14 @@ let person = {
     }
 }
 function bar ({ age, name: { first: firstName, last: lastName }}) {
-    console.log(age, firstName, lastName)
+    console.log('Name: %s Lastname: %s Age: %n', firstName, lastName, age)
 }
-bar(person) // 30 John Doe
+bar(person) // Name: John | Lastname: Doe | Age: 30
                         </code></pre>
                     </section>
                 </section>
 
-                <!-- for..of -->
+                <!-- ### for..of ### -->
                 <section>
                     <section>
                         <h1>for..of</h1>
@@ -698,14 +703,14 @@ for ( let item of items ) {
                     </section>
                 </section>
 
-                <!-- iterators -->
+                <!-- ### iterators ### -->
                 <section>
                     <section>
-                        <h2>iterators</h2>
-                        <p>iterable objects have [Symbol.iterator] function that returns iterable object</p>
-                        <p>currently no environment implements Symbol</p>
-                        <p>some vendors (Nightly Firefox) have ["@@iterator"] property</p>
-                        <p>iterator object has one method: next() which iterates over values of the object</p>
+                        <h1>iterators</h1>
+                        <p class="fragment">iterable objects have [Symbol.iterator] function that returns iterable object</p>
+                        <p class="fragment">currently no environment implements Symbol</p>
+                        <p class="fragment">some vendors (Nightly Firefox) have ["@@iterator"] property</p>
+                        <p class="fragment">iterator object has one method: next() which iterates over values of the object</p>
                     </section>
 
                     <section>
