@@ -707,10 +707,13 @@ for ( let item of items ) {
                 <section>
                     <section>
                         <h1>iterators</h1>
-                        <p class="fragment">iterable objects have [Symbol.iterator] function that returns iterable object</p>
+                        <p class="fragment">[Symbol.iterator]</p>
                         <p class="fragment">currently no environment implements Symbol</p>
                         <p class="fragment">some vendors (Nightly Firefox) have ["@@iterator"] property</p>
                         <p class="fragment">iterator object has one method: next() which iterates over values of the object</p>
+                        <aside class="notes">
+                            iterable objects have [Symbol.iterator] function that returns iterable object 
+                        </aside>
                     </section>
 
                     <section>
@@ -760,6 +763,21 @@ function fibonacci ( max ) {
         b = c + b;
     }
 }
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Fibonacci sequence - new way</h2>
+                        <pre><code data-trim contenteditable>
+function* fibonacci () {
+    var a = 0, b = 1
+    while ( 1 ) {
+        yield a;
+        [ a, b ] = [ b, a + b ]
+    }
+}
+var gen = fibonacci()
+console.log(gen.next()) // {value: 0, done: false}
                         </code></pre>
                     </section>
 
