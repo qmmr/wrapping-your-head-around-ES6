@@ -219,16 +219,16 @@ var person = {
     friends: [ 'Jane', 'Johnny', 'Luke' ],
     getName: function () {
         setTimeout(function () {
-            console.log( this.name )
-        }.bind( this ), 1000)
+            console.log( this.name );
+        }.bind( this ), 1000);
     },
     showFriends: function () {
-        var self = this
+        var self = this;
         this.friends.forEach(function ( friend ) {
-            console.log( self.name + ' is friend with ' + friend )
-        })
+            console.log( self.name + ' is friend with ' + friend );
+        });
     }
-}
+};
                         </code></pre>
                     </section>
 
@@ -244,21 +244,24 @@ let person = {
     showFriends() {
         this.friends.forEach( friend => console.log( this.name + ' is friend with ' + friend ) );
     }
-}
-person.getName()
-person.showFriends()
+};
+person.getName();
+person.showFriends();
                         </code></pre>
+                        <aside class="notes">
+                            es6fiddle
+                        </aside>
                     </section>
 
-                    <!-- ### refined object literals ### -->
-                    <section>
-                        <h1>Refined object literals</h1>
-                    </section>
+                        <!-- ### refined object literals ### -->
+                        <section>
+                            <h1>Refined object literals</h1>
+                        </section>
 
-                    <section>
-                        <h2>object literals</h2>
-                        <p>old way</p>
-                        <pre><code data-trim contenteditable>
+                        <section>
+                            <h2>object literals</h2>
+                            <p>old way</p>
+                            <pre><code data-trim contenteditable>
 var teacher = 'Michael'
 var student = {
     name: 'Joe',
@@ -267,13 +270,14 @@ var student = {
         return 'Hi, ' + this.name + '!'
     }
 }
-student[ '_id' + +new Date() ] = Math.floor( Math.random() * 10000000 )
-                        </code></pre>
-                    </section>
-                    <section>
-                        <h2>object literals</h2>
-                        <p>new way</p>
-                        <pre><code data-trim contenteditable>
+student[ '_id_' + +new Date() ] = Math.floor( Math.random() * 10000000 )
+                            </code></pre>
+                        </section>
+
+                        <section>
+                            <h2>object literals</h2>
+                            <p>new way</p>
+                            <pre><code data-trim contenteditable>
 let teacher = 'Michael'
 let student = {
     name: 'Joe',
@@ -283,27 +287,28 @@ let student = {
     },
     [ '_id' + +new Date() ]: Math.floor( Math.random() * 10000000 )
 }
-                        </code></pre>
+                            </code></pre>
+                        </section>
                     </section>
-
                 </section>
-
 
                 <!-- ### new syntax ### -->
                 <section>
-                    <h1>New syntax</h1>
-                </section>
 
-                <!-- ### let keyword ### -->
-                <section>
+                    <section>
+                        <h1>New syntax</h1>
+                    </section>
+
+                    <!-- ### let keyword ### -->
                     <section>
                         <h1>let</h1>
-                        <h2>is the new var</h3>
-                        <p>scoped to the current block {}</p>
-                        <p>does not have hoisting characteristics</p>
+                        <h2 class="fragment">is the new var</h3>
+                        <p class="fragment">scoped to the current block {}</p>
+                        <p class="fragment">does not have hoisting characteristics</p>
                     </section>
 
                     <section>
+                        <h2>scoped inside if clause</h2>
                         <pre><code data-trim contenteditable>
 function printName ( language ) {
     var name = 'Marcin'
@@ -321,6 +326,7 @@ function printName ( language ) {
 
                     <section>
                         <h2>Local scopes</h2>
+                        <p>common problem</p>
                         <pre><code data-trim contenteditable>
 function wrapper ( arr ) {
     var result = []
@@ -383,11 +389,9 @@ function square ( x ) {
     return x * x
 }
                         </code></pre>
-                    </section>
-                </section> <!-- end of let keyword vertical section -->
+                    </section><!-- end ### let keyword ### -->
 
-                <!-- const keyword -->
-                <section>
+                    <!-- ### const keyword ### -->
                     <section>
                         <h1>const</h1>
                     </section>
@@ -434,28 +438,27 @@ const bar = {}
 bar.baz = 'hello, world!'
 console.log( bar.baz ) // hello, world!
                         </code></pre>
-                    </section>
-                </section>
+                    </section><!-- end ### const ### -->
 
-                <!-- default parameters -->
-                <section>
+                    <!-- ### default parameters ### -->
                     <section>
                         <h1>default parameters</h1>
                     </section>
+
                     <section>
-                        <h2>old way, checking if optional params were supplied</h2>
+                        <h2>checking if optional params were supplied - old way</h2>
                         <pre><code data-trim contenteditable>
 function createCustomElement ( tagName, id, parent ) {
     if ( !id ) {
-        id = generateID()
+        id = generateID();
     }
     if ( ! parent ) {
-        parent = document.body
+        parent = document.body;
     }
-    let element = document.createElement( tagName )
-    element.id = id
-    parent.appendChild( element )
-    return element
+    let element = document.createElement( tagName );
+    element.id = id;
+    parent.appendChild( element );
+    return element;
 }
                         </code></pre>
                     </section>
@@ -464,17 +467,15 @@ function createCustomElement ( tagName, id, parent ) {
                         <h2>new way, assignment inside parenthesis</h2>
                         <pre><code data-trim contenteditable>
 function createCustomElement ( tagName, id = generateID(), parent = document.body ) {
-    let element = document.createElement( tagName )
-    element.id = id
-    parent.appendChild( element )
-    return element
+    let element = document.createElement( tagName );
+    element.id = id;
+    parent.appendChild( element );
+    return element;
 }
                         </code></pre>
-                    </section>
-                </section>
+                    </section><!-- end ### default parameters ### -->
 
-                <!-- rest -->
-                <section>
+                    <!-- ### rest ### -->
                     <section>
                         <h1>...rest</h1>
                         <p class="fragment">is an array of params that were not declared</p>
@@ -513,11 +514,9 @@ function sum ( a, b, ...more ) {
 }
 sum( 1, 2, 3, 4, 5 ) // 15
                         </code></pre>
-                    </section>
-                </section>
+                    </section><!-- end ### rest ### -->
 
-                <!-- ### spread ### -->
-                <section>
+                    <!-- ### spread ### -->
                     <section>
                         <h1>...spread</h1>
                         <p class="fragment">expands array of args into individual variables</p>
@@ -576,11 +575,9 @@ var fibonacci = [ 0, 1, 1, 8, 13, 21 ]
 let fibonacci = [ 0, 1, 1, ...primes, 8, 13, 21 ]
 console.log( fibonacci ) // [0, 1, 1, 2, 3, 5, 8, 13, 21]
                         </code></pre>
-                    </section>
-                </section>
+                    </section><!-- end ### spread ### -->
 
-                <!-- ### destructuring ### -->
-                <section>
+                    <!-- ### destructuring ### -->
                     <section>
                         <h1>destructuring</h1>
                         <p class="fragment">extract data from objects and arrays</p>
@@ -663,11 +660,9 @@ function bar ({ age, name: { first: firstName, last: lastName }}) {
 }
 bar(person) // Name: John | Lastname: Doe | Age: 30
                         </code></pre>
-                    </section>
-                </section>
+                    </section><!-- ### destructuring ### -->
 
-                <!-- ### for..of ### -->
-                <section>
+                    <!-- ### for..of ### -->
                     <section>
                         <h1>for..of</h1>
                     </section>
@@ -706,11 +701,9 @@ for ( let item of items ) {
     console.log( item.textContent )
 }
                         </code></pre>
-                    </section>
-                </section>
+                    </section><!-- end ### for..of ### -->
 
-                <!-- ### iterators ### -->
-                <section>
+                    <!-- ### iterators ### -->
                     <section>
                         <h1>iterators</h1>
                         <p class="fragment">[Symbol.iterator]</p>
@@ -731,11 +724,9 @@ iter.next() // { value: 1, done: false }
 iter.next() // { value: 2, done: false }
 iter.next() // { value: undefined, done: true }
                         </code></pre>
-                    </section>
-                </section>
+                    </section><!-- end ### iterators ### -->
 
-                <!-- generators -->
-                <section>
+                    <!-- ### generators ### -->
                     <section>
                         <h1>generators</h1>
                     </section>
@@ -840,11 +831,9 @@ for ( let [ key, val ] of johnDoe ) {
 // "firstName: John"
 // "lastName: Doe"
                         </code></pre>
-                    </section>
-                </section>
+                    </section><!-- end ### generators ### -->
 
-                <!-- comprehensions -->
-                <section>
+                    <!-- ### comprehensions ### -->
                     <section>
                         <h2>comprehensions</h2>
                         <p>syntactic construct for creating arrays based on other arrays</p>
@@ -895,7 +884,12 @@ let jedis = [ 'Luke Skywalker', 'Yoda', 'Darth Vader', 'Darth Maul' ]
 let jediKnights = ( knight for ( knight of jedis ) if ( knight.indexOf( 'Darth' ) == -1) )
 console.log( jediKnights.next() ) // 'Luke Skywalker'
                         </code></pre>
-                    </section>
+                    </section><!-- ### comprehensions ### -->
+
+                </section><!-- ### new syntax ### -->
+
+                <section>
+                    <h1>Thank you</h1>
                 </section>
 
             </div>
