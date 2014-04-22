@@ -168,7 +168,7 @@
                     <h1>Syntax refinements</h1>
                 </section>
 
-                <!-- => (arrow) -->
+                <!-- ### => (arrow) ### -->
                 <section>
                     <section>
                         <h1>=> (arrow)</h1>
@@ -237,7 +237,7 @@ person.showFriends()
                     </section>
                 </section>
 
-                <!-- refined object literals -->
+                <!-- ### refined object literals ### -->
                 <section>
                     <section>
                         <h1>Refined object literals</h1>
@@ -275,20 +275,21 @@ let student = {
                     </section>
                 </section>
 
-                <!-- new syntax -->
+                <!-- ### new syntax ### -->
                 <section>
                     <h1>New syntax</h1>
                 </section>
 
-                <!-- let keyword -->
+                <!-- ### let keyword ### -->
                 <section>
                     <section>
                         <h1>let</h1>
                         <h2>is the new var</h3>
+                        <p>scoped to the current block {}</p>
+                        <p>does not have hoisting characteristics</p>
                     </section>
 
                     <section>
-                        <h2>Block-scoped binding</h2>
                         <pre><code data-trim contenteditable>
 function printName ( language ) {
     var name = 'Marcin'
@@ -296,8 +297,12 @@ function printName ( language ) {
         let name = 'Martin'
         console.log( name ) // Martin
     }
+    console.log( name ) // Marcin
 }
                         </code></pre>
+                        <aside class="notes">
+                            you cannot redeclare identifier, throws syntax error
+                        </aside>
                     </section>
 
                     <section>
