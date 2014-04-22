@@ -57,6 +57,7 @@ module.exports = function (grunt) {
 
         jshint: {
             options: {
+                asi: true,
                 curly: false,
                 eqeqeq: true,
                 immed: true,
@@ -69,6 +70,7 @@ module.exports = function (grunt) {
                 browser: true,
                 expr: true,
                 globals: {
+                    require: false,
                     head: false,
                     module: false,
                     console: false,
