@@ -698,42 +698,53 @@ describePerson( person ); // Name: John | Lastname: Doe | Age: 30 | email: jdoe@
                     <!-- ### for..of ### -->
                     <section>
                         <h1>for..of</h1>
+                        <h2 class="look fragment">&#664;&#8255;&#664;</h2>
                     </section>
 
                     <section>
+                        <h2>looping over array</h2>
+                        <blockquote>old way</blockquote>
                         <pre><code data-trim contenteditable>
-let numbers = [ 1, 2, 3, 4, 5 ]
-// traditional
+var numbers = [ 1, 2, 3, 4, 5 ]
 numbers.forEach(function ( number ) {
-    console.log( number )
-})
-// new syntax
-for ( let number of numbers ) {
-    console.log( number )
-}
+    console.log( number );
+});
                         </code></pre>
+                        <div class="fragment">
+                            <blockquote>new way</blockquote>
+                            <pre><code data-trim contenteditable>
+for ( let number of numbers ) {
+    console.log( number );
+}
+                            </code></pre>
+                        </div>
                     </section>
 
                     <section>
                         <h2>array-like objects</h2>
+                        <blockquote>old way</blockquote>
                         <pre><code data-trim contenteditable>
-// html
 <ul>
     <li>one</li>
     <li>two</li>
     <li>three</li>
 </ul>
-// js
-// old way
+                        </code></pre>
+                        <pre><code data-trim contenteditable>
 var items = [].slice.call(document.getElementsByTagName('li'))
 items.forEach(function ( el ) {
     console.log( el.textContent )
 })
-// new way
+
+                        </code></pre>
+                        <div class="fragment">
+                            <blockquote>new way</blockquote>
+                            <pre><code data-trim contenteditable>
 for ( let item of items ) {
     console.log( item.textContent )
 }
-                        </code></pre>
+                            </code></pre>
+                        </div>
                     </section><!-- end ### for..of ### -->
 
                     <!-- ### iterators ### -->
