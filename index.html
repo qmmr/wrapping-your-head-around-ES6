@@ -384,49 +384,49 @@ console.log( wrapped[1]() ); // 'Obi-Wan'
                     <!-- ### const keyword ### -->
                     <section>
                         <h1>const</h1>
+                        <p class="fragment">similar to let, block scoped</p>
+                        <aside class="notes">
+                            - block being anything inside curly braces
+                            - loops
+                            - if/else/else if
+                            - switch
+                            - try/catch*
+                        </aside>
                     </section>
 
                     <section>
                         <h2>once declared, cannot be redeclared</h2>
                         <pre><code data-trim contenteditable>
-const foo = 'hello world'
-foo = 'oops!' // error
+const FOO = 'hello world';
+FOO = 'oops!'; // error
                         </code></pre>
                     </section>
 
                     <section>
-                        <h2>declaration must be followed by assignment</h2>
-                        <p>otherwise we have undefined value, that we cannot change (sic!)</p>
-                        <p>IE will give an error, others will ignore it (Firefox)</p>
+                        <h2>declaration must be followed<br> by assignment</h2>
                         <pre><code data-trim contenteditable>
-const foo;
-console.log( foo ) // undefined
-foo = 'hello world!' // error: cannot reasign const
+const FOO;
+console.log( FOO ); // undefined
+FOO = 'hello world!'; // error: cannot reasign const
                         </code></pre>
-                    </section>
-
-                    <section>
-                        <h2>const (like let) are block scoped</h2>
-                        <pre><code data-trim contenteditable>
-if ( 1 ) {
-    const foo = 'hello world!'
-}
-console.log( foo ) // undefined
-                        </code></pre>
+                        <aside class="notes">
+                            - otherwise we have undefined value, that we cannot change (sic!)
+                            - IE will give an error, others will ignore it (Firefox)
+                        </aside>
                     </section>
 
                     <section>
                         <h2>const can hold any type of variables (array, object etc.)</h2>
                         <pre><code data-trim contenteditable>
-const foo = []
-foo.push( 'hello' )
-foo.push( 'world!' )
-console.log( foo.join(', ') ) // hello, world!
+const FOO = [];
+FOO.push( 'Hello' );
+FOO.push( 'world!' );
+console.log(FOO.join( ', ' )); // Hello, world!
                         </code></pre>
                         <pre><code data-trim contenteditable>
-const bar = {}
-bar.baz = 'hello, world!'
-console.log( bar.baz ) // hello, world!
+const BAR = {};
+BAR.baz = 'Hello, world!';
+console.log( BAR.baz ); // hello, world!
                         </code></pre>
                     </section><!-- end ### const ### -->
 
