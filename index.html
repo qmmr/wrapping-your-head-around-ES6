@@ -16,6 +16,7 @@
 
         <link rel="stylesheet" href="css/reveal.min.css">
         <link rel="stylesheet" href="css/theme/default.css" id="theme">
+        <link rel="stylesheet" href="css/custom.css">
 
         <!-- For syntax highlighting -->
         <link rel="stylesheet" href="lib/css/zenburn.css">
@@ -347,6 +348,7 @@ function wrapper ( arr ) {
 var wrapped = wrapper([ 'Luke', 'Obi-Wan', 'Yoda' ]);
 console.log( wrapped[1]() ); // undefined
                         </code></pre>
+                        <h2 class="look fragment fade-in">&#3232;_&#3232;</h2>
                     </section>
 
                     <section>
@@ -364,6 +366,7 @@ function wrapper ( arr ) {
 var wrapped = wrapper([ 'Luke', 'Obi-Wan', 'Yoda' ]);
 console.log( wrapped[2]() ); // 'Yoda'
                         </code></pre>
+                        <h2 class="look fragment fade-in">&#3232;&#3263;_&#3232;</h2>
                     </section>
 
                     <section>
@@ -379,6 +382,7 @@ function wrapper ( arr ) {
 var wrapped = wrapper([ 'Luke', 'Obi-Wan', 'Yoda' ]);
 console.log( wrapped[1]() ); // 'Obi-Wan'
                         </code></pre>
+                        <h2 class="look fragment fade-in">&#65340;(&#65344;0&#180;)&#65295;</h2>
                     </section><!-- end ### let keyword ### -->
 
                     <!-- ### const keyword ### -->
@@ -398,7 +402,7 @@ console.log( wrapped[1]() ); // 'Obi-Wan'
                         <h2>once declared, cannot be redeclared</h2>
                         <pre><code data-trim contenteditable>
 const FOO = 'hello world';
-FOO = 'oops!'; // error
+FOO = 'Goodbye, world!'; // error
                         </code></pre>
                     </section>
 
@@ -433,10 +437,12 @@ console.log( BAR.baz ); // hello, world!
                     <!-- ### default parameters ### -->
                     <section>
                         <h1>default parameters</h1>
+                        <h2 class="look fragment">&#664;&#8255;&#664;</h2>
                     </section>
 
                     <section>
-                        <h2>checking if optional params were supplied - old way</h2>
+                        <h2>checking for optional params</h2>
+                        <blockquote>old way</blockquote>
                         <pre><code data-trim contenteditable>
 function createCustomElement ( tagName, id, parent ) {
     if ( !id ) {
@@ -454,7 +460,8 @@ function createCustomElement ( tagName, id, parent ) {
                     </section>
 
                     <section>
-                        <h2>new way, assignment inside parenthesis</h2>
+                        <h2>assignment inside parenthesis</h2>
+                        <blockquote>new way</blockquote>
                         <pre><code data-trim contenteditable>
 function createCustomElement ( tagName, id = generateID(), parent = document.body ) {
     let element = document.createElement( tagName );
@@ -469,40 +476,41 @@ function createCustomElement ( tagName, id = generateID(), parent = document.bod
                     <section>
                         <h1>...rest</h1>
                         <p class="fragment">is an array of params that were not declared</p>
+                        <p class="fragment">solves the arguments problem</p>
+                        <h2 class="look fragment">&#65340;(&#65344;0&#180;)&#65295;</h2>
                     </section>
 
                     <section>
-                        <h2>rest params - old way</h2>
+                        <h2>rest params</h2>
+                        <blockquote>old way</blockquote>
+                        <pre><code data-trim contenteditable>
+function sum ( a, b ) {
+    var rest = [].slice.call(arguments, 2), optional = 0;
+
+    if ( rest.length ) {
+        optional = rest.reduce(function ( prev, current ) {
+            return prev + current;
+        })
+    }
+
+    return a + b + optional;
+}
+sum( 1, 2, 3, 4, 5 ) // 15
+                        </code></pre>
                         <aside class="notes">
                             sum function with 2 required params ( a, b )
                             any additional params are optional
                         </aside>
-                        <pre><code data-trim contenteditable>
-function sum ( a, b ) {
-    var rest = [].slice.call(arguments, 2)
-    var optional = 0
-
-    if ( rest.length ) {
-        optional = rest.reduce(function ( prev, current ) {
-            return prev + current
-        })
-    }
-
-    return a + b + optional
-}
-sum( 1, 2, 3, 4, 5 ) // 15
-                        </code></pre>
                     </section>
 
                     <section>
-                        <h2>rest params - new way</h2>
+                        <h2>rest params</h2>
+                        <blockquote>new way</blockquote>
                         <pre><code data-trim contenteditable>
 function sum ( a, b, ...more ) {
-    return a + b + more.reduce(function ( prev, current ) {
-        return prev + current
-    })
+    return a + b + more.reduce(( prev, current ) => prev + current);
 }
-sum( 1, 2, 3, 4, 5 ) // 15
+console.log(sum( 1, 2, 3, 4, 5 )); // 15
                         </code></pre>
                     </section><!-- end ### rest ### -->
 
@@ -514,57 +522,80 @@ sum( 1, 2, 3, 4, 5 ) // 15
 
                     <section>
                         <h2>getting the highest value</h2>
+                        <blockquote>old way</blockquote>
                         <pre><code data-trim contenteditable>
-let numbers = [ 0, 20, 21, 42 ]
-// var highest = Math.max.apply(null, numbers) // 42
-let highest = Math.max(...numbers) // 42
+var numbers = [ 0, 20, 21, 42 ];
+var highest = Math.max.apply( null, numbers ); // 42
+                        </code></pre>
+                        <blockquote>new way</blockquote>
+                        <pre><code data-trim contenteditable>
+let highest = Math.max(...numbers); // 42
                         </code></pre>
                     </section>
 
                     <section>
-                        <h2>spread array into individual arguments</h2>
+                        <h2>spread array</h2>
+                        <blockquote>old way</blockquote>
                         <pre><code data-trim contenteditable>
 function coords ( x, y, z ) {
-    return { x, y, z }
+    return { x: x, y: y, z: z };
 }
-let points = [ 100, 50, 42 ]
-// old way
-var point = coords( points[0], points[1], points[2] )
-// new way
-let point = coords( ...points )
-// or even shorter
-let point = coords( ...[ 100, 50, 42 ] )
-console.log(point.x, point.y, point.z) // 100 50 42
+var points = [ 100, 50, 42 ];
+var point = coords( points[0], points[1], points[2] );
                         </code></pre>
                     </section>
 
                     <section>
-                        <h2>joining arrays - novice</h2>
+                        <h2>spread array</h2>
+                        <blockquote>new way</blockquote>
                         <pre><code data-trim contenteditable>
-// old way
+function coords ( x, y, z ) { return { x, y, z } }
+let point = coords( ...points ); // 100 50 42
+                        </code></pre>
+                        <div class="fragment">
+                            <blockquote>even shorter</blockquote>
+                            <pre><code data-trim contenteditable>
+let point = coords( ...[ 100, 50, 42 ] );
+console.log(point.x, point.y, point.z); // 100 50 42
+                            </code></pre>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2>joining arrays</h2>
+                        <blockquote>old way</blockquote>
+                        <pre><code data-trim contenteditable>
 var primes = [ 2, 3, 5 ]
 var fibonacci = [ 0, 1, 1 ]
 fibonacci = fibonacci.concat( primes ) // [0, 1, 1, 2, 3, 5]
-// new way
-fibonacci = [ 0, 1, 1, ...primes ]
-console.log( fibonacci ) // [0, 1, 1, 2, 3, 5]
                         </code></pre>
+                        <div class="fragment">
+                            <blockquote>new way</blockquote>
+                            <pre><code data-trim contenteditable>
+let fibonacci = [ 0, 1, 1, ...primes ]; // [0, 1, 1, 2, 3, 5]
+                            </code></pre>
+                        </div>
                     </section>
 
                     <section>
                         <h2>joining arrays - advanced</h2>
+                        <blockquote>old way</blockquote>
                         <pre><code data-trim contenteditable>
-// old way
-var primes = [ 2, 3, 5 ]
-var fibonacci = [ 0, 1, 1, 8, 13, 21 ]
-[ 2, 3, 5 ].forEach(function ( num ) {
-    var index = fibonacci.indexOf( 8 )
-    fibonacci.splice( index, 0, num )
+var primes = [ 2, 3, 5 ];
+var fibonacci = [ 0, 1, 1, 8, 13, 21 ];
+primes.forEach(function ( num ) {
+    var index = fibonacci.indexOf( 8 );
+    fibonacci.splice( index, 0, num );
 })
-// new way
-let fibonacci = [ 0, 1, 1, ...primes, 8, 13, 21 ]
-console.log( fibonacci ) // [0, 1, 1, 2, 3, 5, 8, 13, 21]
+console.log( fibonacci ); // [0, 1, 1, 2, 3, 5, 8, 13, 21]
                         </code></pre>
+                        <div class="fragment">
+                            <blockquote>new way</blockquote>
+                            <pre><code data-trim contenteditable>
+let fibonacci = [ 0, 1, 1, ...primes, 8, 13, 21 ];
+console.log( fibonacci ); // [0, 1, 1, 2, 3, 5, 8, 13, 21]
+                            </code></pre>
+                        </div>
                     </section><!-- end ### spread ### -->
 
                     <!-- ### destructuring ### -->
@@ -574,7 +605,8 @@ console.log( fibonacci ) // [0, 1, 1, 2, 3, 5, 8, 13, 21]
                     </section>
 
                     <section>
-                        <h2>swaping values of variables - old way</h2>
+                        <h2>swaping values of variables</h2>
+                        <blockquote>old way</blockquote>
                         <pre><code data-trim contenteditable>
 var a = 1
 var b = 2
@@ -582,13 +614,14 @@ var tmp = a
 a = b
 b = tmp
                         </code></pre>
+                        <h2 class="look fragment fade-in">&#3232;_&#3232;</h2>
                     </section>
 
                     <section>
                         <h2>swaping values of variables - new way</h2>
                         <pre><code data-trim contenteditable>
 let [a, b] = [b, a]
-console.log('a = %s, b = %s', a, b) // a = 5, b = 6
+console.log(a, b) // 5, 6
                         </pre></code>
                     </section>
 
