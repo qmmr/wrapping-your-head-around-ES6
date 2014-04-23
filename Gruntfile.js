@@ -50,7 +50,8 @@ module.exports = function (grunt) {
                     'css/theme/sky.css': 'css/theme/source/sky.scss',
                     'css/theme/moon.css': 'css/theme/source/moon.scss',
                     'css/theme/solarized.css': 'css/theme/source/solarized.scss',
-                    'css/theme/blood.css': 'css/theme/source/blood.scss'
+                    'css/theme/blood.css': 'css/theme/source/blood.scss',
+                    'css/custom.css': 'css/custom.scss'
                 }
             }
         },
@@ -113,7 +114,7 @@ module.exports = function (grunt) {
             },
 
             theme: {
-                files: [ 'css/theme/source/*.scss', 'css/theme/template/*.scss' ],
+                files: [ 'css/**/*.scss' ],
                 tasks: 'themes'
             }
         }
