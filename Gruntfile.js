@@ -127,7 +127,8 @@ module.exports = function (grunt) {
     grunt.registerTask( 'harmony', 'Exec shell js', function () {
         grunt.log.subhead('Running nodejs --harmony...')
         grunt.log.subhead('<------------------ START ------------------->\n\n')
-        shell.exec('node --harmony harmony.js')
+        // shell.exec('node --harmony harmony.js')
+        shell.exec('./run.sh')
         grunt.log.subhead('\n\n<------------------- END -------------------->')
     } );
 

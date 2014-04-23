@@ -1,7 +1,15 @@
 'use strict'
 
-// var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 var log = console.log
+
+// var fs = require('fs');
+// var words = fs.readFileSync('./words').toString().split('\n');
+
+// for ( var word of words ) {
+// 	console.log(word)
+// }
+
+// var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 // var data
 // var httpReq = new XMLHttpRequest()
@@ -19,3 +27,18 @@ var log = console.log
 // }
 // httpReq.open('GET', 'http://ergast.com/api/f1/2013/driverStandings.json', true)
 // httpReq.send(null)
+
+function* fibonacci () {
+    var [ prev, curr ] = [ 0, 1 ];
+    while ( 1 ) {
+        yield curr;
+        [ prev, curr ] = [ curr, prev + curr ];
+    }
+}
+var gen = fibonacci();
+gen.next() // {value: 0, done: false}
+
+for ( var n of gen) {
+    if (n > 1000) break;
+    console.log(n);
+}

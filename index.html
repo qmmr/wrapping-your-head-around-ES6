@@ -42,7 +42,7 @@
             <!-- Any section element inside of this container is displayed as a slide -->
             <div class="slides">
                 <section>
-                    <h1>ECMAScript 6 => `pure awesomness`</h1>
+                    <h1>ECMAScript 6 => `${pure} awesomness`</h1>
                 </section>
 
                 <section>
@@ -120,8 +120,8 @@
                     <section>
                         <h2>Syntax refinements:</h2>
                         <ul>
-                            <li class="fragment"><a href="#/10">=> (arrow)</a></li>
-                            <li class="fragment"><a href="#/11">object literals</a></li>
+                            <li class="fragment"><a href="#/5/1">=> (arrow)</a></li>
+                            <li class="fragment"><a href="#/5/6">object literals</a></li>
                         </ul>
                     </section>
 
@@ -130,9 +130,9 @@
                         <ul>
                             <li class="fragment"><a href="#/6/1">let</a></li>
                             <li class="fragment"><a href="#/6/6">const</a></li>
-                            <li class="fragment"><a href="#/6/11">default parameters</a></li>
-                            <li class="fragment"><a href="#/6/14">rest</a></li>
-                            <li class="fragment"><a href="#/6/17">spread</a></li>
+                            <li class="fragment"><a href="#/6/10">default parameters</a></li>
+                            <li class="fragment"><a href="#/6/13">rest</a></li>
+                            <li class="fragment"><a href="#/6/16">spread</a></li>
                             <li class="fragment"><a href="#/6/22">destructuring</a></li>
                             <li class="fragment"><a href="#/6/29">for..of loop</a></li>
                             <li class="fragment"><a href="#/6/32">iterators</a></li>
@@ -624,6 +624,7 @@ b = tmp;
 let [a, b] = [b, a]
 console.log(a, b) // 5, 6
                         </pre></code>
+                        <h2 class="look fragment">&#664;&#8255;&#664;</h2>
                     </section>
 
                     <section>
@@ -763,7 +764,7 @@ for ( let item of items ) {
                         <h2>iterating over array</h2>
                         <pre><code data-trim contenteditable>
 let numbers = [ 1, 2 ]
-let iter = numbers["@iterator"]() // iterator object that has method next()
+let iter = numbers["@@iterator"]() // iterator object that has method next()
 iter.next() // { value: 1, done: false }
 iter.next() // { value: 2, done: false }
 iter.next() // { value: undefined, done: true }
@@ -773,6 +774,11 @@ iter.next() // { value: undefined, done: true }
                     <!-- ### generators ### -->
                     <section>
                         <h1>generators</h1>
+                        <h2><a href="http://wiki.ecmascript.org/doku.php?id=harmony:generators" target="_blank">ECMAScript 6 Draft</a></h2>
+                        <blockquote>First-class coroutines, represented as objects encapsulating suspended execution contexts.</blockquote>
+                        <aside class="notes">
+                            Generators are functions that can suspend themselves (using the yield keyword) and be resumed (from the outside world) by calling their “next” method.
+                        </aside>
                     </section>
 
                     <section>
@@ -785,15 +791,16 @@ function* evenGen ( arr ) {
         }
     }
 }
-let numbers = [ 1, 2, 3, 4, 5, 6 ]
-for ( let num of evenGen ( numbers ) ) {
-    console.log( num )
+let numbers = [ 1, 2, 3, 4, 5, 6 ];
+for (let num of evenGen( numbers )) {
+    console.log( num );
 }
                         </code></pre>
                     </section>
 
                     <section>
-                        <h2>Fibonacci sequence - old way</h2>
+                        <h2>Fibonacci sequence</h2>
+                        <blockquote>old way</blockquote>
                         <pre><code data-trim contenteditable>
 function fibonacci ( max ) {
     var a = 0, b = 1, c = 0;
@@ -804,21 +811,28 @@ function fibonacci ( max ) {
         b = c + b;
     }
 }
+// 0 1 1 2 3 5 8 13 21 34
                         </code></pre>
                     </section>
 
                     <section>
-                        <h2>Fibonacci sequence - new way</h2>
+                        <h2>Fibonacci sequence</h2>
+                        <blockquote>new way</blockquote>
                         <pre><code data-trim contenteditable>
 function* fibonacci () {
-    var a = 0, b = 1
+    var [ prev, curr ] = [ 0, 1 ];
     while ( 1 ) {
-        yield a;
-        [ a, b ] = [ b, a + b ]
+        yield curr;
+        [ prev, curr ] = [ curr, prev + curr ];
     }
 }
-var gen = fibonacci()
-console.log(gen.next()) // {value: 0, done: false}
+var gen = fibonacci();
+gen.next() // {value: 0, done: false}
+
+for ( var n of gen) {
+    if (n > 1000) break;
+    console.log(n);
+}
                         </code></pre>
                     </section>
 
@@ -826,15 +840,15 @@ console.log(gen.next()) // {value: 0, done: false}
                         <h2>iterating over obj using generator</h2>
                         <pre><code data-trim contenteditable>
 function Person ( firstName, lastName ) {
-    this.firstName = firstName
-    this.lastName = lastName
+    this.firstName = firstName;
+    this.lastName = lastName;
 }
 Person.prototype.greet = function () {
-    return 'Hi, my name is ' + this.firstName
-}
-let johnDoe = new Person( ...['John', 'Doe'] )
+    return 'Hi, my name is ' + this.firstName;
+};
+let johnDoe = new Person( ...['John', 'Doe'] );
 for ( let val of johnDoe ) {
-    console.log( val )
+    console.log( val );
 }
 // TypeError: john['@@iterator'] is not a function
                         </code></pre>
@@ -887,50 +901,54 @@ for ( let [ key, val ] of johnDoe ) {
                     </section>
 
                     <section>
-                        <h2>ES5 - map</h2>
+                        <h2>Array map</h2>
+                        <blockquote>old way</blockquote>
                         <pre><code data-trim contenteditable>
-var jedis = ['Luke Skywalker', 'Obi-wan Kenobi', 'Yoda']
+var jedis = [ 'Luke Skywalker', 'Obi-wan Kenobi', 'Yoda' ];
 var jediMasters = jedis.map(function ( jedi ) {
-    return 'master ' + jedi
-})
-console.log( jediMasters ) // [ "master Luke Skywalker", "master Obi-wan Kenobi", "master Yoda" ]
+    return 'master ' + jedi;
+});
+console.log( jediMasters ); // [ "master Luke Skywalker", "master Obi-wan Kenobi", "master Yoda" ]
                         </code></pre>
                     </section>
 
                     <section>
-                        <h2>ES6 - map using comprehensions</h2>
+                        <h2>Array map</h2>
+                        <blockquote>new way</blockquote>
                         <pre><code data-trim contenteditable>
-let jedis = ['Luke Skywalker', 'Obi-wan Kenobi', 'Yoda']
-let jediMasters = [ 'master ' + jedi for ( jedi of jedis ) ]
+let jedis = [ 'Luke Skywalker', 'Obi-wan Kenobi', 'Yoda' ];
+let jediMasters = [ 'master ' + jedi for ( jedi of jedis ) ];
                         </code></pre>
                     </section>
 
                     <section>
-                        <h2>ES5 - filter</h2>
+                        <h2>Array filter</h2>
+                        <blockquote>old way</blockquote>
                         <pre><code data-trim contenteditable>
-var jedis = [ 'Luke Skywalker', 'Yoda', 'Darth Vader', 'Darth Maul' ]
+var jedis = [ 'Luke Skywalker', 'Yoda', 'Darth Vader', 'Darth Maul' ];
 var jediKnights = jedis.filter(function ( jedi ) {
-    return jedi.indexOf( 'Darth' ) == -1
-})
-console.log( jediKnights ) // [ 'Luke Skywalker', 'Yoda' ]
+    return jedi.indexOf( 'Darth' ) == -1;
+});
+console.log( jediKnights ); // [ 'Luke Skywalker', 'Yoda' ]
                         </code></pre>
                     </section>
 
                     <section>
-                        <h2>ES6 - filter using comprehensions</h2>
+                        <h2>Array filter</h2>
+                        <blockquote>new way</blockquote>
                         <pre><code data-trim contenteditable>
-let jedis = [ 'Luke Skywalker', 'Yoda', 'Darth Vader', 'Darth Maul' ]
-let jediKnights = [ knight for ( knight of jedis ) if ( knight.indexOf( 'Darth' ) == -1) ]
-console.log( jediKnights )
+let jedis = [ 'Luke Skywalker', 'Yoda', 'Darth Vader', 'Darth Maul' ];
+let jediKnights = [ knight for ( knight of jedis ) if ( knight.indexOf( 'Darth' ) == -1) ];
+console.log( jediKnights );
                         </code></pre>
                     </section>
 
                     <section>
                         <h2>Generator comprehension</h2>
                         <pre><code data-trim contenteditable>
-let jedis = [ 'Luke Skywalker', 'Yoda', 'Darth Vader', 'Darth Maul' ]
-let jediKnights = ( knight for ( knight of jedis ) if ( knight.indexOf( 'Darth' ) == -1) )
-console.log( jediKnights.next() ) // 'Luke Skywalker'
+let jedis = [ 'Luke Skywalker', 'Yoda', 'Darth Vader', 'Darth Maul' ];
+let jediKnights = ( knight for ( knight of jedis ) if ( knight.indexOf( 'Darth' ) == -1) );
+console.log( jediKnights.next() ); // 'Luke Skywalker'
                         </code></pre>
                     </section><!-- ### comprehensions ### -->
 
