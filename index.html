@@ -608,17 +608,18 @@ console.log( fibonacci ); // [0, 1, 1, 2, 3, 5, 8, 13, 21]
                         <h2>swaping values of variables</h2>
                         <blockquote>old way</blockquote>
                         <pre><code data-trim contenteditable>
-var a = 1
-var b = 2
-var tmp = a
-a = b
-b = tmp
+var a = 1;
+var b = 2;
+var tmp = a;
+a = b;
+b = tmp;
                         </code></pre>
                         <h2 class="look fragment fade-in">&#3232;_&#3232;</h2>
                     </section>
 
                     <section>
-                        <h2>swaping values of variables - new way</h2>
+                        <h2>swaping values of variables</h2>
+                        <blockquote>new way</blockquote>
                         <pre><code data-trim contenteditable>
 let [a, b] = [b, a]
 console.log(a, b) // 5, 6
@@ -626,63 +627,72 @@ console.log(a, b) // 5, 6
                     </section>
 
                     <section>
-                        <h2>extract array into individual variables</h2>
+                        <h2>extract array</h2>
                         <pre><code data-trim contenteditable>
-function foo () {
-    return [ 5, 10, 15 ]
-}
-let [ a, b, c ] = foo()
-console.log( 'a = %s, b = %s, c = %s', a, b, c ) // "a = 5, b = 10, c = 15"
-// omitting
-let [ x, , z ] = foo()
-console.log( 'x = %s, z = %s', x, z ) // "x = 5, z = 15"
-console.log( y ) // Reference error: y is not defined
+function foo () { return [ 5, 10, 15 ] }
+let [ a, b, c ] = foo();
+console.log( a, b, c ); // 5, 10, 15
                         </code></pre>
+                        <br>
+                        <h3 class="fragment">omitting certain values</h3>
+                        <pre class="fragment"><code data-trim contenteditable>
+let [ x, , z ] = foo();
+console.log( x, z ); // 5, 15
+console.log( y ); // Reference error: y is not defined
+                        </code></pre>
+                        <aside class="notes">omitting - second code block</aside>
                     </section>
 
                     <section>
                         <h2>destructuring objects</h2>
-                        <p>long way / control naming</p>
+                        <blockquote>long way / control naming</blockquote>
                         <pre><code data-trim contenteditable>
 let person = {
     name: {
         first: 'John',
         last: 'Doe'
     }
-}
-let { first: firstName, last: lastName } = person.name
-console.log(firstName, lastName) // John Doe
+};
+let { first: firstName, last: lastName } = person.name;
+console.log(firstName, lastName); // John Doe
                         </code></pre>
                     </section>
 
                     <section>
                         <h2>destructuring objects</h2>
-                        <p>short way / same variables names</p>
+                        <blockquote>short way / same variables names</blockquote>
                         <pre><code data-trim contenteditable>
 let person = {
     firstName: 'John',
     lastName: 'Doe'
-}
-let { firstName, lastName } = person
-console.log(firstName, lastName) // John Doe
+};
+let { firstName, lastName } = person;
+console.log(firstName, lastName); // John Doe
                         </code></pre>
                     </section>
 
                     <section>
-                        <h2>destructuring inside function parameters</h2>
+                        <h2>destructuring function parameters</h2>
                         <pre><code data-trim contenteditable>
 let person = {
     age: 30,
-    name: {
-        first: 'John',
-        last: 'Doe'
+    firstName: 'John',
+    lastName: 'Doe',
+    email: {
+        work: 'john.doe@office.com',
+        home: 'jdoe@gmail.com'
     }
+};
+
+function describePerson ({ age, firstName: name, lastName, email: { home: email }}) {
+    console.log(`Name: ${name} | Lastname: ${lastName} | Age: ${age} | email: ${email}`);
 }
-function bar ({ age, name: { first: firstName, last: lastName }}) {
-    console.log('Name: %s Lastname: %s Age: %n', firstName, lastName, age)
-}
-bar(person) // Name: John | Lastname: Doe | Age: 30
+
+describePerson( person ); // Name: John | Lastname: Doe | Age: 30 | email: jdoe@gmail.com
                         </code></pre>
+                        <aside class="notes">
+                            you can destructure nested objects
+                        </aside>
                     </section><!-- ### destructuring ### -->
 
                     <!-- ### for..of ### -->
