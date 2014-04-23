@@ -128,15 +128,15 @@
                         <h2>New syntax:</h2>
                         <ul>
                             <li class="fragment"><a href="#/6/1">let</a></li>
-                            <li class="fragment"><a href="#/6/7">const</a></li>
-                            <li class="fragment"><a href="#/6/12">default parameters</a></li>
-                            <li class="fragment"><a href="#/6/15">rest</a></li>
-                            <li class="fragment"><a href="#/6/18">spread</a></li>
-                            <li class="fragment"><a href="#/6/23">destructuring</a></li>
-                            <li class="fragment"><a href="#/6/30">for..of loop</a></li>
-                            <li class="fragment"><a href="#/6/33">iterators</a></li>
-                            <li class="fragment"><a href="#/6/35">generators</a></li>
-                            <li class="fragment"><a href="#/6/42">comprehensions</a></li>
+                            <li class="fragment"><a href="#/6/6">const</a></li>
+                            <li class="fragment"><a href="#/6/11">default parameters</a></li>
+                            <li class="fragment"><a href="#/6/14">rest</a></li>
+                            <li class="fragment"><a href="#/6/17">spread</a></li>
+                            <li class="fragment"><a href="#/6/22">destructuring</a></li>
+                            <li class="fragment"><a href="#/6/29">for..of loop</a></li>
+                            <li class="fragment"><a href="#/6/32">iterators</a></li>
+                            <li class="fragment"><a href="#/6/34">generators</a></li>
+                            <li class="fragment"><a href="#/6/41">comprehensions</a></li>
                         </ul>
                     </section>
 
@@ -303,20 +303,27 @@ let student = {
                     <section>
                         <h1>let</h1>
                         <h2>is the new var</h3>
-                        <p class="fragment">scoped to the current block {}</p>
+                        <p class="fragment">scoped to the block rather then function</p>
                         <p class="fragment">does not have hoisting characteristics</p>
+                        <aside class="notes">
+                            block being anything inside curly braces
+                            - loops
+                            - if/else/else if
+                            - switch
+                            - try/catch*
+                        </aside>
                     </section>
 
                     <section>
                         <h2>scoped inside if clause</h2>
                         <pre><code data-trim contenteditable>
 function printName ( language ) {
-    var name = 'Marcin'
+    var name = 'Marcin';
     if ( language === 'English' ) {
-        let name = 'Martin'
-        console.log( name ) // Martin
+        let name = 'Martin';
+        console.log( name ); // Martin
     }
-    console.log( name ) // Marcin
+    console.log( name ); // Marcin
 }
                         </code></pre>
                         <aside class="notes">
@@ -329,14 +336,16 @@ function printName ( language ) {
                         <p>common problem</p>
                         <pre><code data-trim contenteditable>
 function wrapper ( arr ) {
-    var result = []
-    for ( var i = 0, len = arr.length; i < len; ++i ) {
-        result[i] = function () { return arr[i] }
+    var result = [], i, len;
+    for ( i = 0, len = arr.length; i < len; ++i ) {
+        result[i] = function () {
+            return arr[i];
+        }
     }
     return result
 }
-var wrapped = wrapper( ['Luke', 'Obi-Wan', 'Yoda'] )
-wrapped[1]() // undefined
+var wrapped = wrapper([ 'Luke', 'Obi-Wan', 'Yoda' ]);
+console.log( wrapped[1]() ); // undefined
                         </code></pre>
                     </section>
 
@@ -344,16 +353,16 @@ wrapped[1]() // undefined
                         <h2>Old solution</h2>
                         <pre><code data-trim contenteditable>
 function wrapper ( arr ) {
-    var result = []
-    for ( var i = 0, len = arr.length; i < len; ++i ) {
+    var result = [], i, len;
+    for ( i = 0, len = arr.length; i < len; ++i ) {
         (function ( j ) {
             result[i] = function () { return arr[j] }
         })( i )
     }
-    return result
+    return result;
 }
-var wrapped = wrapper( ['Luke', 'Obi-Wan', 'Yoda'] )
-wrapped[2]() // 'Yoda'
+var wrapped = wrapper([ 'Luke', 'Obi-Wan', 'Yoda' ]);
+console.log( wrapped[2]() ); // 'Yoda'
                         </code></pre>
                     </section>
 
@@ -361,33 +370,14 @@ wrapped[2]() // 'Yoda'
                         <h2>New solution</h2>
                         <pre><code data-trim contenteditable>
 function wrapper ( arr ) {
-    var result = []
+    var result = [];
     for ( let i = 0, len = arr.length; i < len; ++i ) {
         result[i] = function () { return arr[i] }
     }
-    return result
+    return result;
 }
-var wrapped = wrapper( ['Luke', 'Obi-Wan', 'Yoda'] )
-wrapped[1]() // 'Obi-Wan'
-                        </code></pre>
-                    </section>
-
-                    <section>
-                        <h2>Everything inside {}</h2>
-                        <ul>
-                            <li>loops</li>
-                            <li>if/else/else if</li>
-                            <li>switch</li>
-                            <li>try/catch*</li>
-                        </ul>
-                        <pre><code data-trim contenteditable>
-function square ( x ) {
-    if ( !x ) {
-        let x = 2
-        return x * x
-    }
-    return x * x
-}
+var wrapped = wrapper([ 'Luke', 'Obi-Wan', 'Yoda' ]);
+console.log( wrapped[1]() ); // 'Obi-Wan'
                         </code></pre>
                     </section><!-- end ### let keyword ### -->
 
@@ -831,13 +821,17 @@ for ( let [ key, val ] of johnDoe ) {
 // "firstName: John"
 // "lastName: Doe"
                         </code></pre>
+                        <aside class="notes">
+                            
+                        </aside>
                     </section><!-- end ### generators ### -->
 
                     <!-- ### comprehensions ### -->
                     <section>
-                        <h2>comprehensions</h2>
-                        <p>syntactic construct for creating arrays based on other arrays</p>
+                        <h1>comprehensions</h1>
+                        <p class="fragment">syntactic construct for creating arrays based on other arrays</p>
                     </section>
+
                     <section>
                         <h2>ES5 - map</h2>
                         <pre><code data-trim contenteditable>
