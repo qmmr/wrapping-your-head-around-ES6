@@ -1,5 +1,3 @@
-'use strict';
-var log = console.log;
 function fibonacci() {
   var $__2,
       prev,

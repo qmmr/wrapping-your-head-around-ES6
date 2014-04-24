@@ -109,8 +109,8 @@ module.exports = function (grunt) {
             },
 
             es6: {
-                files: [ 'harmony.js' ],
-                tasks: [ 'harmony' ]
+                files: [ 'node-harmony.js', 'traceur.js' ],
+                tasks: [ 'harmony', 'traceur' ]
             },
 
             theme: {
@@ -124,13 +124,19 @@ module.exports = function (grunt) {
     // Loading dependencies
     require('load-grunt-tasks')(grunt)
 
-    grunt.registerTask( 'harmony', 'Exec shell js', function () {
-        grunt.log.subhead('Running nodejs --harmony...')
+    grunt.registerTask('traceur', 'Running traceur task', function () {
+        grunt.log.subhead('Running nodejs traceur...')
         grunt.log.subhead('<------------------ START ------------------->\n\n')
-        // shell.exec('node --harmony harmony.js')
         shell.exec('./run.sh')
         grunt.log.subhead('\n\n<------------------- END -------------------->')
-    } );
+    })
+
+    grunt.registerTask('harmony', 'Running nodejs --harmony task', function () {
+        grunt.log.subhead('Running nodejs --harmony...')
+        grunt.log.subhead('<------------------ START ------------------->\n\n')
+        shell.exec('node --harmony node-harmony.js')
+        grunt.log.subhead('\n\n<------------------- END -------------------->')
+    })
 
     // Default task
     grunt.registerTask( 'default', [ 'jshint', 'cssmin', 'uglify', 'qunit' ] );
