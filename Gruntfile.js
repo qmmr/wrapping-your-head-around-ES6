@@ -148,7 +148,7 @@ module.exports = function (grunt) {
     grunt.registerTask( 'package', [ 'default', 'zip' ] );
 
     // Serve presentation locally
-    grunt.registerTask( 'serve', [ 'connect', 'watch' ] );
+    grunt.registerTask( 'serve', [ 'default', 'connect', 'watch:main' ] );
 
     // Run tests
     grunt.registerTask( 'test', [ 'jshint', 'qunit' ] )
