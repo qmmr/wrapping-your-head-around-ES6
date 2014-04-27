@@ -688,11 +688,11 @@ let person = {
     }
 };
 
-function describePerson ({ age, firstName: name, lastName, email: { home: email }}) {
-    console.log(`Name: ${name} | Lastname: ${lastName} | Age: ${age} | email: ${email}`);
+function describePerson ({ firstName, lastName, email: { home: email }}) {
+    console.log(`${firstName} ${lastName} | email: ${email}`);
 }
 
-describePerson( person ); // Name: John | Lastname: Doe | Age: 30 | email: jdoe@gmail.com
+describePerson( person ); // John Doe | email: jdoe@gmail.com
                         </code></pre>
                         <aside class="notes">
                             you can destructure nested objects
@@ -702,26 +702,43 @@ describePerson( person ); // Name: John | Lastname: Doe | Age: 30 | email: jdoe@
                     <!-- ### for..of ### -->
                     <section>
                         <h1>for..of</h1>
-                        <h2 class="look fragment">&#664;&#8255;&#664;</h2>
+                        <p class="fragment">iterates over values of array</p>
+                    </section>
+
+                    <section>
+                        <h2>for..in loop problem</h2>
+                        <pre><code data-trim contenteditable>
+var numbers = [ 1, 2, 3, 4, 5 ]
+for (var num in numbers) {
+    console.log( num )
+}
+// 0, 1, 2, 3, 4
+                        </code></pre>
+                        <h2 class="look fragment fade-in">WTF?!?<br>&#3232;_&#3232;</h2>
                     </section>
 
                     <section>
                         <h2>looping over array</h2>
                         <blockquote>old way</blockquote>
                         <pre><code data-trim contenteditable>
-var numbers = [ 1, 2, 3, 4, 5 ]
-numbers.forEach(function ( number ) {
-    console.log( number );
-});
+[ 1, 2, 3, 4, 5 ].forEach(function ( number ) {
+    console.log( number )
+})
+// 1, 2, 3, 4, 5
                         </code></pre>
-                        <div class="fragment">
-                            <blockquote>new way</blockquote>
-                            <pre><code data-trim contenteditable>
+                        <h2 class="look fragment fade-in">&#3232;&#3263;_&#3232;</h2>
+                    </section>
+
+                    <section>
+                        <h2>looping over array</h2>
+                        <blockquote>new way</blockquote>
+                        <pre><code data-trim contenteditable>
 for ( let number of numbers ) {
-    console.log( number );
+    console.log( number )
 }
-                            </code></pre>
-                        </div>
+// 1, 2, 3, 4, 5
+                        </code></pre>
+                        <h2 class="look fragment fade-in">&#65340;(&#65344;0&#180;)&#65295;</h2>
                     </section>
 
                     <section>
