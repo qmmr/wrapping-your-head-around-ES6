@@ -631,16 +631,18 @@ console.log(a, b) // 2, 1
                     <section>
                         <h2>extract array</h2>
                         <pre><code data-trim contenteditable>
-function foo () { return [ 5, 10, 15 ] }
-let [ a, b, c ] = foo();
-console.log( a, b, c ); // 5, 10, 15
+function totalLength ( l, w, h ) {
+    return [ 2 * l , 2 * w, h ]
+}
+let [ baseLength, baseWidth, height ] = totalLength( 10, 20, 15 );
+console.log( baseLength, baseWidth, height ); // 20, 40, 15
                         </code></pre>
                         <br>
                         <h3 class="fragment">omitting certain values</h3>
                         <pre class="fragment"><code data-trim contenteditable>
-let [ x, , z ] = foo();
-console.log( x, z ); // 5, 15
-console.log( y ); // Reference error: y is not defined
+let [ baseLength, , height ] = totalLength( 10, 20, 15);
+console.log( baseLength, height ); // 5, 15
+console.log( baseWidth ); // Reference error: baseWidth is not defined
                         </code></pre>
                         <aside class="notes">omitting - second code block</aside>
                     </section>
