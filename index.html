@@ -771,13 +771,8 @@ for ( let item of items ) {
                     <!-- ### iterators ### -->
                     <section>
                         <h1>iterators</h1>
-                        <p class="fragment">[Symbol.iterator]</p>
-                        <p class="fragment">currently no environment implements Symbol</p>
-                        <p class="fragment">some vendors (Nightly Firefox) have ["@@iterator"] property</p>
-                        <p class="fragment">iterator object has one method: next() which iterates over values of the object</p>
-                        <aside class="notes">
-                            iterable objects have [Symbol.iterator] function that returns iterable object 
-                        </aside>
+                        <p class="fragment">An iterator is an object with a next method that returns { done, value }</p>
+                        <p class="fragment">An iterable is an object which has an internal method, written in the current ES6 draft specs as obj[@@iterator](), that returns an iterator.</p>
                     </section>
 
                     <section>
@@ -789,6 +784,9 @@ iter.next() // { value: 1, done: false }
 iter.next() // { value: 2, done: false }
 iter.next() // { value: undefined, done: true }
                         </code></pre>
+                        <aside class="notes">
+                            "@@iterator" is implemented in Firefox, ES6 Draft Spec defines Symbol.iterator
+                        </aside>
                     </section><!-- end ### iterators ### -->
 
                     <!-- ### generators ### -->
@@ -974,12 +972,6 @@ console.log( jediKnights.next() ); // 'Luke Skywalker'
 
                 </section><!-- end ### new syntax ### -->
 
-                <!-- ### Organizational features ### -->
-                <section>
-                    <h1>Organizational features</h1>
-                    http://www.nczonline.net/blog/2014/04/22/creating-defensive-objects-with-es6-proxies/
-                </section><!-- end ### Organizational features ### -->
-
                 <section>
                     <h1>Questions?</h1>
                 </section>
@@ -987,6 +979,21 @@ console.log( jediKnights.next() ); // 'Luke Skywalker'
                 <section>
                     <h1>Thank you</h1>
                 </section>
+
+                <!-- ### Symbol ### -->
+                <section>
+                    <h2>Symbol</h2>
+                    <aside class="notes">
+                        symbol is a new kind of primitive value, and each symbol is unique
+                        Using symbols instead of strings allows different modules to create properties that don't conflict with one another.
+                    </aside>
+                </section><!-- end ### Symbol ### -->
+
+                <!-- ### Organizational features ### -->
+                <section>
+                    <h1>Organizational features</h1>
+                    http://www.nczonline.net/blog/2014/04/22/creating-defensive-objects-with-es6-proxies/
+                </section><!-- end ### Organizational features ### -->
 
             </div>
 
