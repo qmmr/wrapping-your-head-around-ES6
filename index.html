@@ -779,11 +779,17 @@ for ( let item of items ) {
                         <h2>iterating over array</h2>
                         <pre><code data-trim contenteditable>
 let numbers = [ 1, 2 ]
-let iter = numbers["@@iterator"]() // iterator object that has method next()
+let iter = numbers["@@iterator"]()
 iter.next() // { value: 1, done: false }
 iter.next() // { value: 2, done: false }
 iter.next() // { value: undefined, done: true }
                         </code></pre>
+                        <div class="fragment">
+                            <blockquote>using iterable</blockquote>
+                            <pre><code data-trim contenteditable>
+for ( let num of iter ) { console.log( num ) }
+                            </code></pre>
+                        </div>
                         <aside class="notes">
                             "@@iterator" is implemented in Firefox, ES6 Draft Spec defines Symbol.iterator
                         </aside>
