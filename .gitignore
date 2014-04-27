@@ -6,4 +6,4 @@ node_modules/
 .sass-cache
 *.sublime-*
 js/reveal.min.js
-css/*.css
+css/**/*.css
