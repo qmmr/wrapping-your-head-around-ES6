@@ -798,15 +798,16 @@ for ( let num of iter ) { console.log( num ) }
                     <!-- ### generators ### -->
                     <section>
                         <h1>generators</h1>
-                        <h2><a href="http://wiki.ecmascript.org/doku.php?id=harmony:generators" target="_blank">ECMAScript 6 Draft</a></h2>
-                        <blockquote>First-class coroutines, represented as objects encapsulating suspended execution contexts.</blockquote>
+                        <h2 class="fragment"><a href="http://wiki.ecmascript.org/doku.php?id=harmony:generators" target="_blank">ECMAScript 6 Draft</a></h2>
+                        <blockquote class="fragment">First-class coroutines, represented as objects encapsulating suspended execution contexts.</blockquote>
                         <aside class="notes">
                             Generators are functions that can suspend themselves (using the yield keyword) and be resumed (from the outside world) by calling their “next” method.
                         </aside>
                     </section>
 
                     <section>
-                        <h2>iterating over array</h2>
+                        <h2>even numbers</h2>
+                        <blockquote>generator example</blockquote>
                         <pre><code data-trim contenteditable>
 function* evenGen ( arr ) {
     for ( let num of arr ) {
@@ -820,6 +821,9 @@ for (let num of evenGen( numbers )) {
     console.log( num );
 }
                         </code></pre>
+                        <aside class="notes">
+                            function followed by * and yield keyword
+                        </aside>
                     </section>
 
                     <section>
@@ -835,7 +839,7 @@ function fibonacci ( max ) {
         b = c + b;
     }
 }
-// 0 1 1 2 3 5 8 13 21 34
+fibonacci( 10 ); // 0 1 1 2 3 5 8 13 21 34
                         </code></pre>
                     </section>
 
@@ -846,22 +850,23 @@ function fibonacci ( max ) {
 function* fibonacci () {
     var [ prev, curr ] = [ 0, 1 ];
     while ( 1 ) {
-        yield curr;
+        yield prev;
         [ prev, curr ] = [ curr, prev + curr ];
     }
 }
 var gen = fibonacci();
-gen.next() // {value: 0, done: false}
-
+//gen.next() // {value: 0, done: false}
+var fibSeq = [];
 for ( var n of gen) {
-    if (n > 1000) break;
-    console.log(n);
+    if (n > 34) break;
+    o.push(n);
 }
+console.log( fibSeq.join(', ') ) // 0, 1, 1, 2, 3, 5, 8, 13, 21, 34
                         </code></pre>
                     </section>
 
                     <section>
-                        <h2>iterating over obj using generator</h2>
+                        <h2>generator and objects</h2>
                         <pre><code data-trim contenteditable>
 function Person ( firstName, lastName ) {
     this.firstName = firstName;
@@ -870,7 +875,7 @@ function Person ( firstName, lastName ) {
 Person.prototype.greet = function () {
     return 'Hi, my name is ' + this.firstName;
 };
-let johnDoe = new Person( ...['John', 'Doe'] );
+let johnDoe = new Person( 'John', 'Doe' );
 for ( let val of johnDoe ) {
     console.log( val );
 }
@@ -879,7 +884,7 @@ for ( let val of johnDoe ) {
                     </section>
 
                     <section>
-                        <h2>iterating over obj using generator part 2</h2>
+                        <h2>generator and objects</h2>
                         <pre><code data-trim contenteditable>
 function* objGen ( obj ) {
     for ( let prop in obj ) {
@@ -898,7 +903,7 @@ for ( let [key, val] of objGen( johnDoe ) ) {
                     </section>
 
                     <section>
-                        <h2>implementing generator into obj</h2>
+                        <h2>implementing generator into object</h2>
                         <pre><code data-trim contenteditable>
 Person.prototype['@@iterator'] = function* () {
     for ( let prop in this ) {
@@ -928,11 +933,11 @@ for ( let [ key, val ] of johnDoe ) {
                         <h2>Array map</h2>
                         <blockquote>old way</blockquote>
                         <pre><code data-trim contenteditable>
-var jedis = [ 'Luke Skywalker', 'Obi-wan Kenobi', 'Yoda' ];
+var jedis = [ 'Luke', 'Obi-wan', 'Yoda' ];
 var jediMasters = jedis.map(function ( jedi ) {
     return 'master ' + jedi;
 });
-console.log( jediMasters ); // [ "master Luke Skywalker", "master Obi-wan Kenobi", "master Yoda" ]
+console.log( jediMasters ); // [ "master Luke", "master Obi-wan", "master Yoda" ]
                         </code></pre>
                     </section>
 
@@ -940,8 +945,9 @@ console.log( jediMasters ); // [ "master Luke Skywalker", "master Obi-wan Kenobi
                         <h2>Array map</h2>
                         <blockquote>new way</blockquote>
                         <pre><code data-trim contenteditable>
-let jedis = [ 'Luke Skywalker', 'Obi-wan Kenobi', 'Yoda' ];
+let jedis = [ 'Luke', 'Obi-wan', 'Yoda' ];
 let jediMasters = [ 'master ' + jedi for ( jedi of jedis ) ];
+console.log( jediMasters ); // [ "master Luke", "master Obi-wan", "master Yoda" ]
                         </code></pre>
                     </section>
 
@@ -963,7 +969,7 @@ console.log( jediKnights ); // [ 'Luke Skywalker', 'Yoda' ]
                         <pre><code data-trim contenteditable>
 let jedis = [ 'Luke Skywalker', 'Yoda', 'Darth Vader', 'Darth Maul' ];
 let jediKnights = [ knight for ( knight of jedis ) if ( knight.indexOf( 'Darth' ) == -1) ];
-console.log( jediKnights );
+console.log( jediKnights ); // [ 'Luke Skywalker', 'Yoda' ]
                         </code></pre>
                     </section>
 
