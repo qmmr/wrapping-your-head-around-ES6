@@ -990,11 +990,12 @@ console.log( jediKnights.next() ); // 'Luke Skywalker'
                 <!-- ### Organizational features ### -->
                 <section>
                     <section>
-                        <h2>Organizational features:</h2>
+                        <h2>Organizational features</h2>
                     </section>
 
+                    <!-- ### classes ### -->
                     <section>
-                        <h2>classes</h2>
+                        <h1>classes</h1>
                         <blockquote>ES6 classes are a simple sugar over the prototype-based OO pattern</blockquote>
                         <p>Classes support prototype-based inheritance, super calls, instance and static methods and constructors.</p>
                     </section>
@@ -1003,23 +1004,52 @@ console.log( jediKnights.next() ); // 'Luke Skywalker'
                         <h2>OOP in JS</h2>
                         <blockquote>old way</blockquote>
                         <pre><code data-trim contenteditable>
-Animal = (function () {
-    function Animal ( name ) {
-        this.name = name
+var Vehicle = (function () {
+    function Vehicle ( name, color ) {
+        this.name = name || 'Default Vehicle'
+        this.color = color || 'white'
     }
 
-    Animal.prototype.move = function ( meters ) {
-        return alert( this.name + (' moved ' + meters + 'm.') )
+    Vehicle.prototype.getColor = function () {
+        return this.color
     }
 
-    return Animal
-})()
-var ralph = new Animal('Joe the Dog')
+    return Vehicle
+})();
+
+var jollyRoger = new Vehicle( 'Jolly Roger', 'pink' )
                         </code></pre>
                     </section>
 
+                    <section>
+                        <h2>OOP in JS</h2>
+                        <blockquote>new way</blockquote>
+                        <pre><code data-trim contenteditable>
+class Vehicle {
+    constructor ( name = 'Default Vehicle', color = 'white' ) {
+        this.name = name
+        this.color = color
+    }
+
+    getColor () {
+        return this.color
+    }
+}
+var jollyRoger = new Vehicle( 'Jolly Roger', 'pink' )
+                        </code></pre>
+                    </section><!-- end ### classes ### -->
+
+                    <!-- ### modules ### -->
+                    <section>
+                        <h1>modules</h1>
+                    </section>
+
+                    <section>
+                        <h2>???</h2>
+                        <blockquote>What the heck are modules?</blockquote>
+                    </section><!-- ### modules ### -->
+
                 </section><!-- end ### Organizational features ### -->
-                        <li>modules</li>
 
                 <!-- ### New standard library features ### -->
                 <section>
