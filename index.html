@@ -987,6 +987,45 @@ console.log( jediKnights.next() ); // 'Luke Skywalker'
 
                 </section><!-- end ### new syntax ### -->
 
+                <!-- ### Organizational features ### -->
+                <section>
+                    <section>
+                        <h2>Organizational features:</h2>
+                    </section>
+
+                    <section>
+                        <h2>classes</h2>
+                        <blockquote>ES6 classes are a simple sugar over the prototype-based OO pattern</blockquote>
+                        <p>Classes support prototype-based inheritance, super calls, instance and static methods and constructors.</p>
+                    </section>
+
+                    <section>
+                        <h2>OOP in JS</h2>
+                        <blockquote>old way</blockquote>
+                        <pre><code data-trim contenteditable>
+Animal = (function () {
+    function Animal ( name ) {
+        this.name = name
+    }
+
+    Animal.prototype.move = function ( meters ) {
+        return alert( this.name + (' moved ' + meters + 'm.') )
+    }
+
+    return Animal
+})()
+var ralph = new Animal('Joe the Dog')
+                        </code></pre>
+                    </section>
+
+                </section><!-- end ### Organizational features ### -->
+                        <li>modules</li>
+
+                <!-- ### New standard library features ### -->
+                <section>
+                    <h2>New standard library features:</h2>
+                </section><!-- end ### New standard library features ### -->
+
                 <section>
                     <h1>Questions?</h1>
                 </section>
