@@ -108,9 +108,14 @@ module.exports = function (grunt) {
                 tasks: 'default'
             },
 
-            es6: {
-                files: [ 'node-harmony.js', 'traceur.js' ],
-                tasks: [ 'harmony', 'traceur' ]
+            harmony: {
+                files: [ 'node-harmony.js' ],
+                tasks: [ 'harmony' ]
+            },
+
+            traceur: {
+                files: [ 'traceur.js' ],
+                tasks: [ 'traceur' ]
             },
 
             theme: {
