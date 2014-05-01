@@ -21,3 +21,18 @@
 // }
 // httpReq.open('GET', 'http://ergast.com/api/f1/2013/driverStandings.json', true)
 // httpReq.send(null)
+
+class Vehicle {
+    constructor ( name = 'Default Vehicle', color = 'white' ) {
+        this.name = name
+        this.color = color
+    }
+
+    getColor () {
+        return this.color
+    }
+}
+
+var jollyRoger = new Vehicle( 'Jolly Roger', 'pink' )
+
+console.log(jollyRoger.name, jollyRoger.getColor())
