@@ -631,19 +631,22 @@ console.log(a, b) // 2, 1
                     <section>
                         <h2>extract array</h2>
                         <pre><code data-trim contenteditable>
-function totalLength ( l, w, h ) {
-    return [ 2 * l , 2 * w, h ]
-}
-let [ baseLength, baseWidth, height ] = totalLength( 10, 20, 15 );
-console.log( baseLength, baseWidth, height ); // 20, 40, 15
+let destruct = ( str ) => str.split( /\n/ )
+let [ title, message ] = destruct( 'Congratulations!\nYou have been rewarded $50!' );
+console.log( title ); // 'Congratulations!'
+console.log( message ); // 'You have been rewarded $50!'
                         </code></pre>
                         <br>
-                        <h3 class="fragment">omitting certain values</h3>
-                        <pre class="fragment"><code data-trim contenteditable>
-let [ baseLength, , height ] = totalLength( 10, 20, 15);
-console.log( baseLength, height ); // 5, 15
-console.log( baseWidth ); // Reference error: baseWidth is not defined
-                        </code></pre>
+                        <div class="fragment">
+                            <h3>omitting certain values</h3>
+                            <pre><code data-trim contenteditable>
+let destruct = ( str ) => str.split( /\s/ )
+let [ first, , , , last ] = destruct( 'Joe James John Jake Josh' );
+console.log( first ); // 'Joe'
+console.log( last ); // 'Josh'
+console.log( second ); // ReferenceError: second is not defined
+                            </code></pre>
+                        </div>
                         <aside class="notes">omitting - second code block</aside>
                     </section>
 
