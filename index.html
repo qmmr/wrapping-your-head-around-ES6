@@ -1006,9 +1006,7 @@ var Human = (function () {
         this.lastName = lastName || 'Doe'
     }
 
-    Human.greet = function () {
-        return 'Hello, I am a human!'
-    }
+    Human.type = function () { return 'human' }
 
     Human.prototype.toString = function () {
         return (this.firstName + ' ' + this.lastName)
