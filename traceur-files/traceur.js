@@ -22,32 +22,37 @@
 // httpReq.open('GET', 'http://ergast.com/api/f1/2013/driverStandings.json', true)
 // httpReq.send(null)
 
-class Vehicle {
-    constructor ( name = 'Base Vehicle', color = 'white' ) {
-        this.name = name
-        this.color = color
-    }
+import {Human} from './human'
+import {SuperHuman} from './superhuman'
 
-    drive ( distance = 0, unit = 'meters' ) {
-        console.log( `${this.name} drove ${distance} ${unit}.` )
-    }
-}
+// console.log( new Human(), Human.greet() )
+console.log( SuperHuman.greet() )
+// class Vehicle {
+//     constructor ( name = 'Base Vehicle', color = 'white' ) {
+//         this.name = name
+//         this.color = color
+//     }
 
-var jollyRoger = new Vehicle( 'Jolly Roger', 'pink' )
-jollyRoger.drive( '42' )
+//     drive ( distance = 0, unit = 'meters' ) {
+//         console.log( `${this.name} drove ${distance} ${unit}.` )
+//     }
+// }
 
-class Car extends Vehicle {
-	constructor ( name, color, speed = 60 ) {
-		super( name, color )
-		this.speed = speed
-	}
+// var jollyRoger = new Vehicle( 'Jolly Roger', 'pink' )
+// jollyRoger.drive( '42' )
 
-	drive ( distance, unit ) {
-		super( distance, unit )
-		console.log('Warning, max speed allowed is 120 km/h!')
-	}
-}
+// class Car extends Vehicle {
+//     constructor ( name, color, speed = 60 ) {
+//         super( name, color )
+//         this.speed = speed
+//     }
 
-var porsche = new Car( 'Porsche 911', 'black', 250)
-porsche.drive( 200, 'kilometers' )
+//     drive ( distance, unit ) {
+//         super( distance, unit )
+//         console.log('Warning, max speed allowed is 120 km/h!')
+//     }
+// }
+
+// var porsche = new Car( 'Porsche 911', 'black', 250)
+// porsche.drive( 200, 'kilometers' )
 
