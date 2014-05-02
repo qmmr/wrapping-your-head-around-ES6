@@ -5,10 +5,10 @@ export class Human {
     }
 
     toString () {
-        console.log( `${this.firstName} ${this.lastName}` )
+        return `${this.firstName} ${this.lastName}`
     }
 
     static greet () {
-        console.log( `Hello, I am a human!` )
+        return `Hello, I am a human!`
     }
 }

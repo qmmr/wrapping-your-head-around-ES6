@@ -6,11 +6,14 @@ export class SuperHuman extends Human {
     }
 
     toString () {
-        super()
-        console.log( `Hello, I am a Superhuman` )
+        return `Hello, I am a Superhuman`
     }
 
     useSuperpower () {
-        console.log( `${this.alias} uses ${this.superpower}` )
+        return `${this.alias} uses ${this.superpower}`
+    }
+
+    static greet() {
+        return super() + ` Pssst... I am also Superhuman!`
     }
 }
