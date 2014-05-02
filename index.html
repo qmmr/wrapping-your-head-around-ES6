@@ -1022,16 +1022,47 @@ var jollyRoger = new Vehicle( 'Jolly Roger', 'pink' )
                         <blockquote>new way</blockquote>
                         <pre><code data-trim contenteditable>
 class Vehicle {
-    constructor ( name = 'Default Vehicle', color = 'white' ) {
+    constructor ( name = 'Base Vehicle', color = 'white' ) {
         this.name = name
         this.color = color
     }
 
-    getColor () {
-        return this.color
+    drive ( distance = 0, unit = 'meters' ) {
+        console.log( `${this.name} drove ${distance} ${unit}.` )
     }
 }
+
 var jollyRoger = new Vehicle( 'Jolly Roger', 'pink' )
+jollyRoger.drive( '42' )
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>OOP inheritance</h2>
+                        <blockquote>old way</blockquote>
+                        <pre><code data-trim contenteditable>
+
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>OOP inheritance</h2>
+                        <blockquote>new way</blockquote>
+                        <pre><code data-trim contenteditable>
+class Car extends Vehicle {
+    constructor ( name, color, speed = 60 ) {
+        super( name, color )
+        this.speed = speed
+    }
+
+    drive ( distance, unit ) {
+        super( distance, unit )
+        console.log('Warning, max speed allowed is 120 km/h!')
+    }
+}
+
+var porsche = new Car( 'Porsche 911', 'black', 250)
+porsche.drive( 200, 'kilometers' )
                         </code></pre>
                     </section><!-- end ### classes ### -->
 
