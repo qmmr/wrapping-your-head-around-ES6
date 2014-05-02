@@ -23,16 +23,31 @@
 // httpReq.send(null)
 
 class Vehicle {
-    constructor ( name = 'Default Vehicle', color = 'white' ) {
+    constructor ( name = 'Base Vehicle', color = 'white' ) {
         this.name = name
         this.color = color
     }
 
-    getColor () {
-        return this.color
+    drive ( distance = 0, unit = 'meters' ) {
+        console.log( `${this.name} drove ${distance} ${unit}.` )
     }
 }
 
 var jollyRoger = new Vehicle( 'Jolly Roger', 'pink' )
+jollyRoger.drive( '42' )
 
-console.log(jollyRoger.name, jollyRoger.getColor())
+class Car extends Vehicle {
+	constructor ( name, color, speed = 60 ) {
+		super( name, color )
+		this.speed = speed
+	}
+
+	drive ( distance, unit ) {
+		super( distance, unit )
+		console.log('Warning, max speed allowed is 120 km/h!')
+	}
+}
+
+var porsche = new Car( 'Porsche 911', 'black', 250)
+porsche.drive( 200, 'kilometers' )
+
