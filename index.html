@@ -918,7 +918,7 @@ for ( let [ key, val ] of johnDoe ) {
 // "lastName: Doe"
                         </code></pre>
                         <aside class="notes">
-                            
+
                         </aside>
                     </section><!-- end ### generators ### -->
 
@@ -1000,20 +1000,26 @@ console.log( jediKnights.next() ); // 'Luke Skywalker'
                         <h2>OOP</h2>
                         <blockquote>old way</blockquote>
                         <pre><code data-trim contenteditable>
-var Vehicle = (function () {
-    function Vehicle ( name, color ) {
-        this.name = name || 'Default Vehicle'
-        this.color = color || 'white'
+var Human = (function () {
+    function Human ( firstName, lastName ) {
+        this.firstName = firstName || 'John'
+        this.lastName = lastName || 'Doe'
     }
 
-    Vehicle.prototype.getColor = function () {
-        return this.color
+    Human.greet = function () {
+        return 'Hello, I am a human!'
     }
 
-    return Vehicle
+    Human.prototype.toString = function () {
+        return (this.firstName + ' ' + this.lastName)
+    }
+
+    return Human
 })();
 
-var jollyRoger = new Vehicle( 'Jolly Roger', 'pink' )
+var joe = new Human( 'Joe', 'Doe' )
+console.log(joe) // { firstName: 'Joe', lastName: 'Doe' }
+console.log( Human.greet() ) // Hello, I am a human!
                         </code></pre>
                     </section>
 

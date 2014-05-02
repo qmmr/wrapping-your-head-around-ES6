@@ -4,42 +4,46 @@ var log = console.log
 
 // var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
-var Vehicle = (function () {
-    function Vehicle ( options ) {
-        this.name = options.name || 'Default Vehicle'
-        // this.speed = options.speed || 0
-        this.color = options.color || 'white'
+
+
+// var options = { name: 'Jolly Roger', speed: '12km/h', color: 'pink' }
+// var jollyRoger = new Vehicle( options )
+
+// log( jollyRoger.name, jollyRoger.getColor() ) // 'Jolly Roger', 'pink'
+
+// var Car = (function( __proto ) {
+//     function Car ( options ) {
+//         Vehicle.call( this, options )
+//     }
+
+//     Car.prototype = Object.create(__proto.prototype)
+//     Car.prototype.constructor = Car
+
+//     return Car
+// })( Vehicle )
+
+// var options = { name: 'Aston Martin', speed: '250km/h', color: 'navy blue' }
+// var astonMartin = new Car( options )
+
+// log( astonMartin.name, astonMartin.getColor() ) // 'Aston Martin', 'navy blue'
+
+var Human = (function () {
+    function Human ( firstName, lastName ) {
+        this.firstName = firstName || 'John'
+        this.lastName = lastName || 'Doe'
     }
 
-    Vehicle.prototype.getColor = function () {
-        return this.color
+    Human.greet = function () {
+        return 'Hello, I am a human!'
     }
 
-    // Vehicle.prototype.getSpeed = function () {
-    //     return this.name + ' have speed of ' + this.speed
-    // }
-
-    return Vehicle
-})()
-
-var options = { name: 'Jolly Roger', speed: '12km/h', color: 'pink' }
-var jollyRoger = new Vehicle( options )
-
-log( jollyRoger.name, jollyRoger.getColor() ) // 'Jolly Roger', 'pink'
-
-var Car = (function( __proto ) {
-    function Car ( options ) {
-        Vehicle.call( this, options )
+    Human.prototype.toString = function () {
+        return (this.firstName + ' ' + this.lastName)
     }
 
-    Car.prototype = Object.create(__proto.prototype)
-    Car.prototype.constructor = Car
+    return Human
+})();
 
-    return Car
-})( Vehicle )
-
-var options = { name: 'Aston Martin', speed: '250km/h', color: 'navy blue' }
-var astonMartin = new Car( options )
-
-log( astonMartin.name, astonMartin.getColor() ) // 'Aston Martin', 'navy blue'
-
+var joe = new Human( 'John', 'Doe' )
+console.log(joe) // { firstName: 'John', lastName: 'Doe' }
+console.log( Human.greet() ) // Hello, I am a human!
