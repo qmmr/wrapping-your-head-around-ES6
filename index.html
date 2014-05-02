@@ -553,13 +553,9 @@ var point = coords( points[0], points[1], points[2] );
 function coords ( x, y, z ) { return { x, y, z } }
 let point = coords( ...points ); // 100 50 42
                         </code></pre>
-                        <div class="fragment">
-                            <blockquote>even shorter</blockquote>
-                            <pre><code data-trim contenteditable>
-let point = coords( ...[ 100, 50, 42 ] );
-console.log(point.x, point.y, point.z); // 100 50 42
-                            </code></pre>
-                        </div>
+                        <aside class="notes">
+                            - notice spread into new object literal syntax
+                        </aside>
                     </section>
 
                     <section>
@@ -1001,7 +997,7 @@ console.log( jediKnights.next() ); // 'Luke Skywalker'
                     </section>
 
                     <section>
-                        <h2>OOP in JS</h2>
+                        <h2>OOP</h2>
                         <blockquote>old way</blockquote>
                         <pre><code data-trim contenteditable>
 var Vehicle = (function () {
@@ -1022,7 +1018,7 @@ var jollyRoger = new Vehicle( 'Jolly Roger', 'pink' )
                     </section>
 
                     <section>
-                        <h2>OOP in JS</h2>
+                        <h2>OOP</h2>
                         <blockquote>new way</blockquote>
                         <pre><code data-trim contenteditable>
 class Vehicle {
