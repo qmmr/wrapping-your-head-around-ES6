@@ -33,9 +33,7 @@ var Human = (function () {
         this.lastName = lastName || 'Doe'
     }
 
-    Human.greet = function () {
-        return 'Hello, I am a human!'
-    }
+    Human.type = function () { return 'human' }
 
     Human.prototype.toString = function () {
         return (this.firstName + ' ' + this.lastName)
@@ -44,6 +42,6 @@ var Human = (function () {
     return Human
 })();
 
-var joe = new Human( 'John', 'Doe' )
+var joe = new Human( 'Han', 'Solo' )
 console.log(joe) // { firstName: 'John', lastName: 'Doe' }
-console.log( Human.greet() ) // Hello, I am a human!
+console.log( Human.type() ) // Hello, I am a human!
