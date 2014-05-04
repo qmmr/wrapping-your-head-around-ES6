@@ -1,12 +1,12 @@
-'use strict'
+'use strict';
 
 var log = console.log
 // var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 var Human = (function () {
     function Human ( firstName, lastName ) {
-        this.firstName = firstName || 'John'
-        this.lastName = lastName || 'Doe'
+        this.firstName = firstName || 'John';
+        this.lastName = lastName || 'Doe';
     }
 
     // Human.prototype.__defineGetter__('age', function () {
@@ -24,7 +24,7 @@ var Human = (function () {
     // })
 
     Human.prototype.greet = function () {
-        return 'Hi, my name is ' + this.firstName
+        return ( 'Hi, my name is ' + this.firstName + ' ' + this.lastName )
     }
 
     // Human.prototype.getFullname = function () {
@@ -34,15 +34,14 @@ var Human = (function () {
     // static method
     Human.type = function () { return 'human' }
 
-    return Human
+    return Human;
 })();
 
 var joe = new Human( 'Joe', 'Doe' )
-// console.log(joe) // { firstName: 'Joe', lastName: 'Doe' }
-// console.log( Human.type() ) // human
+console.log( joe.greet() + ' and I am a ' + Human.type() + ' being.' );
 
-var getRandom = function (min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+var getRandom = function ( min, max ) {
+    return Math.floor(Math.random() * ( max - min + 1 )) + min;
 }
 
 var SuperHuman = (function( parent ) {
@@ -52,27 +51,27 @@ var SuperHuman = (function( parent ) {
         this.superpowers = superpowers;
     }
 
-    SuperHuman.prototype = Object.create(parent.prototype);
-    SuperHuman.prototype.constructor = SuperHuman
+    SuperHuman.prototype = Object.create( parent.prototype );
+    SuperHuman.prototype.constructor = SuperHuman;
 
     SuperHuman.prototype.greet = function () {
-        return  ( 'Hi, I am ' + this.alias + '!' )
+        return  ( 'Hi, I am ' + this.alias + '!' );
     }
-    
+
     SuperHuman.prototype.revealIdentity = function () {
-        return parent.prototype.greet.call(this)
+        var id = ( parent.prototype.greet.call(this) + ' a.k.a. ' + this.alias );
+        return ( id + ' and I am a ' + SuperHuman.type() + '.' );
     }
-    
+
     SuperHuman.prototype.useSuperpower = function () {
-        var rand = getRandom(0, this.superpowers.length - 1); 
-        return this.alias + ' uses the ' + this.superpowers[rand] + '!';
+        var randomNum = getRandom( 0, this.superpowers.length - 1 ); 
+        return this.alias + ' uses the ' + this.superpowers[randomNum] + '!';
     }
 
     SuperHuman.type = function () { return 'superhuman' }
 
-    return SuperHuman
-})(Human);
+    return SuperHuman;
+})( Human );
 
-var spiderman = new SuperHuman( 'Peter', 'Parker', 'male', 'Spider-man', ['sixth sense', 'super jump', 'web attack'])
-// console.log( spiderman.greet() ); // Hi, I am Spider-man!
-// console.log( spiderman.useSuperpower() ); // Spider-man uses the super jump!
+var spiderman = new SuperHuman( 'Peter', 'Parker', 'male', 'Spider-man', ['sixth sense', 'super jump', 'web attack']);
+console.log( spiderman.revealIdentity() );

@@ -1,15 +1,28 @@
+var getRandom = function (min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 export class SuperHuman extends Human {
-    constructor ( firstName, lastName, alias, superpower ) {
+    constructor ( firstName, lastName, alias = 'superhuman' , superpowers = [] ) {
         super( firstName, lastName )
         this.alias = alias
-        this.superpower = superpower
+        this.superpowers= superpowers
+    }
+
+    greet () {
+        return `Hi, I am ${this.alias}`
+    }
+
+    revealIdentity () {
+        return `${super.greet()} a.k.a. ${this.alias} and I am a ${SuperHuman.type()}.`
     }
 
     useSuperpower () {
-        return `${this.alias} uses ${this.superpower}`
+        var randomNum = getRandom(0, this.superpowers.length - 1)
+        return `${this.alias} uses the ${this.superpowers[randomNum]}!`
     }
 
-    static getFulln() {
-        return super() + ` Pssst... I am also Superhuman!`
+    static type() {
+        return 'superhuman'
     }
 }

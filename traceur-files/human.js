@@ -5,7 +5,7 @@ export class Human {
     }
 
     greet () {
-        return 'Hi, my name is ' + this.firstName
+        return `Hi, my name is ${this.firstName} ${this.lastName}`
     }
 
     static type () {

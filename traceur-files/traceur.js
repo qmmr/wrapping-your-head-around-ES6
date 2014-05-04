@@ -25,36 +25,9 @@
 import {Human} from './human'
 import {SuperHuman} from './superhuman'
 
-console.log( Human.type(), new Human().greet() )
-var spiderMan = new SuperHuman('Peter', 'Parker', 'Spiderman', 'web')
-console.log( spiderMan )
+var joe = new Human('John', 'Doe')
+console.log( joe.greet() + ' and I am a simple ' + Human.type() + ' being.' )
+var spiderMan = new SuperHuman('Peter', 'Parker', 'Spider-man',  ['sixth sense', 'super jump', 'web attack'])
+console.log( spiderMan.revealIdentity() )
 console.log( spiderMan.useSuperpower() )
-// class Vehicle {
-//     constructor ( name = 'Base Vehicle', color = 'white' ) {
-//         this.name = name
-//         this.color = color
-//     }
-
-//     drive ( distance = 0, unit = 'meters' ) {
-//         console.log( `${this.name} drove ${distance} ${unit}.` )
-//     }
-// }
-
-// var jollyRoger = new Vehicle( 'Jolly Roger', 'pink' )
-// jollyRoger.drive( '42' )
-
-// class Car extends Vehicle {
-//     constructor ( name, color, speed = 60 ) {
-//         super( name, color )
-//         this.speed = speed
-//     }
-
-//     drive ( distance, unit ) {
-//         super( distance, unit )
-//         console.log('Warning, max speed allowed is 120 km/h!')
-//     }
-// }
-
-// var porsche = new Car( 'Porsche 911', 'black', 250)
-// porsche.drive( 200, 'kilometers' )
 
