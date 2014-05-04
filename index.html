@@ -177,8 +177,14 @@
                     </section>
                 </section>
 
-                <!-- SYNTAX REFINEMENTS -->
+                <!-- PART ONE -->
                 <section>
+                    
+                    <section>
+                        <h1>Part one</h1>
+                    </section>
+
+                    <!-- SYNTAX REFINEMENTS -->
                     <section>
                         <h1>Syntax refinements</h1>
                     </section>
@@ -187,8 +193,8 @@
                     <section>
                         <h1>=> (arrow)</h1>
                         <ul>
-                            <li class="fragment">shorter syntax for common case use of anonymous functions</li>
-                            <li class="fragment">retains lexical scope of <strong>this</strong></p></li>
+                            <li>shorter syntax for common case use of anonymous functions</li>
+                            <li>retains lexical scope of <strong>this</strong></p></li>
                         </ul>
                     </section>
 
@@ -291,12 +297,8 @@ let student = {
 }
                             </code></pre>
                         </section>
-                    </section>
-                </section>
 
-                <!-- ### new syntax ### -->
-                <section>
-
+                    <!-- ### new syntax ### -->
                     <section>
                         <h1>New syntax</h1>
                     </section>
@@ -594,6 +596,20 @@ console.log( fibonacci ); // [0, 1, 1, 2, 3, 5, 8, 13, 21]
                             </code></pre>
                         </div>
                     </section><!-- end ### spread ### -->
+
+                    <section>
+                        <h2>The rest of new syntax features in part two</h2>
+                    </section>
+
+                </section><!-- END OF PART ONE -->
+
+                <!-- PART TWO -->
+                <section>
+
+                    <section>
+                        <h1>Part two</h1>
+                        <h2>New syntax continues</h2>
+                    </section>
 
                     <!-- ### destructuring ### -->
                     <section>
@@ -982,105 +998,113 @@ console.log( jediKnights.next() ); // 'Luke Skywalker'
                     </section><!-- end ### comprehensions ### -->
 
                 </section><!-- end ### new syntax ### -->
+            </section><!-- END OF PART TWO -->
+
+            <!-- PART THREE -->
+            <section>
+
+                <section>
+                    <h1>Part three</h1>
+                </section>
 
                 <!-- ### Organizational features ### -->
                 <section>
-                    <section>
-                        <h2>Organizational features</h2>
-                    </section>
+                    <h2>Organizational features</h2>
+                </section>
 
-                    <!-- ### classes ### -->
-                    <section>
-                        <h1>classes</h1>
-                        <blockquote>ES6 classes are a simple sugar over the prototype-based OO pattern</blockquote>
-                        <p>Classes support prototype-based inheritance, super calls, instance and static methods and constructors.</p>
-                    </section>
+                <!-- ### classes ### -->
+                <section>
+                    <h1>classes</h1>
+                    <blockquote>ES6 classes are a simple sugar over the prototype-based OO pattern</blockquote>
+                    <p>Classes support prototype-based inheritance, super calls, instance and static methods and constructors.</p>
+                </section>
 
-                    <section>
-                        <h2>OOP</h2>
-                        <blockquote>old way</blockquote>
-                        <pre><code data-trim contenteditable>
+                <section>
+                    <h2>OOP</h2>
+                    <blockquote>old way</blockquote>
+                    <pre><code data-trim contenteditable>
 var Human = (function () {
-    function Human ( firstName, lastName ) {
-        this.firstName = firstName || 'John'
-        this.lastName = lastName || 'Doe'
-    }
+function Human ( firstName, lastName ) {
+    this.firstName = firstName || 'John'
+    this.lastName = lastName || 'Doe'
+}
 
-    Human.type = function () { return 'human' }
+Human.type = function () { return 'human' }
 
-    Human.prototype.toString = function () {
-        return (this.firstName + ' ' + this.lastName)
-    }
+Human.prototype.toString = function () {
+    return (this.firstName + ' ' + this.lastName)
+}
 
-    return Human
+return Human
 })();
 
 var joe = new Human( 'Joe', 'Doe' )
 console.log(joe) // { firstName: 'Joe', lastName: 'Doe' }
 console.log( Human.greet() ) // Hello, I am a human!
-                        </code></pre>
-                    </section>
+                    </code></pre>
+                </section>
 
-                    <section>
-                        <h2>OOP</h2>
-                        <blockquote>new way</blockquote>
-                        <pre><code data-trim contenteditable>
+                <section>
+                    <h2>OOP</h2>
+                    <blockquote>new way</blockquote>
+                    <pre><code data-trim contenteditable>
 class Vehicle {
-    constructor ( name = 'Base Vehicle', color = 'white' ) {
-        this.name = name
-        this.color = color
-    }
+constructor ( name = 'Base Vehicle', color = 'white' ) {
+    this.name = name
+    this.color = color
+}
 
-    drive ( distance = 0, unit = 'meters' ) {
-        console.log( `${this.name} drove ${distance} ${unit}.` )
-    }
+drive ( distance = 0, unit = 'meters' ) {
+    console.log( `${this.name} drove ${distance} ${unit}.` )
+}
 }
 
 var jollyRoger = new Vehicle( 'Jolly Roger', 'pink' )
 jollyRoger.drive( '42' )
-                        </code></pre>
-                    </section>
+                    </code></pre>
+                </section>
 
-                    <section>
-                        <h2>OOP inheritance</h2>
-                        <blockquote>old way</blockquote>
-                        <pre><code data-trim contenteditable>
+                <section>
+                    <h2>OOP inheritance</h2>
+                    <blockquote>old way</blockquote>
+                    <pre><code data-trim contenteditable>
 
-                        </code></pre>
-                    </section>
+                    </code></pre>
+                </section>
 
-                    <section>
-                        <h2>OOP inheritance</h2>
-                        <blockquote>new way</blockquote>
-                        <pre><code data-trim contenteditable>
+                <section>
+                    <h2>OOP inheritance</h2>
+                    <blockquote>new way</blockquote>
+                    <pre><code data-trim contenteditable>
 class Car extends Vehicle {
-    constructor ( name, color, speed = 60 ) {
-        super( name, color )
-        this.speed = speed
-    }
+constructor ( name, color, speed = 60 ) {
+    super( name, color )
+    this.speed = speed
+}
 
-    drive ( distance, unit ) {
-        super( distance, unit )
-        console.log('Warning, max speed allowed is 120 km/h!')
-    }
+drive ( distance, unit ) {
+    super( distance, unit )
+    console.log('Warning, max speed allowed is 120 km/h!')
+}
 }
 
 var porsche = new Car( 'Porsche 911', 'black', 250)
 porsche.drive( 200, 'kilometers' )
-                        </code></pre>
-                    </section><!-- end ### classes ### -->
+                    </code></pre>
+                </section><!-- end ### classes ### -->
 
-                    <!-- ### modules ### -->
-                    <section>
-                        <h1>modules</h1>
-                    </section>
+                <!-- ### modules ### -->
+                <section>
+                    <h1>modules</h1>
+                </section>
 
-                    <section>
-                        <h2>???</h2>
-                        <blockquote>What the heck are modules?</blockquote>
-                    </section><!-- ### modules ### -->
+                <section>
+                    <h2>???</h2>
+                    <blockquote>What the heck are modules?</blockquote>
+                </section><!-- ### modules ### -->
 
-                </section><!-- end ### Organizational features ### -->
+            <!-- end ### Organizational features ### -->
+            </section><!-- END OF PART THREE -->
 
                 <!-- ### New standard library features ### -->
                 <section>
