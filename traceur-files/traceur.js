@@ -26,8 +26,13 @@ import {Human} from './human'
 import {SuperHuman} from './superhuman'
 
 var joe = new Human('John', 'Doe')
-console.log( joe.greet() + ' and I am a simple ' + Human.type() + ' being.' )
+// console.log( joe.greet() + ' and I am a simple ' + Human.type() + ' being.' )
+// getters & setters
+console.log(joe.fullName);
+joe.occupation = 'Front-end Developer';
+console.log(joe);
+
 var spiderMan = new SuperHuman('Peter', 'Parker', 'Spider-man',  ['sixth sense', 'super jump', 'web attack'])
-console.log( spiderMan.revealIdentity() )
-console.log( spiderMan.useSuperpower() )
+// console.log( spiderMan.revealIdentity() )
+// console.log( spiderMan.useSuperpower() )
 

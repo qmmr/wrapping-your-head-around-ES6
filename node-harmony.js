@@ -17,12 +17,6 @@ var Human = (function () {
     //     this._age = typeof value == 'number' ? value : 0
     // })
 
-    // var age
-    // Object.defineProperty = (Human.prototype, 'age', {
-    //     get: function () { return 42 },
-    //     set: function ( value ) { return age = value }
-    // })
-
     Human.prototype.greet = function () {
         return ( 'Hi, my name is ' + this.firstName + ' ' + this.lastName )
     }
@@ -37,8 +31,28 @@ var Human = (function () {
     return Human;
 })();
 
-var joe = new Human( 'Joe', 'Doe' )
+var joe = new Human( 'Joe', 'Doe' );
 console.log( joe.greet() + ' and I am a ' + Human.type() + ' being.' );
+
+Object.defineProperty(joe, 'fullName', {
+    get: function () {
+        return ( this.lastName + ', ' + this.firstName );
+    }
+});
+
+Object.defineProperty(joe, 'occupation', {
+    get: function () {
+        return this._occupation;
+    },
+    set: function ( occupation ) {
+        return this._occupation = occupation;
+    }
+});
+
+console.log( 'Fullname: ' + joe.fullName );
+joe.occupation = 'Front-end Developer';
+console.log( 'Occupation: ' + joe.occupation );
+
 
 var getRandom = function ( min, max ) {
     return Math.floor(Math.random() * ( max - min + 1 )) + min;

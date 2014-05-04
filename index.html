@@ -1131,12 +1131,57 @@ class SuperHuman extends Human {
         return 'superhuman'
     }
 }
+                    </code></pre>
+                </section>
 
-var porsche = new Car( 'Porsche 911', 'black', 250)
-porsche.drive( 200, 'kilometers' )
+                <section>
+                    <h2>Getters and setters</h2>
+                    <blockquote>old way</blockquote>
+                    <pre><code data-trim contenteditable>
+var joe = new Human( 'Joe', 'Doe' );
+Object.defineProperty(joe, 'fullName', {
+    get: function () {
+        return ( this.lastName + ', ' + this.firstName );
+    }
+});
+
+Object.defineProperty(joe, 'occupation', {
+    get: function () {
+        return this._occupation;
+    },
+    set: function ( occupation ) {
+        return this._occupation = occupation;
+    }
+});
+
+console.log( 'Fullname: ' + joe.fullName ); Fullname: Doe, Joe 
+joe.occupation = 'Front-end Developer';
+console.log( 'Occupation: ' + joe.occupation );
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Getters and setters</h2>
+                    <blockquote>new way</blockquote>
+                    <pre><code data-trim contenteditable>
+
                     </code></pre>
                 </section><!-- end ### classes ### -->
+export class Human {
+    constructor ( firstName = 'Joe', lastName = 'Doe' ) {
+        this.firstName = firstName
+        this.lastName = lastName
+    }
 
+    get fullName () { return `${this.lastName}, ${this.firstName}` }
+
+    get occupation () { return this._occupation }
+
+    set occupation ( occupation ) { return this._occupation = occupation }
+}
+console.log(joe.fullName); // Doe, John
+joe.occupation = 'Front-end Developer';
+console.log(joe); // { ... _occupation: 'Front-end Developer' }
                 <!-- ### modules ### -->
                 <section>
                     <h1>modules</h1>
