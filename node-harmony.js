@@ -1,31 +1,7 @@
 'use strict'
 
 var log = console.log
-
 // var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-
-
-
-// var options = { name: 'Jolly Roger', speed: '12km/h', color: 'pink' }
-// var jollyRoger = new Vehicle( options )
-
-// log( jollyRoger.name, jollyRoger.getColor() ) // 'Jolly Roger', 'pink'
-
-// var Car = (function( __proto ) {
-//     function Car ( options ) {
-//         Vehicle.call( this, options )
-//     }
-
-//     Car.prototype = Object.create(__proto.prototype)
-//     Car.prototype.constructor = Car
-
-//     return Car
-// })( Vehicle )
-
-// var options = { name: 'Aston Martin', speed: '250km/h', color: 'navy blue' }
-// var astonMartin = new Car( options )
-
-// log( astonMartin.name, astonMartin.getColor() ) // 'Aston Martin', 'navy blue'
 
 var Human = (function () {
     function Human ( firstName, lastName ) {
@@ -33,15 +9,70 @@ var Human = (function () {
         this.lastName = lastName || 'Doe'
     }
 
-    Human.type = function () { return 'human' }
+    // Human.prototype.__defineGetter__('age', function () {
+    //     return this._age
+    // })
 
-    Human.prototype.toString = function () {
-        return (this.firstName + ' ' + this.lastName)
+    // Human.prototype.__defineSetter__('age', function ( value ) {
+    //     this._age = typeof value == 'number' ? value : 0
+    // })
+
+    // var age
+    // Object.defineProperty = (Human.prototype, 'age', {
+    //     get: function () { return 42 },
+    //     set: function ( value ) { return age = value }
+    // })
+
+    Human.prototype.greet = function () {
+        return 'Hi, my name is ' + this.firstName
     }
+
+    // Human.prototype.getFullname = function () {
+    //     return this.firstName + ' ' + this.lastName
+    // }
+
+    // static method
+    Human.type = function () { return 'human' }
 
     return Human
 })();
 
-var joe = new Human( 'Han', 'Solo' )
-console.log(joe) // { firstName: 'John', lastName: 'Doe' }
-console.log( Human.type() ) // Hello, I am a human!
+var joe = new Human( 'Joe', 'Doe' )
+// console.log(joe) // { firstName: 'Joe', lastName: 'Doe' }
+// console.log( Human.type() ) // human
+
+var getRandom = function (min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+var SuperHuman = (function( parent ) {
+    function SuperHuman ( firstName, lastName, alias, superpowers ) {
+        parent.call(this, firstName, lastName );
+        this.alias = 'Spider-man';
+        this.superpowers = superpowers;
+    }
+
+    SuperHuman.prototype = Object.create(parent.prototype);
+    SuperHuman.prototype.constructor = SuperHuman
+
+    SuperHuman.prototype.greet = function () {
+        return  ( 'Hi, I am ' + this.alias + '!' )
+    }
+    
+    SuperHuman.prototype.revealIdentity = function () {
+        return parent.prototype.greet.call(this)
+    }
+    
+    SuperHuman.prototype.useSuperpower = function () {
+        var rand = getRandom(0, this.superpowers.length - 1); 
+        return this.alias + ' uses the ' + this.superpowers[rand] + '!';
+    }
+
+    SuperHuman.type = function () { return 'superhuman' }
+
+    return SuperHuman
+})(Human);
+
+var spiderman = new SuperHuman( 'Peter', 'Parker', 'male', 'Spider-man', ['sixth sense', 'super jump', 'web attack'])
+// console.log( spiderman.greet() ); // Hi, I am Spider-man!
+// console.log( spiderman.useSuperpower() ); // Spider-man uses the super jump!

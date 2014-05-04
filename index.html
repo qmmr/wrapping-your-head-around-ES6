@@ -1024,23 +1024,24 @@ console.log( jediKnights.next() ); // 'Luke Skywalker'
                     <blockquote>old way</blockquote>
                     <pre><code data-trim contenteditable>
 var Human = (function () {
-function Human ( firstName, lastName ) {
-    this.firstName = firstName || 'John'
-    this.lastName = lastName || 'Doe'
-}
+    function Human ( firstName, lastName ) {
+        this.firstName = firstName || 'John'
+        this.lastName = lastName || 'Doe'
+    }
 
-Human.type = function () { return 'human' }
+    Human.prototype.greet = function () {
+        return 'Hi, my name is ' + this.firstName
+    }
 
-Human.prototype.toString = function () {
-    return (this.firstName + ' ' + this.lastName)
-}
+    // static method
+    Human.type = function () { return 'human' }
 
-return Human
+    return Human
 })();
 
 var joe = new Human( 'Joe', 'Doe' )
 console.log(joe) // { firstName: 'Joe', lastName: 'Doe' }
-console.log( Human.greet() ) // Hello, I am a human!
+console.log( Human.type() ) // human
                     </code></pre>
                 </section>
 
@@ -1048,19 +1049,20 @@ console.log( Human.greet() ) // Hello, I am a human!
                     <h2>OOP</h2>
                     <blockquote>new way</blockquote>
                     <pre><code data-trim contenteditable>
-class Vehicle {
-constructor ( name = 'Base Vehicle', color = 'white' ) {
-    this.name = name
-    this.color = color
-}
+class Human {
+    constructor ( firstName = 'Joe', lastName = 'Doe' ) {
+        this.firstName = firstName
+        this.lastName = lastName
+    }
 
-drive ( distance = 0, unit = 'meters' ) {
-    console.log( `${this.name} drove ${distance} ${unit}.` )
-}
-}
+    greet () {
+        return 'Hi, my name is ' + this.firstName
+    }
 
-var jollyRoger = new Vehicle( 'Jolly Roger', 'pink' )
-jollyRoger.drive( '42' )
+    static type () {
+        return 'human'
+    }
+}
                     </code></pre>
                 </section>
 
@@ -1068,6 +1070,37 @@ jollyRoger.drive( '42' )
                     <h2>OOP inheritance</h2>
                     <blockquote>old way</blockquote>
                     <pre><code data-trim contenteditable>
+var SuperHuman = (function( parent ) {
+    function SuperHuman ( firstName, lastName, alias, superpowers ) {
+        parent.call(this, firstName, lastName );
+        this.alias = 'Spider-man';
+        this.superpowers = superpowers;
+    }
+
+    SuperHuman.prototype = Object.create(parent.prototype);
+    SuperHuman.prototype.constructor = SuperHuman
+
+    SuperHuman.prototype.greet = function () {
+        return  ( 'Hi, I am ' + this.alias + '!' )
+    }
+    
+    SuperHuman.prototype.revealIdentity = function () {
+        return parent.prototype.greet.call(this)
+    }
+    
+    SuperHuman.prototype.useSuperpower = function () {
+        var rand = getRandom(0, this.superpowers.length - 1); 
+        return this.alias + ' uses the ' + this.superpowers[rand] + '!';
+    }
+
+    SuperHuman.type = function () { return 'superhuman' }
+
+    return SuperHuman
+})(Human);
+
+var spiderman = new SuperHuman( 'Peter', 'Parker', 'male', 'Spider-man', ['sixth sense', 'super jump', 'web attack'])
+// console.log( spiderman.greet() ); // Hi, I am Spider-man!
+// console.log( spiderman.useSuperpower() ); // Spider-man uses the super jump!
 
                     </code></pre>
                 </section>

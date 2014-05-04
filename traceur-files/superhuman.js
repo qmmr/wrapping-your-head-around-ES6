@@ -5,15 +5,11 @@ export class SuperHuman extends Human {
         this.superpower = superpower
     }
 
-    toString () {
-        return `Hello, I am a Superhuman`
-    }
-
     useSuperpower () {
         return `${this.alias} uses ${this.superpower}`
     }
 
-    static greet() {
+    static getFulln() {
         return super() + ` Pssst... I am also Superhuman!`
     }
 }

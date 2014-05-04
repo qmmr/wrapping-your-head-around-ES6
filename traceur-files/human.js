@@ -4,11 +4,11 @@ export class Human {
         this.lastName = lastName
     }
 
-    toString () {
-        return `${this.firstName} ${this.lastName}`
+    greet () {
+        return 'Hi, my name is ' + this.firstName
     }
 
-    static greet () {
-        return `Hello, I am a human!`
+    static type () {
+        return 'human'
     }
 }

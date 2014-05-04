@@ -25,10 +25,9 @@
 import {Human} from './human'
 import {SuperHuman} from './superhuman'
 
-// console.log( new Human(), Human.greet() )
+console.log( Human.type(), new Human().greet() )
 var spiderMan = new SuperHuman('Peter', 'Parker', 'Spiderman', 'web')
 console.log( spiderMan )
-console.log( SuperHuman.greet() )
 console.log( spiderMan.useSuperpower() )
 // class Vehicle {
 //     constructor ( name = 'Base Vehicle', color = 'white' ) {
