@@ -8,3 +8,4 @@ node_modules/
 js/reveal.min.js
 css/**/*.css
 es6-traceur.js
+out/
