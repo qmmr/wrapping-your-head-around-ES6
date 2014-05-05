@@ -1164,13 +1164,11 @@ console.log( 'Occupation: ' + joe.occupation );
                     <h2>Getters and setters</h2>
                     <blockquote>new way</blockquote>
                     <pre><code data-trim contenteditable>
-
-                    </code></pre>
-                </section><!-- end ### classes ### -->
 export class Human {
-    constructor ( firstName = 'Joe', lastName = 'Doe' ) {
+    constructor ( firstName = 'Joe', lastName = 'Doe', occupation = 'Developer' ) {
         this.firstName = firstName
         this.lastName = lastName
+        this._occupation = occupation
     }
 
     get fullName () { return `${this.lastName}, ${this.firstName}` }
@@ -1182,9 +1180,30 @@ export class Human {
 console.log(joe.fullName); // Doe, John
 joe.occupation = 'Front-end Developer';
 console.log(joe); // { ... _occupation: 'Front-end Developer' }
+                    </code></pre>
+                </section><!-- end ### classes ### -->
+
                 <!-- ### modules ### -->
                 <section>
                     <h1>modules</h1>
+                    <ul>
+                        <li>JavaScript does not have built-in support for modules (yet)</li>
+                        <li>community has created impressive work-arounds</li>
+                        <li>two most popular: CJS and AMD</li>
+                    </ul>
+                    <aside class="notes">
+The two most important (and unfortunately incompatible) standards for JavaScript modules are:
+CommonJS Modules (CJS)
+The dominant incarnation of this standard is Node.js modules (Node.js modules have a few features that go beyond CJS). Its characteristics include:
+Compact syntax
+Designed for synchronous loading
+Main use: server
+Asynchronous Module Definition (AMD)
+The most popular implementation of this standard is RequireJS. Its characteristics include:
+Slightly more complicated syntax, enabling AMD to work without eval() or a static compilation step
+Designed for asynchronous loading
+Main use: browsers
+                    </aside>
                 </section>
 
                 <section>
