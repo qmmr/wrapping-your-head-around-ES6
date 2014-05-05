@@ -42,7 +42,9 @@
     "shelljs": "~0.2.6",
     "gulp": "^3.6.2",
     "gulp-jshint": "^1.5.5",
-    "jshint-stylish": "^0.2.0"
+    "jshint-stylish": "^0.2.0",
+    "gulp-es6-module-transpiler": "^0.1.1",
+    "gulp-notify": "^1.2.5"
   },
   "licenses": [
     {
