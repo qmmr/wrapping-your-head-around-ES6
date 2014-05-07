@@ -61,8 +61,8 @@ var getRandom = function ( min, max ) {
 var SuperHuman = (function( parent ) {
     function SuperHuman ( firstName, lastName, alias, superpowers ) {
         parent.call(this, firstName, lastName );
-        this.alias = 'Spider-man';
-        this.superpowers = superpowers;
+        this.alias = 'Spider-man' || 'unknown';
+        this.superpowers = superpowers || [];
     }
 
     SuperHuman.prototype = Object.create( parent.prototype );
@@ -78,7 +78,7 @@ var SuperHuman = (function( parent ) {
     }
 
     SuperHuman.prototype.useSuperpower = function () {
-        var randomNum = getRandom( 0, this.superpowers.length - 1 ); 
+        var randomNum = getRandom( 0, this.superpowers.length - 1 );
         return this.alias + ' uses the ' + this.superpowers[randomNum] + '!';
     }
 

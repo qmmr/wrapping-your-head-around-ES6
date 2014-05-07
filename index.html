@@ -179,7 +179,7 @@
 
                 <!-- PART ONE -->
                 <section>
-                    
+
                     <section>
                         <h1>Part one</h1>
                     </section>
@@ -1010,6 +1010,10 @@ console.log( jediKnights.next() ); // 'Luke Skywalker'
                 <!-- ### Organizational features ### -->
                 <section>
                     <h2>Organizational features</h2>
+                    <ul>
+                        <li>Classes</li>
+                        <li>Modules</li>
+                    </ul>
                 </section>
 
                 <!-- ### classes ### -->
@@ -1072,8 +1076,8 @@ class Human {
 var SuperHuman = (function( parent ) {
     function SuperHuman ( firstName, lastName, alias, superpowers ) {
         parent.call(this, firstName, lastName );
-        this.alias = 'Spider-man';
-        this.superpowers = superpowers;
+        this.alias = 'Spider-man' || 'unknown';
+        this.superpowers = superpowers || [];
     }
 
     SuperHuman.prototype = Object.create( parent.prototype );
@@ -1089,7 +1093,7 @@ var SuperHuman = (function( parent ) {
     }
 
     SuperHuman.prototype.useSuperpower = function () {
-        var randomNum = getRandom( 0, this.superpowers.length - 1 ); 
+        var randomNum = getRandom( 0, this.superpowers.length - 1 );
         return this.alias + ' uses the ' + this.superpowers[randomNum] + '!';
     }
 
@@ -1154,7 +1158,7 @@ Object.defineProperty(joe, 'occupation', {
     }
 });
 
-console.log( 'Fullname: ' + joe.fullName ); Fullname: Doe, Joe 
+console.log( 'Fullname: ' + joe.fullName ); Fullname: Doe, Joe
 joe.occupation = 'Front-end Developer';
 console.log( 'Occupation: ' + joe.occupation );
                     </code></pre>
