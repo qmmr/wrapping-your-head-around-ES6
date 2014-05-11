@@ -22,8 +22,8 @@
 // httpReq.open('GET', 'http://ergast.com/api/f1/2013/driverStandings.json', true)
 // httpReq.send(null)
 
-import { Human } from './human';
-import { SuperHuman } from './superhuman';
+import { Human } from '../in/human';
+import { SuperHuman } from '../in/superhuman';
 
 var joe = new Human('John', 'Doe');
 // console.log( joe.greet() + ' and I am a simple ' + Human.type() + ' being.' )
@@ -33,7 +33,10 @@ var joe = new Human('John', 'Doe');
 // console.log(joe);
 
 var spiderMan = new SuperHuman('Peter', 'Parker', 'Spider-man',  ['sixth sense', 'super jump', 'web attack']);
-// console.log( spiderMan.revealIdentity() )
+console.log( spiderMan.revealIdentity() )
 // console.log( spiderMan.useSuperpower() )
 
+import { sum, pi } from '../in/math';
+ 
+console.log("2π = " + sum(pi, pi));
 
