@@ -1185,29 +1185,70 @@ joe.occupation; // 'Occupation: Front-end Developer'
                 <!-- ### modules ### -->
                 <section>
                     <h1>modules</h1>
-                    <blockquote></blockquote>
                 </section>
 
                 <section>
-                    <h2>???</h2>
+                    <h2>ES5 modules</h2>
+                    <h3 class="fragment">not available...</h3>
                     <ul>
-                        <li>JavaScript does not have built-in support for modules (yet)</li>
-                        <li>community has created impressive work-arounds</li>
-                        <li>two most popular: CJS and AMD</li>
+                        <li class="fragment">JavaScript does not have built-in support for modules (yet)</li>
+                        <li class="fragment">community has created impressive work-arounds</li>
+                        <li class="fragment">two most popular: CJS and AMD</li>
+                        <li class="fragment">unfortunately incompatible</li>
                     </ul>
+                </section>
+
+                <section>
+                    <h2>CommonJS</h2>
+                    <p class="fragment">Characteristics:</p>
+                    <ul>
+                        <li class="fragment">compact syntax</li>
+                        <li class="fragment">designed for synchronous loading</li>
+                        <li class="fragment">main use: server</li>
+                    </ul>
+                    <pre class="fragment"><code data-trim contenteditable>
+var lib = require('package/lib');
+ 
+// some behaviour for our module
+var foo = function () {
+    lib.log('hello world!');
+};
+ 
+// export foo to other modules
+exports.foo = foo;
+                    </code></pre>
                     <aside class="notes">
-The two most important (and unfortunately incompatible) standards for JavaScript modules are:
-CommonJS Modules (CJS)
+                        CommonJS Modules (CJS)
 The dominant incarnation of this standard is Node.js modules (Node.js modules have a few features that go beyond CJS). Its characteristics include:
-Compact syntax
-Designed for synchronous loading
-Main use: server
-Asynchronous Module Definition (AMD)
-The most popular implementation of this standard is RequireJS. Its characteristics include:
-Slightly more complicated syntax, enabling AMD to work without eval() or a static compilation step
-Designed for asynchronous loading
-Main use: browsers
                     </aside>
+                </section>
+
+                <section>
+                    <h2>Asynchronous Module Definition (AMD)</h2>
+                    <ul>
+                        <li class="fragment">Slightly more complicated syntax</li>
+                        <li class="fragment">enabling AMD to work without eval() or a static compilation step</li>
+                        <li class="fragment">Designed for asynchronous loading</li>
+                        <li class="fragment">main use: browsers</li>
+                        <li class="fragment">The most popular implementation of this standard is RequireJS.</li>
+                    </ul>
+                    <pre class="fragment"><code data-trim contenteditable>
+define(['package/lib'], function ( lib ){
+    function foo() {
+        lib.log('hello world!');
+    } 
+ 
+    // export foo for other modules
+    return {
+        foobar: foo
+    };
+});
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>ES6 Modules</h2>
+                    
                 </section><!-- ### modules ### -->
                 <!-- end ### Organizational features ### -->
 
