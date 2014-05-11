@@ -1019,7 +1019,7 @@ console.log( jediKnights.next() ); // 'Luke Skywalker'
                 <!-- ### classes ### -->
                 <section>
                     <h1>classes</h1>
-                    <blockquote>ES6 classes are a simple sugar over the prototype-based OO pattern</blockquote>
+                    <blockquote>ES6 classes are a simple syntactic sugar of the prototype-based OO pattern</blockquote>
                     <p>Classes support prototype-based inheritance, super calls, instance and static methods and constructors.</p>
                 </section>
 
@@ -1035,16 +1035,12 @@ var Human = (function () {
 
     Human.prototype.greet = function () {
         return ( 'Hi, my name is ' + this.firstName + ' ' + this.lastName )
-    }
+    };
 
-    // static method
-    Human.type = function () { return 'human' }
+    Human.type = function () { return 'human' };
 
     return Human;
 })();
-
-var joe = new Human( 'Joe', 'Doe' );
-console.log( joe.greet() + ' and I am a ' + Human.type() + ' being.' );
                     </code></pre>
                 </section>
 
@@ -1083,27 +1079,25 @@ var SuperHuman = (function( parent ) {
     SuperHuman.prototype = Object.create( parent.prototype );
     SuperHuman.prototype.constructor = SuperHuman;
 
-    SuperHuman.prototype.greet = function () {
-        return  ( 'Hi, I am ' + this.alias + '!' )
-    }
+    SuperHuman.prototype.greet = function () { return  ( 'Hi, I am ' + this.alias + '!' ) };
 
     SuperHuman.prototype.revealIdentity = function () {
         var id = ( parent.prototype.greet.call(this) + ' a.k.a. ' + this.alias );
         return ( id + ' and I am a ' + SuperHuman.type() + '.' );
-    }
+    };
 
     SuperHuman.prototype.useSuperpower = function () {
         var randomNum = getRandom( 0, this.superpowers.length - 1 );
         return this.alias + ' uses the ' + this.superpowers[randomNum] + '!';
-    }
+    };
 
-    SuperHuman.type = function () { return 'superhuman' }
+    SuperHuman.type = function () { return 'superhuman' };
 
     return SuperHuman;
 })( Human );
 
 var spiderman = new SuperHuman( 'Peter', 'Parker', 'male', 'Spider-man', ['sixth sense', 'super jump', 'web attack']);
-console.log( spiderman.revealIdentity() );
+spiderman.revealIdentity(); // Hi, my name is Peter Parker a.k.a. Spider-man and I am a superhuman.
                     </code></pre>
                 </section>
 
@@ -1151,16 +1145,16 @@ Object.defineProperty(joe, 'fullName', {
 
 Object.defineProperty(joe, 'occupation', {
     get: function () {
-        return this._occupation;
+        return ( 'Occupation: ' + this._occupation );
     },
     set: function ( occupation ) {
         return this._occupation = occupation;
     }
 });
 
-console.log( 'Fullname: ' + joe.fullName ); Fullname: Doe, Joe
+joe.fullName; // Doe, Joe
 joe.occupation = 'Front-end Developer';
-console.log( 'Occupation: ' + joe.occupation );
+joe.occupation; // Occupation: Front-end Developer
                     </code></pre>
                 </section>
 
@@ -1168,8 +1162,8 @@ console.log( 'Occupation: ' + joe.occupation );
                     <h2>Getters and setters</h2>
                     <blockquote>new way</blockquote>
                     <pre><code data-trim contenteditable>
-export class Human {
-    constructor ( firstName = 'Joe', lastName = 'Doe', occupation = 'Developer' ) {
+class Human {
+    constructor ( firstName = 'Joe', lastName = 'Doe', occupation = 'redundant' ) {
         this.firstName = firstName
         this.lastName = lastName
         this._occupation = occupation
@@ -1177,13 +1171,14 @@ export class Human {
 
     get fullName () { return `${this.lastName}, ${this.firstName}` }
 
-    get occupation () { return this._occupation }
+    get occupation () { return `Occupation: ${this._occupation}` }
 
     set occupation ( occupation ) { return this._occupation = occupation }
 }
-console.log(joe.fullName); // Doe, John
+joe.fullName; // Doe, John
+joe.occupation; // 'redundant'
 joe.occupation = 'Front-end Developer';
-console.log(joe); // { ... _occupation: 'Front-end Developer' }
+joe.occupation; // 'Occupation: Front-end Developer'
                     </code></pre>
                 </section><!-- end ### classes ### -->
 
