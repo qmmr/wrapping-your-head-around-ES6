@@ -144,7 +144,7 @@ module.exports = function (grunt) {
     })
 
     // Default task
-    grunt.registerTask( 'default', [ 'jshint', 'cssmin', 'uglify', 'qunit' ] );
+    grunt.registerTask( 'default', [ 'jshint', 'cssmin', 'uglify'/*, 'qunit'*/ ] );
 
     // Theme task
     grunt.registerTask( 'themes', [ 'sass' ] );
