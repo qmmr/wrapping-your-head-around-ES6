@@ -1,5 +1,9 @@
 'use strict';
 
+// =============================================================================
+// Function Constructors
+// =============================================================================
+
 // function Human ( firstName, lastName ) {
 //     this.firstName = firstName || 'John';
 //     this.lastName = lastName || 'Doe';
@@ -15,6 +19,28 @@
 // var human = new Human( 'Anakin', 'Skywalker' )
 // console.log( human.greet() )
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// =============================================================================
+// Prototypal Inheritance
 // =============================================================================
 
 // function SuperHuman ( firstName, lastName, alias, superpowers ) {
@@ -43,3 +69,48 @@
 // console.log( spiderMan.greet() )
 // console.log( spiderMan.revealIdentity() )
 // console.log( spiderMan.useSuperpower() )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// =============================================================================
+// Getters & Setters
+// =============================================================================
+
+// Object.defineProperty(Human.prototype, 'fullName', {
+//     get: function () {
+//         return ( this.lastName + ', ' + this.firstName );
+//     }
+// });
+
+// Object.defineProperty(Human.prototype, 'occupation', {
+//     get: function () {
+//         return ( 'Occupation: ' + this._occupation );
+//     },
+//     set: function ( occupation ) {
+//         return this._occupation = occupation;
+//     }
+// });
+
+// var human = new Human()
+// console.log( human.fullName ) // Doe, John
+// human.occupation = 'Front-end Developer'
+// console.log( human.occupation ) // Occupation: Front-end Developer

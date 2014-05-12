@@ -1,4 +1,9 @@
 'use strict';
+var log = console.log
+
+// =============================================================================
+// Classes
+// =============================================================================
 
 // class Human {
 //     constructor ( firstName = 'Joe', lastName = 'Doe' ) {
@@ -18,6 +23,31 @@
 // var human = new Human( 'Anakin', 'Skywalker' )
 // console.log( human.greet() )
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// =============================================================================
+// Classes extend
 // =============================================================================
 
 // class SuperHuman extends Human {
@@ -48,3 +78,56 @@
 // console.log( spiderMan.greet() )
 // console.log( spiderMan.revealIdentity() )
 // console.log( spiderMan.useSuperpower() )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// =============================================================================
+// Getters & Setters
+// =============================================================================
+
+// class Human {
+//     constructor ( firstName = 'Joe', lastName = 'Doe' ) {
+//         this.firstName = firstName
+//         this.lastName = lastName
+//     }
+
+//     get fullName () { return `${this.lastName}, ${this.firstName}` }
+
+//     get occupation () { return `Occupation: ${this._occupation}` }
+
+//     set occupation ( occupation ) { return this._occupation = occupation }
+// }
+
+// var human = new Human
+// log( human.fullName ) // Doe, John
+// log( human.occupation ) // undefined
+// human.occupation = 'Front-end Developer'
+// log( human.occupation ) // 'Occupation: Front-end Developer'
