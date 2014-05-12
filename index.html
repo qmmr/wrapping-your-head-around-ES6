@@ -1027,20 +1027,17 @@ console.log( jediKnights.next() ); // 'Luke Skywalker'
                     <h2>OOP</h2>
                     <blockquote>old way</blockquote>
                     <pre><code data-trim contenteditable>
-var Human = (function () {
-    function Human ( firstName, lastName ) {
-        this.firstName = firstName || 'John';
-        this.lastName = lastName || 'Doe';
-    }
+function Human ( firstName, lastName ) {
+    this.firstName = firstName || 'John';
+    this.lastName = lastName || 'Doe';
+}
 
-    Human.prototype.greet = function () {
-        return ( 'Hi, my name is ' + this.firstName + ' ' + this.lastName )
-    };
+Human.prototype.greet = function () {
+    return ( 'Hi, my name is ' + this.firstName + ' ' + this.lastName )
+};
 
-    Human.type = function () { return 'human' };
-
-    return Human;
-})();
+// static method
+Human.type = function () { return 'human' };
                     </code></pre>
                 </section>
 
@@ -1069,35 +1066,27 @@ class Human {
                     <h2>OOP inheritance</h2>
                     <blockquote>old way</blockquote>
                     <pre><code data-trim contenteditable>
-var SuperHuman = (function( parent ) {
-    function SuperHuman ( firstName, lastName, alias, superpowers ) {
-        parent.call(this, firstName, lastName );
-        this.alias = 'Spider-man' || 'unknown';
-        this.superpowers = superpowers || [];
-    }
+function SuperHuman ( firstName, lastName, alias, superpowers ) {
+    Human.call(this, firstName, lastName );
+    this.alias = 'Spider-man' || 'unknown';
+    this.superpowers = superpowers || [];
+};
 
-    SuperHuman.prototype = Object.create( parent.prototype );
-    SuperHuman.prototype.constructor = SuperHuman;
+SuperHuman.prototype = Object.create( Human.prototype );
+SuperHuman.prototype.constructor = SuperHuman;
 
-    SuperHuman.prototype.greet = function () { return  ( 'Hi, I am ' + this.alias + '!' ) };
+SuperHuman.prototype.greet = function () { return  ( 'Hi, I am ' + this.alias + '!' ) };
 
-    SuperHuman.prototype.revealIdentity = function () {
-        var id = ( parent.prototype.greet.call(this) + ' a.k.a. ' + this.alias );
-        return ( id + ' and I am a ' + SuperHuman.type() + '.' );
-    };
+SuperHuman.prototype.revealIdentity = function () {
+    var greet = ( Human.prototype.greet.call(this) + ' a.k.a. ' + this.alias );
+    return ( greet + ' and I am a ' + SuperHuman.type() + '.' );
+};
 
-    SuperHuman.prototype.useSuperpower = function () {
-        var randomNum = getRandom( 0, this.superpowers.length - 1 );
-        return this.alias + ' uses the ' + this.superpowers[randomNum] + '!';
-    };
+SuperHuman.prototype.useSuperpower = function () {
+    return ( this.alias + ' uses the ' + this.superpowers[0] + '!' )
+};
 
-    SuperHuman.type = function () { return 'superhuman' };
-
-    return SuperHuman;
-})( Human );
-
-var spiderman = new SuperHuman( 'Peter', 'Parker', 'male', 'Spider-man', ['sixth sense', 'super jump', 'web attack']);
-spiderman.revealIdentity(); // Hi, my name is Peter Parker a.k.a. Spider-man and I am a superhuman.
+SuperHuman.type = function () { return 'superhuman' };
                     </code></pre>
                 </section>
 
@@ -1113,7 +1102,7 @@ class SuperHuman extends Human {
     }
 
     greet () {
-        return `Hi, I am ${this.alias}`
+        return `Hi, I am ${this.alias}.`
     }
 
     revealIdentity () {
@@ -1121,8 +1110,7 @@ class SuperHuman extends Human {
     }
 
     useSuperpower () {
-        var randomNum = getRandom(0, this.superpowers.length - 1)
-        return `${this.alias} uses the ${this.superpowers[randomNum]}!`
+        return `${this.alias} uses the ${this.superpowers[0]}!`
     }
 
     static type() {
@@ -1208,12 +1196,12 @@ joe.occupation; // 'Occupation: Front-end Developer'
                     </ul>
                     <pre class="fragment"><code data-trim contenteditable>
 var lib = require('package/lib');
- 
+
 // some behaviour for our module
 var foo = function () {
     lib.log('hello world!');
 };
- 
+
 // export foo to other modules
 exports.foo = foo;
                     </code></pre>
@@ -1236,8 +1224,8 @@ The dominant incarnation of this standard is Node.js modules (Node.js modules ha
 define(['package/lib'], function ( lib ){
     function foo() {
         lib.log('hello world!');
-    } 
- 
+    }
+
     // export foo for other modules
     return {
         foobar: foo
@@ -1248,7 +1236,7 @@ define(['package/lib'], function ( lib ){
 
                 <section>
                     <h2>ES6 Modules</h2>
-                    
+
                 </section><!-- ### modules ### -->
                 <!-- end ### Organizational features ### -->
 
