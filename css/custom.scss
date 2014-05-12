@@ -1,6 +1,20 @@
 .reveal {
-	.look {
-		margin-top: 3rem;
-		text-shadow: 3px 3px 2px #111;
-	}
+    .look {
+        margin-top: 3rem;
+        text-shadow: 3px 3px 2px #111;
+    }
+
+    .horizontal-split {
+        margin-top: 2rem;
+
+        pre {
+            float: left;
+            margin-left: 1em;
+            width: 45%;
+
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+    }
 }

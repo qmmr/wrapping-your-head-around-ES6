@@ -1124,14 +1124,13 @@ class SuperHuman extends Human {
                     <h2>Getters and setters</h2>
                     <blockquote>old way</blockquote>
                     <pre><code data-trim contenteditable>
-var joe = new Human( 'Joe', 'Doe' );
-Object.defineProperty(joe, 'fullName', {
+Object.defineProperty(Human.prototype, 'fullName', {
     get: function () {
         return ( this.lastName + ', ' + this.firstName );
     }
 });
 
-Object.defineProperty(joe, 'occupation', {
+Object.defineProperty(Human.prototype, 'occupation', {
     get: function () {
         return ( 'Occupation: ' + this._occupation );
     },
@@ -1139,10 +1138,6 @@ Object.defineProperty(joe, 'occupation', {
         return this._occupation = occupation;
     }
 });
-
-joe.fullName; // Doe, Joe
-joe.occupation = 'Front-end Developer';
-joe.occupation; // Occupation: Front-end Developer
                     </code></pre>
                 </section>
 
@@ -1151,10 +1146,9 @@ joe.occupation; // Occupation: Front-end Developer
                     <blockquote>new way</blockquote>
                     <pre><code data-trim contenteditable>
 class Human {
-    constructor ( firstName = 'Joe', lastName = 'Doe', occupation = 'redundant' ) {
+    constructor ( firstName = 'Joe', lastName = 'Doe' ) {
         this.firstName = firstName
         this.lastName = lastName
-        this._occupation = occupation
     }
 
     get fullName () { return `${this.lastName}, ${this.firstName}` }
@@ -1163,10 +1157,6 @@ class Human {
 
     set occupation ( occupation ) { return this._occupation = occupation }
 }
-joe.fullName; // Doe, John
-joe.occupation; // 'redundant'
-joe.occupation = 'Front-end Developer';
-joe.occupation; // 'Occupation: Front-end Developer'
                     </code></pre>
                 </section><!-- end ### classes ### -->
 
@@ -1177,9 +1167,12 @@ joe.occupation; // 'Occupation: Front-end Developer'
 
                 <section>
                     <h2>ES5 modules</h2>
-                    <h3 class="fragment">not available...</h3>
+                    <div class="fragment">
+                        <h1>404</h1>
+                        <h3>Sorry, the feature you're looking for is not available.</h3>
+                    </div>
                     <ul>
-                        <li class="fragment">JavaScript does not have built-in support for modules (yet)</li>
+                        <li class="fragment">JavaScript does not have built-in support for modules</li>
                         <li class="fragment">community has created impressive work-arounds</li>
                         <li class="fragment">two most popular: CJS and AMD</li>
                         <li class="fragment">unfortunately incompatible</li>
@@ -1194,7 +1187,8 @@ joe.occupation; // 'Occupation: Front-end Developer'
                         <li class="fragment">designed for synchronous loading</li>
                         <li class="fragment">main use: server</li>
                     </ul>
-                    <pre class="fragment"><code data-trim contenteditable>
+                    <div class="horizontal-split">
+                        <pre class="fragment"><code data-trim contenteditable>
 var lib = require('package/lib');
 
 // some behaviour for our module
@@ -1204,7 +1198,15 @@ var foo = function () {
 
 // export foo to other modules
 exports.foo = foo;
-                    </code></pre>
+                        </code></pre>
+                        <pre class="fragment"><code data-trim contenteditable>
+let privateKey = 'da7J923kjff224kkla';
+export const ULTIMATE_NUMBER = 42;
+export function multiply ( x ) {
+    return x * ULTIMATE_NUMBER;
+}
+                        </code></pre>
+                    </div>
                     <aside class="notes">
                         CommonJS Modules (CJS)
 The dominant incarnation of this standard is Node.js modules (Node.js modules have a few features that go beyond CJS). Its characteristics include:
