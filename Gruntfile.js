@@ -114,7 +114,7 @@ module.exports = function (grunt) {
             },
 
             traceur: {
-                files: [ 'in/*.js' ],
+                files: [ 'in/*.js', 'traceur.js' ],
                 tasks: [ 'traceur' ]
             },
 
