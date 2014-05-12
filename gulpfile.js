@@ -7,9 +7,9 @@ var notify = require('gulp-notify')
 var es6ModuleTranspiler = require('gulp-es6-module-transpiler')
 
 gulp.task('lint', function() {
-  return gulp.src('./js/*.js')
-    .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'));
+    return gulp.src('./js/*.js')
+        .pipe(jshint())
+        .pipe(jshint.reporter('jshint-stylish'));
 });
 
 gulp.task('uglify', function () {
