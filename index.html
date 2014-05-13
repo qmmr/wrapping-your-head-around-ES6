@@ -1196,28 +1196,42 @@ class Human {
                     <div class="horizontal-split">
                         <div class="fragment">
                             <blockquote>exports as object</blockquote>
-                            <pre class="fragment"><code data-trim contenteditable>
-var privateKey = 'da7J923kjff224kkla';
-var ULTIMATE_NUMBER = 42;
-
-function multiply ( x ) {
-    return x * ULTIMATE_NUMBER;
+                            <pre><code data-trim contenteditable>
+// lib/math.js
+var MINI_PI = 3.14;
+var earthRadius = 6378;
+var toFixed = function ( num ) {
+    return Math.ceil(num * 100) / 100
 };
-
-module.exports = {
-    multiply: multiply,
-    ULTIMATE_NUMBER: ULTIMATE_NUMBER
+function circumference ( radius ) {
+    return toFixed( MINI_PI * ( 2 * radius )  )
+}
+exports = {
+    circumference: circumference,
+    MINI_PI: MINI_PI,
+    toFixed: toFixed
 };
                             </code></pre>
                         </div>
                         <div class="fragment">
                             <blockquote>exports individual attributes</blockquote>
-                            <pre class="fragment"><code data-trim contenteditable>
-exports.ULTIMATE_NUMBER = 42;
-exports.multiply = function ( x ) {
-    return x * exports.ULTIMATE_NUMBER;
+                            <pre><code data-trim contenteditable>
+// lib/math.js
+var MINI_PI = 3.14;
+var toFixed = function ( num ) {
+    return Math.ceil(num * 100) / 100
+};
+exports.circumference = function ( radius ) {
+    return toFixed( MINI_PI * ( 2 * radius )  )
 };
                             </code></pre>
+                            <div class="fragment" style="width: 100%; padding-top: 1em;">
+                                <blockquote>require</blockquote>
+                                <pre><code data-trim contenteditable>
+var math = require('lib/math');
+var earthsCircum = math.circumeference( 6378 );
+                                </code></pre>
+                            </div>
                         </div>
                     </div>
                     <aside class="notes">
@@ -1271,20 +1285,25 @@ require([ 'app/myModule' ], function ( myModule ) {
                     <p class="fragment">Implicitly async model – no code executes until requested modules are available and processed.</p>
                     <div class="horizontal-split">
                         <div class="fragment">
-                            <pre class="fragment"><code data-trim contenteditable>
+                            <blockquote>export</blockquote>
+                            <pre><code data-trim contenteditable>
 // lib/math.js
-let miniPI = 3.14;
-export const ULTIMATE_NUMBER = 42;
-export function radius ( c ) {
-  return Math.round( c / ( 2 * miniPI ) * 100 ) / 100
+const MINI_PI = 3.14;
+let earthRadius = 6378;
+let toFixed = num => Math.ceil(num * 100) / 100
+export MINI_PI;
+export function circumference ( radius ) {
+    return toFixed( MINI_PI * ( 2 * radius )  )
 }
                             </code></pre>
                         </div>
                         <div class="fragment">
+                            <blockquote>import</blockquote>
                             <pre><code data-trim contenteditable>
 // app.js
 module math from 'lib/math';
-console.log(`2π =  ${math.sum(math.pi, math.pi)}`);
+let earthCircum = math.circumference( 6378 );
+log(`earth's circumference: ${earthCircum}`);
                             </code></pre>
                         </div>
                     </div>

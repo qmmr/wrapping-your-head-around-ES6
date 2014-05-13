@@ -7,7 +7,7 @@
     .horizontal-split {
         margin-top: 2rem;
 
-        div {
+        & > div {
             float: left;
             margin-left: 1em;
             width: 48%;
