@@ -1418,7 +1418,29 @@ var items = new Set();
                 </section>
 
                 <section>
+                    <h2>Why do we need Set?</h2>
+                    <blockquote class="fragment">Quiz</blockquote>
+                    <pre><code data-trim contenteditable>
+var Library = {};
+var LOTR = { title: 'The Lord of The Rings', author: 'J.R.R Tolkien' };
+var TLP = { title: 'The Little Prince', author: 'Antoine de Saint-Exupery' };
+Library[LOTR] = 'The Lord of The Rings';
+Library[TLP] = 'The Little Prince';
+console.log( Library[LOTR], Library[TLP] ); // ???
+                    </code></pre>
+                    <aside class="notes">
+                        ECMAScript 6 sets do not coerce values in determining whether or not to values are the same. So, a set can contain both the number 5 and the string "5" (internally, the comparison is done using Object.is()). If the add() method is called more than once with the same value, all calls after the first one are effectively ignored:
+                    </aside>
+                </section>
+
+                <section>
                     <h2>Set methods</h2>
+                    <pre class="fragment"><code data-trim contenteditable>
+var items = new Set();
+items.add(5);
+items.add("5");
+console.log(items.size()); // 2
+                    </code></pre>
                 </section><!-- end ### New standard library features ### -->
 
             </section><!-- END OF PART THREE -->
