@@ -1203,9 +1203,9 @@ var earthRadius = 6378;
 var toFixed = function ( num ) {
     return Math.ceil(num * 100) / 100
 };
-function circumference ( radius ) {
+var circumference = function ( radius ) {
     return toFixed( MINI_PI * ( 2 * radius )  )
-}
+};
 exports = {
     circumference: circumference,
     MINI_PI: MINI_PI,
@@ -1244,7 +1244,6 @@ The dominant incarnation of this standard is Node.js modules (Node.js modules ha
                     <h2 class="no-transform">Asynchronous Module Definition (AMD)</h2>
                     <ul class="fragment">
                         <li>Slightly more complicated syntax</li>
-                        <li>enabling AMD to work without eval() or a static compilation step</li>
                         <li>Designed for asynchronous loading</li>
                         <li>main use: browsers</li>
                         <li>The most popular implementation of this standard is RequireJS.</li>
@@ -1253,14 +1252,15 @@ The dominant incarnation of this standard is Node.js modules (Node.js modules ha
                         <div class="fragment">
                             <blockquote>define</blockquote>
                             <pre><code data-trim contenteditable>
-define([ 'package/lib' ], function ( lib ) {
-    var foo = function () {
-        lib.log( 'hello world!' );
+// app/geo
+define([ 'lib/math' ], function ( math ) {
+    var getCircumference = function ( radius ) {
+        return math.circumference( radius );
     };
 
-    // export foo for other modules
+    // export circumference for other modules
     return {
-        foo: foo
+        getCircumference: getCircumference
     };
 });
                             </code></pre>
@@ -1268,25 +1268,61 @@ define([ 'package/lib' ], function ( lib ) {
                         <div class="fragment">
                             <blockquote>require</blockquote>
                             <pre><code data-trim contenteditable>
-require([ 'app/myModule' ], function ( myModule ) {
-        // start the main module which in-turn
-        // loads other modules
-        var module = new myModule();
-        module.doStuff();
+// main.js
+require([ 'underscore', 'app/geo' ], function ( _, geo ) {
+        // main module loads other other modules
+        var earthsCircum = geo.getCircumference( 6378 );
+        // do other stuff
 });
                             </code></pre>
                         </div>
                     </div>
+                    <aside class="notes">
+                        <li>Slightly more complicated syntax</li>
+                        <li>enabling AMD to work without eval() or a static compilation step</li>
+                        <li>Designed for asynchronous loading</li>
+                        <li>main use: browsers</li>
+                        <li>The most popular implementation of this standard is RequireJS.</li>
+                    </aside>
                 </section>
 
                 <section>
                     <h2>ES6 Modules</h2>
                     <blockquote>The goal for ECMAScript 6 (ES6) modules was to create a format that both users of CommonJS and of AMD are happy with.</blockquote>
-                    <p class="fragment">Implicitly async model – no code executes until requested modules are available and processed.</p>
-                    <div class="horizontal-split">
-                        <div class="fragment">
-                            <blockquote>export</blockquote>
-                            <pre><code data-trim contenteditable>
+                    <p class="fragment" style="margin-top: 1em;">Implicitly async model – no code executes until requested modules are available and processed.</p>
+                    <pre class="fragment"><code data-trim contenteditable>
+import $ from "jquery";                    // import the default export of a module
+module crypto from "crypto";               // binding an external module to a variable
+import { encrypt, decrypt } from "crypto"; // binding a module's exports to variables
+import { encrypt as enc } from "crypto";   // binding and renaming one of a module's exports
+export * from "crypto";                    // re-exporting another module's exports
+export { foo, bar } from "crypto";         // re-exporting specified exports from another module
+                    </code></pre>
+                    <aside class="notes">
+                        A module is simply a file with JavaScript code in it.
+                    </aside>
+                </section>
+
+                <section>
+                    <h2>exporting module</h2>
+                    <pre class="fragment"><code data-trim contenteditable>
+// lib/math.js
+const MINI_PI = 3.14;
+let earthRadius = 6378;
+let toFixed = num => Math.ceil(num * 100) / 100
+module 'math' {
+    export function circumference ( radius ) {
+        return toFixed( MINI_PI * ( 2 * radius )  )
+    }
+    export MINI_PI;
+}
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>exporting variables and functions</h2>
+                    <div class="fragment">
+                        <pre><code data-trim contenteditable>
 // lib/math.js
 const MINI_PI = 3.14;
 let earthRadius = 6378;
@@ -1295,10 +1331,16 @@ export MINI_PI;
 export function circumference ( radius ) {
     return toFixed( MINI_PI * ( 2 * radius )  )
 }
-                            </code></pre>
-                        </div>
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>importing</h2>
+                    <blockquote>Import declarations bind another module’s exports as local variables. Imported variables may be locally renamed to avoid conflicts.</blockquote>
+                    <div class="horizontal-split">
                         <div class="fragment">
-                            <blockquote>import</blockquote>
+                            <blockquote>import as a module</blockquote>
                             <pre><code data-trim contenteditable>
 // app.js
 module math from 'lib/math';
@@ -1306,10 +1348,45 @@ let earthCircum = math.circumference( 6378 );
 log(`earth's circumference: ${earthCircum}`);
                             </code></pre>
                         </div>
+                        <div class="fragment">
+                            <blockquote>import as variables</blockquote>
+                            <pre><code data-trim contenteditable>
+// app.js
+module { MINI_PI, circumference } from 'lib/math';
+let earthCircum = circumference( 6378 );
+log(`earth's circumference: ${earthCircum}`);
+                            </code></pre>
+                        </div>
+                        <div class="fragment" style="width: 100%;margin-top: 1em;">
+                            <blockquote>renaming</blockquote>
+                            <pre><code data-trim contenteditable>
+module { MINI_PI as PIE, circumference as circum } from 'lib/math';
+                            </code></pre>
+                        </div>
                     </div>
-                    <aside class="notes">
-                        A module is simply a file with JavaScript code in it.
-                    </aside>
+                </section>
+
+                <section>
+                    <h2>default export</h2>
+                    <div class="horizontal-split">
+                        <div class="fragment">
+                            <blockquote>default export</blockquote>
+                            <pre><code data-trim contenteditable>
+module "foo" {
+    export default function () {
+        console.log("hello!");
+    }
+}
+                            </code></pre>
+                        </div>
+                        <div class="fragment">
+                            <blockquote>import</blockquote>
+                            <pre><code data-trim contenteditable>
+import foo from "foo"; // no need for curly braces
+foo(); // hello!
+                            </code></pre>
+                        </div>
+                    </div>
                 </section><!-- ### modules ### -->
                 <!-- end ### Organizational features ### -->
 
@@ -1326,6 +1403,22 @@ log(`earth's circumference: ${earthCircum}`);
                     <aside class="notes">
                         http://www.nczonline.net/blog/2014/04/22/creating-defensive-objects-with-es6-proxies/
                     </aside>
+                </section>
+
+                <section>
+                    <h2>Set</h2>
+                    <blockquote>A set is in an ordered list of values that cannot contain duplicates. </blockquote>
+                    <pre class="fragment"><code data-trim contenteditable>
+var items = new Set();
+                    </code></pre>
+                    <aside class="notes">
+                        Sets are nothing new if you come from languages such as Java, Ruby, or Python but have been missing from JavaScript.
+                        You typically don't access items in the set like you would items in an array, instead it's much more common to check the set to see if a value is present.
+                    </aside>
+                </section>
+
+                <section>
+                    <h2>Set methods</h2>
                 </section><!-- end ### New standard library features ### -->
 
             </section><!-- END OF PART THREE -->
