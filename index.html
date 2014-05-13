@@ -1227,7 +1227,7 @@ The dominant incarnation of this standard is Node.js modules (Node.js modules ha
                 </section>
 
                 <section>
-                    <h2>Asynchronous Module Definition (AMD)</h2>
+                    <h2 class="no-transform">Asynchronous Module Definition (AMD)</h2>
                     <ul class="fragment">
                         <li>Slightly more complicated syntax</li>
                         <li>enabling AMD to work without eval() or a static compilation step</li>
@@ -1268,13 +1268,26 @@ require([ 'app/myModule' ], function ( myModule ) {
                 <section>
                     <h2>ES6 Modules</h2>
                     <blockquote>The goal for ECMAScript 6 (ES6) modules was to create a format that both users of CommonJS and of AMD are happy with.</blockquote>
-                    <pre class="fragment"><code data-trim contenteditable>
-let privateKey = 'da7J923kjff224kkla';
+                    <p class="fragment">Implicitly async model – no code executes until requested modules are available and processed.</p>
+                    <div class="horizontal-split">
+                        <div class="fragment">
+                            <pre class="fragment"><code data-trim contenteditable>
+// lib/math.js
+let miniPI = 3.14;
 export const ULTIMATE_NUMBER = 42;
-export function multiply ( x ) {
-    return x * ULTIMATE_NUMBER;
+export function radius ( c ) {
+  return Math.round( c / ( 2 * miniPI ) * 100 ) / 100
 }
-                    </code></pre>
+                            </code></pre>
+                        </div>
+                        <div class="fragment">
+                            <pre><code data-trim contenteditable>
+// app.js
+module math from 'lib/math';
+console.log(`2π =  ${math.sum(math.pi, math.pi)}`);
+                            </code></pre>
+                        </div>
+                    </div>
                     <aside class="notes">
                         A module is simply a file with JavaScript code in it.
                     </aside>
