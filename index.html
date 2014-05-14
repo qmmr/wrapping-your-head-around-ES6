@@ -1396,9 +1396,6 @@ foo(); // hello!
                     <ul>
                         <li>Set</li>
                         <li>Map</li>
-                        <li>WeakMap + WeakSet</li>
-                        <li>Promises</li>
-                        <li>Proxies</li>
                     </ul>
                     <aside class="notes">
                         http://www.nczonline.net/blog/2014/04/22/creating-defensive-objects-with-es6-proxies/
@@ -1409,25 +1406,17 @@ foo(); // hello!
                     <h2>Set</h2>
                     <blockquote>A set is in an ordered list of values that cannot contain duplicates.</blockquote>
                     <pre class="fragment"><code data-trim contenteditable>
-var items = new Set();
+var fruits = new Set();
+fruits.add('banana');
+fruits.has('banana'); // true
+fruits.add('apple');
+fruits.size; // 2
                     </code></pre>
                     <div class="fragment">
                         <blockquote>Set methods</blockquote>
                         <pre><code data-trim contenteditable>
 console.log( Object.getOwnPropertyNames(Set.prototype) );
 // [ "size", "has", "add", "delete", "clear" ]
-                        </code></pre>
-                    </div>
-                    <div class="fragment">
-                        <pre><code data-trim contenteditable>
-var fruits = new Set();
-fruits.add('banana')
-fruits.add('apple')
-fruits.add('banana')
-fruits.add('mango')
-for ( let fruit of fruits ) {
-    console.log( fruit )
-}
                         </code></pre>
                     </div>
                     <aside class="notes">
@@ -1437,12 +1426,7 @@ for ( let fruit of fruits ) {
                 </section>
 
                 <section>
-                    <h2>Converting Array to Sets</h2>
-                    You can initialize the set using an array, and the Set constructor will ensure that only unique values are used:
-                </section>
-
-                <section>
-                    <h2>Set methods</h2>
+                    <h2>Set and coercion</h2>
                     <pre class="fragment"><code data-trim contenteditable>
 var items = new Set();
 items.add(5);
@@ -1455,24 +1439,58 @@ console.log(items.size()); // 2
                 </section>
 
                 <section>
+                    <h2>Converting Array to Sets</h2>
+                    <blockquote>You can initialize the set using an array, and the Set constructor will ensure that only unique values are used.</blockquote>
+                    <pre class="fragment"><code data-trim contenteditable>
+var items = new Set([1, 2, 2, 3, 3, 4, 5, 5, 5, 5]);
+console.log(items.size()); // 5
+                    </code></pre>
+                </section>
+
+                <section>
                     <h2>Map</h2>
+                    <blockquote class="fragment"><strong>Map</strong> type is an ordered list of key-value pairs where both the key and the value can be of any type.</blockquote>
                 </section>
 
                 <section>
                     <h2>Why do we need Map?</h2>
                     <blockquote class="fragment">Quiz</blockquote>
-                    <pre><code data-trim contenteditable>
-var Library = {};
+                    <pre class="fragment"><code data-trim contenteditable>
+var library = {};
 var LOTR = { title: 'The Lord of The Rings', author: 'J.R.R Tolkien' };
 var TLP = { title: 'The Little Prince', author: 'Antoine de Saint-Exupery' };
-Library[LOTR] = 'The Lord of The Rings';
-Library[TLP] = 'The Little Prince';
-console.log( Library[LOTR], Library[TLP] ); // ???
+library[LOTR] = 'The Lord of The Rings';
+library[TLP] = 'The Little Prince';
+console.log( library[LOTR] ); // ???
+console.log( library[TLP] ); // ???
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Map - proper way</h2>
+                    <pre class="fragment"><code data-trim contenteditable>
+var library = new Map();
+var LOTR = { title: 'The Lord of The Rings', author: 'J.R.R Tolkien' };
+var TLP = { title: 'The Little Prince', author: 'Antoine de Saint-Exupery' };
+library.set(LOTR, 'The Lord of The Rings');
+library.set(TLP, 'The Little Prince');
+library.get(LOTR); // "The Lord of The Rings"
+library.get(TLP) ); // "The Little Prince"
+// DOM Nodes
+var header = document.getElementById('header');
+library.set(header, 'some metadata');
                     </code></pre>
                     <aside class="notes">
                         ECMAScript 6 sets do not coerce values in determining whether or not to values are the same. So, a set can contain both the number 5 and the string "5" (internally, the comparison is done using Object.is()). If the add() method is called more than once with the same value, all calls after the first one are effectively ignored:
                     </aside>
+                </section>
 
+                <section>
+                    <h2>Map methods</h2>
+                    <pre class="fragment"><code data-trim contenteditable>
+console.log( Object.getOwnPropertyNames(Map.prototype) );
+// [ "size", "get", "has", "set", "delete" ]
+                    </code></pre>
                 </section><!-- end ### New standard library features ### -->
 
             </section><!-- END OF PART THREE -->
@@ -1482,6 +1500,19 @@ console.log( Library[LOTR], Library[TLP] ); // ???
                 <section>
                     <h1>part four</h1>
                 </section>
+
+                <!-- ### New standard library features continuous ### -->
+                <section>
+                    <h2>New standard library features:</h2>
+                    <ul>
+                        <li>WeakMap + WeakSet</li>
+                        <li>Promises</li>
+                        <li>Proxies</li>
+                    </ul>
+                    <aside class="notes">
+                        http://www.nczonline.net/blog/2014/04/22/creating-defensive-objects-with-es6-proxies/
+                    </aside>
+                </section><!-- end ### New standard library features continuous ### -->
 
                 <section>
                     <h2>...rest of goodies</h2>
