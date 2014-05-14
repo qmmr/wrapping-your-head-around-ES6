@@ -1185,7 +1185,7 @@ class Human {
                 </section>
 
                 <section>
-                    <h2 class="no-transform">CommonJS</h2>
+                    <h2>CommonJS</h2>
                     <div class="fragment">
                         <ul>
                             <li>compact syntax</li>
@@ -1241,7 +1241,7 @@ The dominant incarnation of this standard is Node.js modules (Node.js modules ha
                 </section>
 
                 <section>
-                    <h2 class="no-transform">Asynchronous Module Definition (AMD)</h2>
+                    <h2>Asynchronous Module Definition (AMD)</h2>
                     <ul class="fragment">
                         <li>Slightly more complicated syntax</li>
                         <li>Designed for asynchronous loading</li>
@@ -1394,11 +1394,11 @@ foo(); // hello!
                 <section>
                     <h2>New standard library features:</h2>
                     <ul>
-                        <li>set</li>
-                        <li>map</li>
-                        <li>weakmap + weakset</li>
-                        <li>promises</li>
-                        <li>proxies</li>
+                        <li>Set</li>
+                        <li>Map</li>
+                        <li>WeakMap + WeakSet</li>
+                        <li>Promises</li>
+                        <li>Proxies</li>
                     </ul>
                     <aside class="notes">
                         http://www.nczonline.net/blog/2014/04/22/creating-defensive-objects-with-es6-proxies/
@@ -1407,10 +1407,29 @@ foo(); // hello!
 
                 <section>
                     <h2>Set</h2>
-                    <blockquote>A set is in an ordered list of values that cannot contain duplicates. </blockquote>
+                    <blockquote>A set is in an ordered list of values that cannot contain duplicates.</blockquote>
                     <pre class="fragment"><code data-trim contenteditable>
 var items = new Set();
                     </code></pre>
+                    <div class="fragment">
+                        <blockquote>Set methods</blockquote>
+                        <pre><code data-trim contenteditable>
+console.log( Object.getOwnPropertyNames(Set.prototype) );
+// [ "size", "has", "add", "delete", "clear" ]
+                        </code></pre>
+                    </div>
+                    <div class="fragment">
+                        <pre><code data-trim contenteditable>
+var fruits = new Set();
+fruits.add('banana')
+fruits.add('apple')
+fruits.add('banana')
+fruits.add('mango')
+for ( let fruit of fruits ) {
+    console.log( fruit )
+}
+                        </code></pre>
+                    </div>
                     <aside class="notes">
                         Sets are nothing new if you come from languages such as Java, Ruby, or Python but have been missing from JavaScript.
                         You typically don't access items in the set like you would items in an array, instead it's much more common to check the set to see if a value is present.
@@ -1418,7 +1437,29 @@ var items = new Set();
                 </section>
 
                 <section>
-                    <h2>Why do we need Set?</h2>
+                    <h2>Converting Array to Sets</h2>
+                    You can initialize the set using an array, and the Set constructor will ensure that only unique values are used:
+                </section>
+
+                <section>
+                    <h2>Set methods</h2>
+                    <pre class="fragment"><code data-trim contenteditable>
+var items = new Set();
+items.add(5);
+items.add("5");
+console.log(items.size()); // 2
+                    </code></pre>
+                    <aside class="notes">
+                        ECMAScript 6 sets do not coerce values in determining whether or not to values are the same. So, a set can contain both the number 5 and the string "5" (internally, the comparison is done using Object.is()). If the add() method is called more than once with the same value, all calls after the first one are effectively ignored.
+                    </aside>
+                </section>
+
+                <section>
+                    <h2>Map</h2>
+                </section>
+
+                <section>
+                    <h2>Why do we need Map?</h2>
                     <blockquote class="fragment">Quiz</blockquote>
                     <pre><code data-trim contenteditable>
 var Library = {};
@@ -1431,16 +1472,7 @@ console.log( Library[LOTR], Library[TLP] ); // ???
                     <aside class="notes">
                         ECMAScript 6 sets do not coerce values in determining whether or not to values are the same. So, a set can contain both the number 5 and the string "5" (internally, the comparison is done using Object.is()). If the add() method is called more than once with the same value, all calls after the first one are effectively ignored:
                     </aside>
-                </section>
 
-                <section>
-                    <h2>Set methods</h2>
-                    <pre class="fragment"><code data-trim contenteditable>
-var items = new Set();
-items.add(5);
-items.add("5");
-console.log(items.size()); // 2
-                    </code></pre>
                 </section><!-- end ### New standard library features ### -->
 
             </section><!-- END OF PART THREE -->
