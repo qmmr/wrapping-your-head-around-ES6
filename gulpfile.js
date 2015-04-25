@@ -3,7 +3,7 @@ var clean = require('gulp-clean')
 var jshint = require('gulp-jshint')
 var uglify = require('gulp-uglify')
 var notify = require('gulp-notify')
-// var traceur = require('gulp-traceur')
+var traceur = require('gulp-traceur')
 var es6ModuleTranspiler = require('gulp-es6-module-transpiler')
 
 gulp.task('lint', function() {
@@ -20,7 +20,7 @@ gulp.task('uglify', function () {
 
 gulp.task('traceur', function () {
     return gulp.src('./examples/js/classes/*.js')
-        .pipe(traceur({ sourceMap: false, modules: 'amd' }))
+        .pipe(traceur({ sourceMap: true }))
         .pipe(gulp.dest('./examples/js/out'))
 })
 

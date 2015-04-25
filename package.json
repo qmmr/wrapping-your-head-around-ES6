@@ -28,26 +28,26 @@
     "traceur": "*"
   },
   "devDependencies": {
-    "grunt-contrib-qunit": "~0.2.2",
-    "grunt-contrib-jshint": "~0.6.4",
+    "grunt": "latest",
+    "grunt-contrib-connect": "~0.4.1",
     "grunt-contrib-cssmin": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.4",
+    "grunt-contrib-qunit": "~0.2.2",
+    "grunt-contrib-sass": "~0.5.0",
     "grunt-contrib-uglify": "~0.2.4",
     "grunt-contrib-watch": "~0.6.1",
-    "grunt-contrib-sass": "~0.5.0",
-    "grunt-contrib-connect": "~0.4.1",
     "grunt-zip": "~0.7.0",
-    "grunt": "latest",
-    "load-grunt-tasks": "^0.4.0",
-    "xmlhttprequest": "^1.6.0",
-    "shelljs": "~0.2.6",
     "gulp": "*",
-    "gulp-jshint": "*",
-    "jshint-stylish": "^0.2.0",
+    "gulp-clean": "^0.2.4",
     "gulp-es6-module-transpiler": "*",
+    "gulp-jshint": "*",
     "gulp-notify": "^1.2.5",
+    "gulp-traceur": "^0.13.0",
     "gulp-uglify": "~0.2.1",
-    "gulp-traceur": "*",
-    "gulp-clean": "^0.2.4"
+    "jshint-stylish": "^0.2.0",
+    "load-grunt-tasks": "^0.4.0",
+    "shelljs": "~0.2.6",
+    "xmlhttprequest": "^1.6.0"
   },
   "licenses": [
     {
