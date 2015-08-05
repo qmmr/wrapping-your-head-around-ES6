@@ -165,6 +165,40 @@
                         <h2>...rest</h2>
                         <ul>
                             <li class="fragment">template strings</li>
+// template literals
+`string text`
+
+// Multiline strings
+`string text line 1
+ string text line 2`
+
+// String interpolation
+`string text ${expression} string text`
+
+var greet = function(greet = 'Hello', name = 'stranger') {
+    return `${ greet } ${ name },
+how are you today?`;
+};
+
+console.log(greet());
+"Hello stranger,
+how are you today?"
+
+console.log(greet('Hi', 'Marcin'));
+"Hi Marcin,
+how are you today?"
+
+---
+
+var lovem = function(strings, ...vars) {
+    return `${ vars[0] } <3 ${ strings[1] }!`;
+};
+
+var user = 'Marcin';
+
+// syntax - tagged template
+console.log(lovem `${ user }ECMAScript2015`);
+
                             <li class="fragment">unicode</li>
                             <li class="fragment">module loaders</li>
                             <li class="fragment">symbols</li>
@@ -202,19 +236,71 @@
                         <h2>shorter syntax for common case use of anonymous functions</h2>
                         <p>old way</p>
                         <pre><code data-trim contenteditable>
-var square = function ( n ) {
+var reflect = function(value) {
+    return value;
+};
+
+var reflect = value => value;
+
+or
+
+var reflect = (value) => {
+    return value;
+}
+
+---
+
+var sum = function(a, b) {
+    return a + b;
+};
+
+var sum = (a, b) => a + b;
+
+// OR
+
+var sum = (a, b) => {
+    return a + b;
+};
+
+---
+
+var getName = function() {
+    return 'Marcin';
+};
+
+var getName = () => 'Marcin';
+
+---
+
+var square = function(n) {
     return n * n;
 };
 var numbers = [ 0, 1, 2, 3, 4, 5 ];
 var doubles = numbers.map( square ); // [ 0, 1, 4, 9, 16, 25 ]
+
+var numbers = [ 0, 1, 2, 3, 4, 5 ];
+var doubles = numbers.map( n => n * n ); // [ 0, 1, 4, 9, 16, 25 ]
                         </code></pre>
                     </section>
 
                     <section>
                         <p>new way</p>
                         <pre><code data-trim contenteditable>
-let numbers = [ 0, 1, 2, 3, 4, 5 ];
-let doubles = numbers.map( n => n * n ); // [ 0, 1, 4, 9, 16, 25 ]
+let people = [
+    {
+        name: 'Joe',
+        lastName: 'Doe',
+        occupation: 'Web Developer',
+        languages: [ 'HTML', 'CSS', 'JavaScript' ]
+    },
+    {
+        name: 'Jane',
+        lastName: 'Doe',
+        occupation: 'Back-end Developer',
+        languages: [ 'PHP', 'Ruby', 'Python', 'JavaScript' ]
+    }
+]
+
                         </code></pre>
                     </section>
 
@@ -225,18 +311,62 @@ let doubles = numbers.map( n => n * n ); // [ 0, 1, 4, 9, 16, 25 ]
 var person = {
     name: 'Joe',
     friends: [ 'Jane', 'Johnny', 'Luke' ],
-    getName: function () {
-        setTimeout(function () {
-            console.log( this.name );
-        }.bind( this ), 1000);
+    getName: function() {
+        setTimeout(function() {
+            console.log(this.name);
+        }, 1000);
     },
-    showFriends: function () {
-        var self = this;
-        this.friends.forEach(function ( friend ) {
-            console.log( self.name + ' is friend with ' + friend );
+    showFriends: function() {
+        return this.friends.map(function(friend) {
+            return `${ this.name } is friend with ${ friend }`;
         });
     }
 };
+
+var person = {
+    name: 'Joe',
+    friends: [ 'Jane', 'Johnny', 'Luke' ],
+    getName: function() {
+        var that = this;
+        setTimeout(function() {
+            console.log(that.name);
+        }, 1000);
+    },
+    showFriends: function() {
+        var self = this;
+        return this.friends.map(function(friend) {
+            return `${ self.name } is friend with ${ friend }`;
+        });
+    }
+};
+
+var person = {
+    name: 'Joe',
+    friends: [ 'Jane', 'Johnny', 'Luke' ],
+    getName: function() {
+        setTimeout(function() {
+            console.log(this.name);
+        }.bind(this), 1000);
+    },
+    showFriends: function() {
+        return this.friends.map(function(friend) {
+            return `${ this.name } is friend with ${ friend }`;
+        }, this);
+    }
+};
+
+var person = {
+    name: 'Joe',
+    friends: [ 'Jane', 'Johnny', 'Luke' ],
+    getName() {
+        setTimeout(() => console.log(this.name), 1000);
+    },
+    showFriends() {
+        return this.friends.map(friend => `${ this.name } is friend with ${ friend }`)
+    }
+};
+console.log(person.getName())
+console.log(person.showFriends())
                         </code></pre>
                     </section>
 
@@ -285,17 +415,40 @@ student[ '_id_' + +new Date() ] = Math.floor( Math.random() * 10000000 )
                         <section>
                             <h2>object literals</h2>
                             <p>new way</p>
-                            <pre><code data-trim contenteditable>
-let teacher = 'Michael'
-let student = {
-    name: 'Joe',
-    teacher,
-    greet() {
-        return 'Hi, ' + this.name + '!'
+                            <pre>
+                                <code data-trim contenteditable>
+// ES5
+var title = 'ECMAScript 2015';
+var students = [ 'Joe', 'Jane', 'Phil' ];
+var id = function() { return 42 };
+var course = {
+    title: title,
+    students: students,
+    welcome: function() {
+        return 'Welcome to ' + this.title + ' course!';
+    }
+};
+course[ '_prop_' + id() ] = id();
+
+// ES6
+var title = 'ECMAScript 2015';
+var students = [ 'Joe', 'Jane', 'Phil' ];
+var id = function() { return 42 };
+var course = {
+    title,
+    students,
+    welcome() {
+        return `Welcome to ${ this.title } course!`;
     },
-    [ '_id' + +new Date() ]: Math.floor( Math.random() * 10000000 )
+    [ `_prop_${ id() }` ]: id() // ['_prop42']: 42
+};
+
+for (let key of Object.keys(course)) {
+  console.log(`Course.${ key } = ${ course[key] }`)
 }
-                            </code></pre>
+
+                                </code>
+                            </pre>
                         </section>
 
                     <!-- ### new syntax ### -->
@@ -321,6 +474,133 @@ let student = {
                     <section>
                         <h2>scoped inside if clause</h2>
                         <pre><code data-trim contenteditable>
+
+// PROMISES
+
+// jQuery style
+$.ajax('/some/url', options)
+    .done(function() {
+        alert('success');
+    })
+    .fail(function() {
+        alert('error');
+    });
+
+---
+
+function timeout(duration = 1000) {
+    return new Promise(function(resolve, reject) {
+        setTimeout(resolve, duration);
+    });
+}
+
+timeout(1000).then(function() {
+    console.log('1000ms have passed!');
+});
+
+---
+
+// Promise.all()
+
+function timeout(duration = 1000) {
+    return new Promise(function(resolve, reject) {
+        setTimeout(function() {
+            resolve(`${ duration }ms have passed!`);
+        }, duration);
+    });
+}
+
+Promise.all([ timeout(), timeout(1500), timeout(2000) ])
+    .then(function(value) {
+        console.log(value);
+    });
+
+---
+
+function httpGet(url) {
+    return new Promise(function(resolve, reject) {
+        var request = new XMLHttpRequest();
+        request.onreadystatechange = function() {
+            if (this.status === 200) {
+                resolve(this.response); // Success
+            } else {
+                // Something went wrong (404 etc.)
+                reject(new Error(this.statusText));
+            }
+        }
+        request.onerror = function() {
+            reject(new Error('XMLHttpRequest Error: ' + this.statusText));
+        };
+        request.open('GET', url);
+        request.send();
+    });
+}
+
+---
+
+httpGet('http://example.com/file.txt')
+    .then(
+        function(value) {
+            // fullfilment
+            console.log('Contents: ' + value);
+        },
+        function(err) {
+            // rejection
+            console.error('Something went wrong', err);
+        }
+    );
+
+---
+
+httpGet('http://example.com/file.txt')
+    .then(function(value) {
+        // fullfilment
+        console.log('Contents: ' + value);
+    });
+
+---
+
+httpGet('http://example.com/file.txt')
+    .then(
+        null,
+        function(err) {
+            // rejection
+            console.error('Something went wrong', err);
+        }
+    );
+
+---
+
+httpGet('http://example.com/file.txt')
+    .catch(function(err) {
+        // rejection
+        console.error('Something went wrong', err);
+    });
+
+---
+
+function timeout(duration = 1000, promise) {
+    return new Promise(function(resolve, reject) {
+        promise.then(resolve);
+        setTimeout(function() {
+            reject(new Error('Timeout after ' + duration + ' ms.'));
+        }, duration);
+    });
+}
+
+timeout(5000, httpGet('http://example.com/file.txt'))
+    .then(function(value) {
+        console.log('Contents: ' + value);
+    })
+    .catch(function(reason) {
+        console.error('Error or timeout', reason);
+    });
+
+---
+
+
+
+
 function printName ( language ) {
     var name = 'Marcin';
     if ( language === 'English' ) {
@@ -328,6 +608,33 @@ function printName ( language ) {
         console.log( name ); // Martin
     }
     console.log( name ); // Marcin
+}
+
+---
+
+function func() {
+    let foo = 5;
+    if (1) {
+        let foo = 10; // shadows outer `foo`
+        console.log(foo); // 10
+    }
+    console.log(foo); // 5
+}
+
+---
+
+if (true) { // enter new scope, TDZ starts
+    // Uninitialized binding for `tmp` is created
+
+    console.log(typeof tmp); // ReferenceError
+    tmp = 'abc'; // ReferenceError
+    console.log(tmp); // ReferenceError
+
+    let tmp; // TDZ ends, `tmp` is initialized with `undefined`
+    console.log(tmp); // undefined
+
+    tmp = 123;
+    console.log(tmp); // 123
 }
                         </code></pre>
                         <aside class="notes">
@@ -350,6 +657,18 @@ function wrapper ( arr ) {
 }
 var wrapped = wrapper([ 'Luke', 'Obi-Wan', 'Yoda' ]);
 console.log( wrapped[1]() ); // undefined
+
+---
+
+let arr = [];
+for (var i=0; i < 3; i++) {
+    arr.push(function() {
+        return i;
+    });
+}
+arr.map(function(x) {
+    return x();
+}); // [ 3, 3, 3 ]
                         </code></pre>
                         <h2 class="look fragment fade-in">&#3232;_&#3232;</h2>
                     </section>
@@ -434,6 +753,48 @@ console.log(FOO.join( ', ' )); // Hello, world!
 const BAR = {};
 BAR.baz = 'Hello, world!';
 console.log( BAR.baz ); // hello, world!
+
+--
+
+Object.assign()
+
+var alias = 'Spider-man';
+var person = {
+    firstName: 'Peter',
+    lastName: 'Parker'
+};
+var superpowers = [ 'web', 'wall-climbing' ];
+var peter = Object.assign({}, person, { alias: alias }, { superpowers: superpowers });
+
+console.log(JSON.stringify(peter));
+/*
+{
+    "alias": "Spider-man",
+    "firstName": "Peter",
+    "lastName": "Parker",
+    "superpowers": [ "web", "wall-climbing" ]
+}
+*/
+
+---
+
+var alias = 'Spider-man';
+var person = {
+    firstName: 'Peter',
+    lastName: 'Parker'
+};
+var superpowers = [ 'web', 'wall-climbing' ];
+var peter = Object.assign({}, person, { alias, superpowers });
+
+console.log(JSON.stringify(peter));
+/*
+{
+    "alias": "Spider-man",
+    "firstName": "Peter",
+    "lastName": "Parker",
+    "superpowers": [ "web", "wall-climbing" ]
+}
+*/
                         </code></pre>
                     </section><!-- end ### const ### -->
 
@@ -447,17 +808,65 @@ console.log( BAR.baz ); // hello, world!
                         <h2>checking for optional params</h2>
                         <blockquote>old way</blockquote>
                         <pre><code data-trim contenteditable>
-function createCustomElement ( tagName, id, parent ) {
-    if ( !id ) {
+function createCustomElement (tagName, id, parent) {
+    if (!id) {
         id = generateID();
     }
-    if ( ! parent ) {
+    if (!parent) {
         parent = document.body;
     }
-    let element = document.createElement( tagName );
+    var element = document.createElement( tagName );
     element.id = id;
-    parent.appendChild( element );
+    parent.appendChild(element);
     return element;
+}
+
+function makeRequest(url, timeout, callback) {
+    timeout = timeout || 2000;
+    callback = callback || function() {};
+
+    // the rest of the function
+}
+
+function makeRequest(url, timeout = 2000, callback = function() {}) {
+    // the rest of the function
+}
+
+---
+
+function timeout(timeout = 2000, callback = function() {}) {
+    // the rest of the function
+}
+
+---
+
+function getCallback() {
+    return function() {};
+}
+
+function timeout(timeout = 2000, getCallback()) {
+    // the rest of the function
+}
+
+---
+
+// uses default timeout and callback
+makeRequest('/foo');
+
+// uses default callback
+makeRequest('/foo', 500);
+
+// doesn't use defaults
+makeRequest('/foo', 500, function(el) {
+    doSomething(el);
+});
+
+var getCallback = function() {
+    return function callback() {}
+};
+
+function makeRequest(url, timeout = 2000, callback = getCallback()) {
+    // the rest of the function
 }
                         </code></pre>
                     </section>
@@ -466,8 +875,8 @@ function createCustomElement ( tagName, id, parent ) {
                         <h2>assignment inside parenthesis</h2>
                         <blockquote>new way</blockquote>
                         <pre><code data-trim contenteditable>
-function createCustomElement ( tagName, id = generateID(), parent = document.body ) {
-    let element = document.createElement( tagName );
+function createCustomElement (tagName = 'div', id = generateID(), parent = document.body) {
+    let element = document.createElement(tagName);
     element.id = id;
     parent.appendChild( element );
     return element;
@@ -487,18 +896,23 @@ function createCustomElement ( tagName, id = generateID(), parent = document.bod
                         <h2>rest params</h2>
                         <blockquote>old way</blockquote>
                         <pre><code data-trim contenteditable>
-function sum ( a, b ) {
-    var rest = [].slice.call(arguments, 2), optional = 0;
-
-    if ( rest.length ) {
-        optional = rest.reduce(function ( prev, current ) {
-            return prev + current;
-        })
-    }
-
-    return a + b + optional;
+var sum = function(a, b) {
+   return a + b;
 }
-sum( 1, 2, 3, 4, 5 ) // 15
+sum(1, 2); // 3
+
+var sum = function(a, b) {
+   return a + b;
+}
+sum(1, 2, 3); // ???
+
+var sum = function() {
+    var args = [].slice.call(arguments);
+    return args.reduce(function(accu, curr) {
+        return accu + curr;
+    }, 0);
+}
+sum(1, 2, 3, 4, 5) // 15
                         </code></pre>
                         <aside class="notes">
                             sum function with 2 required params ( a, b )
@@ -510,10 +924,17 @@ sum( 1, 2, 3, 4, 5 ) // 15
                         <h2>rest params</h2>
                         <blockquote>new way</blockquote>
                         <pre><code data-trim contenteditable>
-function sum ( a, b, ...more ) {
-    return a + b + more.reduce(( prev, current ) => prev + current);
+var sum = function(...rest) {
+    return rest.reduce(function(prev, current) {
+        return prev + current;
+    }, 0);
 }
-console.log(sum( 1, 2, 3, 4, 5 )); // 15
+console.log(sum(1, 2, 3, 4, 5)); // 15
+
+function sum(...rest) {
+    return rest.reduce((prev, current) => prev + current, 0);
+}
+console.log(sum(1, 2, 3, 4, 5)); // 15
                         </code></pre>
                     </section><!-- end ### rest ### -->
 
@@ -527,12 +948,24 @@ console.log(sum( 1, 2, 3, 4, 5 )); // 15
                         <h2>getting the highest value</h2>
                         <blockquote>old way</blockquote>
                         <pre><code data-trim contenteditable>
-var numbers = [ 0, 20, 21, 42 ];
-var highest = Math.max.apply( null, numbers ); // 42
+var numbers = [ 0, 20, 22, 42 ];
+Math.max.apply(null, numbers); // 42
+
+function sum(x, y, z) {
+    return x + y + z;
+}
+sum(numbers[0], numbers[1], numbers[2]); // 42
                         </code></pre>
                         <blockquote>new way</blockquote>
                         <pre><code data-trim contenteditable>
-let highest = Math.max(...numbers); // 42
+var numbers = [ 0, 20, 22, 42 ];
+Math.max(...numbers); // 42
+
+function sum(x, y, z) {
+    return x + y + z;
+}
+sum(...numbers); // 42
+
                         </code></pre>
                     </section>
 
@@ -540,11 +973,15 @@ let highest = Math.max(...numbers); // 42
                         <h2>spread array</h2>
                         <blockquote>old way</blockquote>
                         <pre><code data-trim contenteditable>
-function coords ( x, y, z ) {
-    return { x: x, y: y, z: z };
+var getCoords = function(x, y, z) {
+    return {
+        x: x,
+        y: y,
+        z: z
+    };
 }
 var points = [ 100, 50, 42 ];
-var point = coords( points[0], points[1], points[2] );
+var coords = getCoords(points[0], points[1], points[2]); // { "x": 100, "y": 50, "z": 42 }
                         </code></pre>
                     </section>
 
@@ -552,8 +989,28 @@ var point = coords( points[0], points[1], points[2] );
                         <h2>spread array</h2>
                         <blockquote>new way</blockquote>
                         <pre><code data-trim contenteditable>
-function coords ( x, y, z ) { return { x, y, z } }
-let point = coords( ...points ); // 100 50 42
+var getCoords = function(x, y, z) {
+    return {
+        x: x,
+        y: y,
+        z: z
+    };
+}
+var points = [ 100, 50, 42 ];
+var coords = getCoords(...points); // { "x": 100, "y": 50, "z": 42 }
+
+var getCoords = function(x, y, z) {
+    return { x, y, z };
+}
+var points = [ 100, 50, 42 ];
+var coords = getCoords(...points); // { "x": 100, "y": 50, "z": 42 }
+
+var getCoords = (x, y, z) => ({ x, y, z });
+var points = [ 100, 50, 42 ];
+var coords = getCoords(...points); // { "x": 100, "y": 50, "z": 42 }
+
+var getPoints = ({ x, y, z }) => [ x, y, z];
+var coords = getCoords(...getPoints({ "x": 100, "y": 50, "z": 42 })); // { "x": 100, "y": 50, "z": 42 }
                         </code></pre>
                         <aside class="notes">
                             - notice spread into new object literal syntax
@@ -634,8 +1091,15 @@ b = tmp;
                         <h2>swaping values of variables</h2>
                         <blockquote>new way</blockquote>
                         <pre><code data-trim contenteditable>
-let [a, b] = [b, a]
-console.log(a, b) // 2, 1
+let a = 1;
+let b = 2;
+let tmp = a;
+a = b;
+b = tmp;
+
+let [ a, b ] = [ 1, 2 ];
+[ a, b ] = [ b, a ];
+console.log(a, b); // 2, 1
                         </pre></code>
                         <h2 class="look fragment">&#664;&#8255;&#664;</h2>
                     </section>
@@ -643,10 +1107,94 @@ console.log(a, b) // 2, 1
                     <section>
                         <h2>extract array</h2>
                         <pre><code data-trim contenteditable>
-let destruct = ( str ) => str.split( /\n/ )
-let [ title, message ] = destruct( 'Congratulations!\nYou have been rewarded $50!' );
-console.log( title ); // 'Congratulations!'
-console.log( message ); // 'You have been rewarded $50!'
+#008744     (0,135,68) // green
+#0057e7     (0,87,231) // blue
+#d62d20     (214,45,32) // red
+#ffa700     (255,167,0) // orange
+#ffffff     (255,255,255) // white
+
+let getColors = function() {
+    return [ '#008744', '#0057e7', '#d62d20' ];
+};
+let colors = getColors();
+let green = colors[0];
+let blue = colors[1];
+let red = colors[2];
+
+let [ green, blue, red ] = getColors;
+console.log(green, blue, red); // "#008744" "#0057e7" "#d62d20"
+
+---
+
+let getColors = function() {
+    return [ '#008744', '#0057e7', '#d62d20' ];
+};
+let colors = getColors();
+let green = colors.shift();
+
+console.log(green, colors); // "#008744", [ "#0057e7", "#d62d20" ]
+
+---
+
+let getColors = function() {
+    return [ '#008744', '#0057e7', '#d62d20' ];
+};
+let [ green, ...colors ] = getColors();
+
+console.log(green, colors); // "#008744", [ "#0057e7", "#d62d20" ]
+
+---
+
+let getColors = function() {
+    return [
+        [ '#008744', '0,135,68' ],
+        [ '#0057e7', '0,87,231' ]
+    ];
+}
+let [
+    [ green = '#00ff00' ] = [],
+    [ blueHEX, blueRGB ] = [],
+    [ , redRGB = '214,45,32' ] = []
+] = getColors();
+console.log(green, blueHEX, blueRGB, redRGB);
+
+---
+
+let getColors = function() {
+    return [
+        [ '#008744', '0,135,68' ],
+        [ '#0057e7', '0,87,231' ],
+        [ '#d62d20', '214,45,32' ]
+    ];
+}
+
+let colors = getColors();
+let green = colors[0][0];
+let blue = colors[1][0];
+let red = colors[2][0];
+
+let [ green, ...colors ] = getColors; // "#008744", [ "#0057e7","#d62d20" ]
+
+---
+
+let [ [ green ], [ blue ], [ red ] ] = colors;
+console.log(green, blue, red); // "#008744" "#0057e7" "#d62d20"
+
+---
+
+let destruct = function(str) {
+    return str.split(/\n/);
+};
+let headline = 'Congratulations!\nYou have been rewarded $50’;
+var [ title, message ] = destruct(headline);
+console.log(title); // "Congratulations!"
+console.log(message); // "You have been rewarded $50!"
+
+let destruct = str => str.split(/\n/);
+let headline = 'Congratulations!\nYou have been rewarded $50’;
+let [ title, message ] = destruct(headline);
+console.log(title); // "Congratulations!"
+console.log(message); // "You have been rewarded $50!"
                         </code></pre>
                         <br>
                         <div class="fragment">
@@ -667,13 +1215,87 @@ console.log( second ); // ReferenceError: second is not defined
                         <blockquote>long way / control naming</blockquote>
                         <pre><code data-trim contenteditable>
 let person = {
-    name: {
-        first: 'John',
-        last: 'Doe'
+    firstName: 'Joe',
+    lastName: 'Doe'
+};
+let { firstName: first, lastName: last } = person;
+console.log(first); // "Joe"
+console.log(last); // "Doe"
+
+let person = {
+    firstName: 'Joe',
+    lastName: 'Doe'
+};
+let { firstName, lastName } = person;
+console.log(firstName); // "Joe"
+console.log(lastName); // "Doe"
+
+---
+
+let person = {
+    firstName: 'Joe',
+    lastName: 'Doe',
+    email: {
+        personal: 'joe.doe@gmail.com',
+        work: 'joe.doe@gamesys.co.uk'
     }
 };
-let { first: firstName, last: lastName } = person.name;
-console.log(firstName, lastName); // John Doe
+let {
+    firstName,
+    lastName,
+    email: { personal: email }
+} = person;
+console.log(firstName); // "Joe"
+console.log(lastName); // "Doe"
+console.log(email); // "joe.doe@gmail.com"
+
+---
+
+let person = {
+    firstName: 'Joe',
+    lastName: 'Doe',
+    emails: [ 'joe.doe@gmail.com', 'joe.doe@gamesys.co.uk' ]
+};
+let { firstName, lastName, emails: [ email ] } = person;
+console.log(firstName); // "Joe"
+console.log(lastName); // "Doe"
+console.log(email); // "joe.doe@gmail.com"
+
+---
+
+let person = {
+    firstName: 'Joe',
+    lastName: 'Doe',
+    emails: [ 'joe.doe@gmail.com', 'joe.doe@gamesys.co.uk' ]
+};
+let { firstName, lastName, emails: [ personalEmail, workEmail ] } = person;
+console.log(firstName); // "Joe"
+console.log(lastName); // "Doe"
+console.log(personalEmail); // "joe.doe@gmail.com"
+console.log(workEmail); // "joe.doe@gamesys.co.uk"
+
+
+---
+
+let person = {
+    firstName: 'Joe',
+    lastName: 'Doe',
+    emails: [ 'joe.doe@gmail.com', 'joe.doe@gamesys.co.uk' ]
+};
+let { firstName, lastName, emails: [ personalEmail, workEmail ] } = person;
+console.log(firstName); // "Joe"
+console.log(lastName); // "Doe"
+console.log(personalEmail); // "joe.doe@gmail.com"
+console.log(workEmail); // "joe.doe@gamesys.co.uk"
+
+
+---
+
+
+function getFullname({ firstName, lastName }) {
+    return `${ lastName }, ${ firstName }`;
+}
+getFullname(person); // "Doe, Joe"
                         </code></pre>
                     </section>
 
@@ -1027,17 +1649,17 @@ console.log( jediKnights.next() ); // 'Luke Skywalker'
                     <h2>OOP</h2>
                     <blockquote>old way</blockquote>
                     <pre><code data-trim contenteditable>
-function Human ( firstName, lastName ) {
+function Human (firstName, lastName) {
     this.firstName = firstName || 'John';
     this.lastName = lastName || 'Doe';
 }
 
-Human.prototype.greet = function () {
-    return ( 'Hi, my name is ' + this.firstName + ' ' + this.lastName )
+Human.prototype.greet = function() {
+    return 'Hi, my name is ' + this.firstName + ' ' + this.lastName;
 };
 
 // static method
-Human.type = function () { return 'human' };
+Human.type = function() { return 'human' };
                     </code></pre>
                 </section>
 
@@ -1046,19 +1668,23 @@ Human.type = function () { return 'human' };
                     <blockquote>new way</blockquote>
                     <pre><code data-trim contenteditable>
 class Human {
-    constructor ( firstName = 'Joe', lastName = 'Doe' ) {
-        this.firstName = firstName
-        this.lastName = lastName
+    constructor(firstName = 'Joe', lastName = 'Doe') {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
-    greet () {
-        return `Hi, my name is ${this.firstName} ${this.lastName}`
+    greet() {
+        return `Hi, my name is ${ this.firstName }.`;
     }
 
-    static type () {
-        return 'human'
+    static type() {
+        return 'human';
     }
 }
+
+var joe = new Human();
+console.log(joe.greet()); // 'Hi, my name is Joe.'
+console.log(Human.type()); // 'human'
                     </code></pre>
                 </section>
 
@@ -1066,8 +1692,8 @@ class Human {
                     <h2>OOP inheritance</h2>
                     <blockquote>old way</blockquote>
                     <pre><code data-trim contenteditable>
-function SuperHuman ( firstName, lastName, alias, superpowers ) {
-    Human.call(this, firstName, lastName );
+function SuperHuman (firstName, lastName, alias) {
+    Human.call(this, firstName, lastName);
     this.alias = 'Spider-man' || 'unknown';
     this.superpowers = superpowers || [];
 };
@@ -1095,28 +1721,23 @@ SuperHuman.type = function () { return 'superhuman' };
                     <blockquote>new way</blockquote>
                     <pre><code data-trim contenteditable>
 class SuperHuman extends Human {
-    constructor ( firstName, lastName, alias = 'superhuman' , superpowers = [] ) {
-        super( firstName, lastName )
-        this.alias = alias
-        this.superpowers= superpowers
+    constructor(firstName, lastName, alias = 'superhuman') {
+        super(firstName, lastName);
+        this.alias = alias;
     }
-
-    greet () {
-        return `Hi, I am ${this.alias}.`
+    greet() {
+        return `Hi, I am ${ this.alias }!`;
     }
-
-    revealIdentity () {
-        return `${super.greet()} a.k.a. ${this.alias} and I am a ${SuperHuman.type()}.`
+    revealIdentity() {
+        return `Psst... It's me, ${ this.firstName }!`;
     }
-
-    useSuperpower () {
-        return `${this.alias} uses the ${this.superpowers[0]}!`
-    }
-
     static type() {
-        return 'superhuman'
+        return 'superhuman';
     }
 }
+var spider = new SuperHuman('Peter', 'Parker', 'Spider-man');
+console.log(spider.greet()); // Hi, I am Spider-man!
+console.log(spider.revealIdentity()); // Psst... It's me, Peter!
                     </code></pre>
                 </section>
 
@@ -1145,20 +1766,54 @@ Object.defineProperty(Human.prototype, 'occupation', {
                     <h2>Getters and setters</h2>
                     <blockquote>new way</blockquote>
                     <pre><code data-trim contenteditable>
-class Human {
-    constructor ( firstName = 'Joe', lastName = 'Doe' ) {
-        this.firstName = firstName
-        this.lastName = lastName
+class Person {
+    constructor(firstName = 'Joe', lastName = 'Doe') {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
-
-    get fullName () { return `${this.lastName}, ${this.firstName}` }
-
-    get occupation () { return `Occupation: ${this._occupation}` }
-
-    set occupation ( occupation ) { return this._occupation = occupation }
+    get fullName () {
+        return `${this.lastName}, ${this.firstName}`
+    }
+    get occupation() {
+        return `Occupation: ${this._occupation}`
+    }
+    set occupation(occupation) {
+        return this._occupation = occupation;
+    }
 }
+var jane = new Person('Jane');
+console.log(jane.fullName); // Doe, Jane
                     </code></pre>
                 </section><!-- end ### classes ### -->
+
+                <section>
+                    <h2>Object.assign</h2>
+                    <blockquote>The missing piece</blockquote>
+                    <pre><code data-trim contenteditable>
+var person = {
+    firstName: 'Peter',
+    lastName: 'Parker'
+};
+
+var superhero = {
+    alias: 'Spider-man',
+    superpowers: [ 'web', 'wall-climbing' ]
+};
+
+var spiderman = Object.assign({}, person, superhero);
+console.log(JSON.stringify(spiderman));
+/*
+{
+    "firstName": "Peter",
+    "lastName": "Parker",
+    "alias": "Spider-man",
+    "superpowers": [ "web", "wall-climbing" ]
+}
+*/
+
+                    </code></pre>
+                </section><!-- end ### classes ### -->
+
 
                 <!-- ### modules ### -->
                 <section>
@@ -1308,14 +1963,103 @@ export { foo, bar } from "crypto";         // re-exporting specified exports fro
                     <pre class="fragment"><code data-trim contenteditable>
 // lib/math.js
 const MINI_PI = 3.14;
-let earthRadius = 6378;
-let toFixed = num => Math.ceil(num * 100) / 100
-module 'math' {
-    export function circumference ( radius ) {
-        return toFixed( MINI_PI * ( 2 * radius )  )
-    }
-    export MINI_PI;
+const EARTH_RADIUS = 6378;
+
+// this function is private to the module
+function toFixed(num) {
+    return Math.ceil(num * 100) / 100;
 }
+
+// export function
+export function circumference(radius) {
+    return toFixed(MINI_PI * (2 * radius))
+}
+
+// export variables
+export var planet = 'Earth';
+export let distanceFromSun = 149600000;
+export MINI_PI;
+
+// export class
+export class Rectangle {
+    constructor(length, width) {
+        this.length = length;
+        this.width = width;
+    }
+}
+
+---
+
+// importing
+
+import { circumference } from './circumference';
+import { EARTH_RADIUS } from './constants';
+let earthCircum = circumference(EARTH_RADIUS);
+
+circumference = 40075; // error
+
+console.log(`Earth's circumference: ${ earthCircum }km.`); // "Earth's circumference: 40074.16km."
+
+---
+
+// math.js
+function sum(num1, num2) {
+    return num1 + num2;
+}
+
+export { sum as add };
+
+// main.js
+import { add } from './math';
+
+// or rename during import
+
+// math.js
+function sum(num1, num2) {
+    return num1 + num2;
+}
+
+export sum;
+
+// main.js
+import { add as sum } from './math';
+console.log(typeof add); // 'undefined'
+console.log(sum(1, 2)); // 3
+
+---
+
+// math.js
+export default function sum(num1, num2) {
+    return num1 + num2;
+}
+
+// main.js
+import sum from './math';
+console.log(sum(1, 2)); // 3
+
+---
+
+// math.js
+export MINI_PI = 3.14;
+export default function sum(num1, num2) {
+    return num1 + num2;
+}
+
+// main.js
+import sum, { MINI_PI } from './math';
+console.log(sum(1, 2)); // 3
+console.log(MINI_PI); // 3.14
+
+---
+
+import { sum } from './math';
+export { sum }
+
+export { sum } from './math';
+export { sum as add } from './math';
+export * from './math';
+
+
                     </code></pre>
                 </section>
 
